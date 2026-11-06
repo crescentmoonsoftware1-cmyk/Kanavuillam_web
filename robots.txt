@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://kanavuillam.in/sitemap.xml
+
