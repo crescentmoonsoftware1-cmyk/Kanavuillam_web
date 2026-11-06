@@ -30,6 +30,7 @@ Official web portal and architectural plan analysis showcase for **Kanavu Illam*
 ├── index.html                 # Main landing page
 ├── privacy-policy.html        # Privacy policy documentation
 ├── terms-conditions.html      # Terms of service documentation
+├── delete-account.html        # Account & data deletion request portal (DPDP Act & Google Play)
 ├── sample_cards_preview.html  # Interactive card design showcase
 └── README.md                  # Project overview
 ```

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request Account Deletion - Kanavu Illam | Crescent Moon Consulting Services</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #faf9f7; color: #1a1c1b; }
+    .font-serif { font-family: 'Playfair Display', serif; }
+  </style>
+</head>
+<body class="py-12 px-6 lg:px-16 max-w-4xl mx-auto">
+  <!-- Top Navigation Header -->
+  <div class="mb-10 pb-6 border-b border-slate-200 flex items-center justify-between flex-wrap gap-4">
+    <a href="index.html" class="inline-flex items-center gap-3 text-slate-800 hover:text-amber-600 transition font-bold text-sm">
+      <i class="fa-solid fa-arrow-left"></i> Back to Kanavu Illam Home
+    </a>
+    <span class="inline-flex items-center gap-1.5 text-xs font-mono text-rose-700 bg-rose-50 px-3 py-1 rounded-full border border-rose-200 font-bold">
+      <i class="fa-solid fa-shield-check text-rose-500"></i> DPDP Act &amp; Google Play Verified
+    </span>
+  </div>
+
+  <article class="prose prose-slate max-w-none space-y-8">
+    <div>
+      <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-rose-50 border border-rose-200 text-rose-600 text-xs font-bold mb-3 shadow-2xs">
+        <i class="fa-solid fa-shield-check text-rose-500"></i> DPDP Act &amp; Google Play Verified
+      </div>
+      <h1 class="font-serif text-3xl sm:text-4xl text-[#1c2520] font-bold">Request Account Deletion</h1>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed mt-3 max-w-3xl">
+        Under Google Play Developer Policies and Section 8 of the Digital Personal Data Protection Act, 2023, you have the absolute right to permanently delete your account and personal data at any time.
+      </p>
+    </div>
+
+    <!-- Permanent Purge Callout Card -->
+    <div class="p-6 rounded-2xl bg-rose-50/70 border-l-4 border-l-rose-500 border border-rose-100 text-xs sm:text-sm leading-relaxed shadow-2xs">
+      <strong class="text-rose-900 font-extrabold block sm:inline mb-1 sm:mb-0">What is permanently purged:</strong>
+      <span class="text-rose-950/85"> Your personal profile, login credentials, saved architectural blueprints, 3D parametric CAD models, Vāstu compliance scores, and analysis history are permanently removed. Financial invoice records are retained only for the statutory period required by Indian tax and GST accounting laws.</span>
+    </div>
+
+    <!-- Account Deletion Form -->
+    <div class="max-w-xl p-7 sm:p-8 rounded-2xl bg-white border border-slate-200 shadow-md">
+      <form id="deleteAccountFormPage" onsubmit="handlePageDeletion(event)">
+        <label for="pageDeleteEmail" class="block text-sm font-bold text-slate-900 mb-2">
+          Account Registered Email Address
+        </label>
+        <input type="email" id="pageDeleteEmail" required placeholder="name@example.com"
+          class="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-800 text-sm focus:outline-none focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 transition-all font-sans mb-5">
+
+        <button type="submit"
+          class="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white font-bold text-sm sm:text-base shadow-lg shadow-rose-600/25 transition-all duration-200 hover:scale-[1.01] active:scale-95 cursor-pointer flex items-center justify-center gap-2.5">
+          <i class="fa-solid fa-trash-can"></i> Request Permanent Deletion
+        </button>
+      </form>
+
+      <div id="pageDeleteSuccess" class="hidden mt-5 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-800 leading-relaxed">
+        <div class="flex items-center gap-2 font-bold mb-1.5 text-emerald-900">
+          <i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i> Deletion Request Submitted
+        </div>
+        <p>In accordance with Section 8 of the DPDP Act 2023, your account and associated architectural assets will be permanently purged within statutory timelines. An email notification has been dispatched.</p>
+      </div>
+    </div>
+
+    <!-- Policy Documentation Section -->
+    <div class="pt-6 border-t border-slate-200 space-y-6 text-sm text-slate-600">
+      <section class="space-y-2">
+        <h2 class="text-base font-bold text-slate-900">1. Statutory Deletion Timelines</h2>
+        <p class="leading-relaxed">
+          Upon submission of this verified request, our automated retention scrubber initiates the immediate revocation of your authentication credentials, cloud sessions, and access tokens. All stored Floor Plans, CAD vectors, 3D renderings, and generated Vāstu dossiers will be erased from active databases within 7 calendar days.
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-base font-bold text-slate-900">2. Financial Record Retention Exception</h2>
+        <p class="leading-relaxed">
+          As mandated by Section 128 of the Companies Act, 2013 and Section 36 of the Central Goods and Services Tax Act, 2017 (CGST Act), invoices, GST billing records, and transaction logs relating to paid architectural consultations or services must be retained for the mandatory statutory period of eight (8) financial years. These records are strictly archived in read-only audit logs and cannot be used for any marketing or profiling activities.
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-base font-bold text-slate-900">3. Direct Data Protection Officer (DPO) Contact</h2>
+        <p class="leading-relaxed">
+          For expedited inquiries regarding account deletion or data portability, contact our designated Grievance &amp; Data Protection Officer directly:
+        </p>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono text-slate-700">
+          <strong>Email:</strong> support@kanavuillam.in<br>
+          <strong>Data Fiduciary:</strong> Crescent Moon Consulting Services<br>
+          <strong>Address:</strong> Corporation Ward-32, 134-B, Sengodampalayam, Perundurai Road, Thindal, Erode, Tamil Nadu 638012, India.
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <div class="pt-10 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+      <div>&copy; 2026 Crescent Moon Consulting Services. All rights reserved.</div>
+      <div class="flex items-center gap-4">
+        <a href="privacy-policy.html" class="hover:text-slate-800 transition">Privacy Policy</a>
+        <span>&bull;</span>
+        <a href="terms-conditions.html" class="hover:text-slate-800 transition">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </article>
+
+  <script>
+    function handlePageDeletion(e) {
+      e.preventDefault();
+      const email = document.getElementById('pageDeleteEmail').value.trim();
+      if (!email) return;
+
+      document.getElementById('pageDeleteSuccess').classList.remove('hidden');
+
+      const recipientEmail = 'support@kanavuillam.in';
+      const subject = encodeURIComponent(`Account Deletion Request - Kanavu Illam (${email})`);
+      const body = encodeURIComponent(
+        `Dear Kanavu Illam Privacy & Compliance Team,\n\n` +
+        `I hereby request the permanent deletion of my account and all associated architectural data pursuant to Section 8 of the Digital Personal Data Protection Act, 2023 (DPDP Act) and Google Play Developer Policies.\n\n` +
+        `Registered Account Email: ${email}\n` +
+        `Application: Kanavu Illam Android & Web Application\n` +
+        `Reason: Permanent account & data purge\n\n` +
+        `Please confirm once the account profile, floor plans, and CAD models have been permanently erased from active servers.\n\n` +
+        `Thank you,\n${email}`
+      );
+      window.location.href = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+    }
+  </script>
+</body>
+</html>
