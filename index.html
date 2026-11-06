@@ -1,0 +1,2563 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Kanavuillam</title>
+
+  <!-- Favicon & App Icon -->
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/app_logo.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#faf9f7",
+            "surface-dim": "#dadad8",
+            "surface-container": "#efeeec",
+            "surface-container-low": "#f4f3f1",
+            "surface-container-high": "#e9e8e6",
+            "primary": "#1e293b",
+            "primary-container": "#334155",
+            "gunmetal-slate": "#1e293b",
+            "gunmetal-light": "#334155",
+            "on-primary": "#ffffff",
+            "warm-brass": "#b45309",
+            "burnished-gold": "#d97706",
+            "gold-accent": "#f59e0b",
+            "tertiary": "#242f41",
+            "charcoal-heading": "#1c2520",
+            "charcoal-slate": "#0f172a",
+            "outline": "#707974",
+            "outline-variant": "#bfc9c3"
+          },
+          fontFamily: {
+            sans: ["Plus Jakarta Sans", "sans-serif"],
+            body: ["Plus Jakarta Sans", "sans-serif"],
+            display: ["Playfair Display", "serif"],
+            serif: ["Playfair Display", "serif"]
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    @layer base {
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #f1f5f9;
+        background-image: url('assets/custom_bg.png?v=7');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        color: #1a1c1b;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+
+      .site-hex-bg {
+        background-image: url('assets/custom_bg.png?v=7');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+      }
+    }
+
+    /* Architectural Blueprint Grid Background Animation */
+    @keyframes gridShift {
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: 36px 36px;
+      }
+    }
+
+    .animated-blueprint-grid {
+      background-image:
+        linear-gradient(to right, rgba(2, 132, 199, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(2, 132, 199, 0.08) 1px, transparent 1px);
+      background-size: 36px 36px;
+      animation: gridShift 40s linear infinite;
+    }
+
+    .blueprint-texture-layer {
+      background-image: url('assets/blueprint_bg.png');
+      background-repeat: repeat;
+      background-size: 1024px 1024px;
+      opacity: 0.17;
+      mix-blend-mode: multiply;
+    }
+
+    /* Ambient Floating Animations */
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-7px);
+      }
+    }
+
+    @keyframes floatSlow {
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-12px) rotate(1deg);
+      }
+    }
+
+    @keyframes pulseGlow {
+
+      0%,
+      100% {
+        opacity: 0.55;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.95;
+        transform: scale(1.04);
+      }
+    }
+
+    .animate-float {
+      animation: float 4.5s ease-in-out infinite;
+    }
+
+    .animate-float-delayed {
+      animation: float 5.2s ease-in-out 1.2s infinite;
+    }
+
+    .animate-float-slow {
+      animation: floatSlow 8s ease-in-out infinite;
+    }
+
+    .animate-pulse-glow {
+      animation: pulseGlow 3.5s ease-in-out infinite;
+    }
+
+    /* Architectural Card & Glassmorphism */
+    .architectural-card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(232, 226, 213, 0.85);
+      box-shadow: 0 10px 30px -5px rgba(6, 78, 59, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .architectural-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(2, 132, 199, 0.4);
+      box-shadow: 0 20px 35px -8px rgba(2, 132, 199, 0.15), 0 0 0 1px rgba(14, 165, 233, 0.25);
+    }
+
+    /* Sweep Light Reflection */
+    .sweep-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sweep-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(60deg,
+          transparent 35%,
+          rgba(255, 255, 255, 0.4) 50%,
+          transparent 65%);
+      transform: rotate(25deg) translateY(-100%);
+      transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+      z-index: 20;
+    }
+
+    .sweep-card:hover::after {
+      transform: rotate(25deg) translateY(100%);
+    }
+
+    /* Workflow Marquee Animation */
+    @keyframes workflowMarquee {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .animate-workflow-marquee {
+      display: flex;
+      width: max-content;
+      animation: workflowMarquee 42s linear infinite;
+    }
+
+    .animate-workflow-marquee:hover {
+      animation-play-state: paused;
+    }
+
+    .marquee-mask {
+      mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+    }
+
+    /* Scroll Reveal */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-on-scroll.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Modal Backdrop */
+    .modal-backdrop {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(8px);
+    }
+
+    /* ==================== VIDEO-INSPIRED FROSTED GLASS & AMBER BUBBLE ANIMATIONS ==================== */
+    @keyframes bubbleFloat1 {
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-9px) rotate(1deg);
+      }
+    }
+
+    @keyframes bubbleFloat2 {
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-13px) rotate(-1.5deg);
+      }
+    }
+
+    @keyframes bubbleFloat3 {
+
+      0%,
+      100% {
+        transform: translateY(0px) scale(1);
+      }
+
+      50% {
+        transform: translateY(-7px) scale(1.03);
+      }
+    }
+
+    @keyframes amberGlowPulse {
+
+      0%,
+      100% {
+        opacity: 0.35;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.75;
+        transform: scale(1.12);
+      }
+    }
+
+    .animate-bubble-1 {
+      animation: bubbleFloat1 4.2s ease-in-out infinite;
+    }
+
+    .animate-bubble-2 {
+      animation: bubbleFloat2 5.2s ease-in-out infinite 0.6s;
+    }
+
+    .animate-bubble-3 {
+      animation: bubbleFloat3 4s ease-in-out infinite 1.2s;
+    }
+
+    .animate-amber-glow {
+      animation: amberGlowPulse 4.5s ease-in-out infinite;
+    }
+
+    /* Video-inspired Glassmorphism & Frosted Bubble Styles */
+    .frosted-glass-card {
+      background: rgba(255, 255, 255, 0.84);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 16px 36px -10px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+      transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .frosted-glass-card:hover {
+      transform: translateY(-9px);
+      background: rgba(255, 255, 255, 0.96);
+      border-color: rgba(252, 179, 40, 0.6);
+      box-shadow: 0 28px 60px -15px rgba(245, 158, 11, 0.22), 0 0 25px rgba(252, 179, 40, 0.15);
+    }
+
+    .frosted-speech-bubble {
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 10px 24px -4px rgba(15, 23, 42, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    .orange-speech-bubble {
+      background: linear-gradient(135deg, #fcb328 0%, #f59e0b 50%, #d97706 100%);
+      box-shadow: 0 12px 24px -4px rgba(245, 158, 11, 0.38), 0 3px 8px rgba(217, 119, 6, 0.2);
+    }
+
+    /* Speech Bubble Tail for Authentic Video Look */
+    .bubble-tail-bottom::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 18px;
+      width: 10px;
+      height: 10px;
+      background: inherit;
+      transform: rotate(45deg);
+      border-right: 1px solid rgba(255, 255, 255, 0.85);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.85);
+      border-radius: 2px;
+    }
+
+    .bubble-tail-orange::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      right: 16px;
+      width: 10px;
+      height: 10px;
+      background: #d97706;
+      transform: rotate(45deg);
+      border-radius: 2px;
+    }
+
+    /* ==================== OPTION 2: 3D HORIZONTAL PERSPECTIVE GLASS DECK ==================== */
+    .deck-viewport {
+      perspective: 1400px;
+      perspective-origin: 50% 45%;
+    }
+
+    .orange-backplate {
+      background: linear-gradient(135deg, #ff8a00 0%, #ea580c 60%, #c2410c 100%);
+      border-radius: 28px;
+      position: absolute;
+      box-shadow: 0 20px 45px -10px rgba(234, 88, 12, 0.45), 0 0 25px rgba(251, 146, 60, 0.25);
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .orange-backplate::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 48px;
+      width: 0;
+      height: 0;
+      border-left: 14px solid transparent;
+      border-right: 14px solid transparent;
+      border-top: 14px solid #c2410c;
+    }
+
+    .glass-card-front {
+      background: rgba(255, 255, 255, 0.90);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      border-radius: 28px;
+      box-shadow: 0 30px 60px -15px rgba(15, 23, 42, 0.18),
+        0 10px 25px rgba(234, 88, 12, 0.10),
+        inset 0 1px 2px rgba(255, 255, 255, 0.95);
+      color: #0f172a;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .glass-card-front::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 42px;
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-top: 15px solid rgba(255, 255, 255, 0.95);
+      filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.06));
+    }
+
+    .studio-floor-glow {
+      background: radial-gradient(ellipse at 50% 50%, rgba(251, 146, 60, 0.16) 0%, rgba(15, 23, 42, 0) 70%);
+      filter: blur(28px);
+    }
+
+    .deck-card {
+      position: absolute;
+      transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transform-style: preserve-3d;
+      will-change: transform, opacity;
+    }
+
+    .deck-card.active {
+      transform: translateX(0) translateZ(60px) rotateY(0deg) scale(1);
+      opacity: 1;
+      z-index: 40;
+      pointer-events: auto;
+    }
+
+    .deck-card.next-1 {
+      transform: translateX(360px) translateZ(-40px) rotateY(-18deg) scale(0.88);
+      opacity: 0.85;
+      z-index: 30;
+      cursor: pointer;
+    }
+
+    .deck-card.next-2 {
+      transform: translateX(650px) translateZ(-140px) rotateY(-24deg) scale(0.76);
+      opacity: 0.55;
+      z-index: 20;
+      cursor: pointer;
+    }
+
+    .deck-card.next-3 {
+      transform: translateX(880px) translateZ(-240px) rotateY(-28deg) scale(0.65);
+      opacity: 0.30;
+      z-index: 10;
+      cursor: pointer;
+    }
+
+    .deck-card.prev {
+      transform: translateX(-420px) translateZ(-80px) rotateY(22deg) scale(0.82);
+      opacity: 0;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    @media (max-width: 1024px) {
+      .deck-card.next-1 {
+        transform: translateX(240px) scale(0.84);
+        opacity: 0.65;
+      }
+
+      .deck-card.next-2,
+      .deck-card.next-3 {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+
+      .deck-card.next-1,
+      .deck-card.next-2,
+      .deck-card.next-3 {
+        display: none;
+      }
+
+      .deck-card.active {
+        transform: translateX(0) scale(1);
+      }
+    }
+
+
+    /* ==================== OPTION 3: ARCHITECTURAL SLATE & FROSTED GLASS CASCADE ==================== */
+    .glass-cascade-card {
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      border-radius: 32px;
+      box-shadow: 0 24px 50px -15px rgba(15, 23, 42, 0.14),
+        0 4px 12px rgba(15, 23, 42, 0.05),
+        inset 0 1px 2px rgba(255, 255, 255, 0.98);
+      transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .glass-cascade-card:hover {
+      background: rgba(255, 255, 255, 0.94);
+      transform: translateY(-8px);
+      border-color: rgba(255, 255, 255, 1);
+      box-shadow: 0 32px 70px -15px rgba(15, 23, 42, 0.25),
+        0 0 25px rgba(252, 179, 40, 0.15),
+        inset 0 1px 3px rgba(255, 255, 255, 1);
+    }
+
+    /* Gunmetal Slate Gray Backplate (Matching App Logo) */
+    .slate-cascade-backplate {
+      background: linear-gradient(135deg, #1e293b 0%, #283440 50%, #1e293b 100%);
+      border-radius: 32px;
+      position: absolute;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 24px 45px -10px rgba(15, 23, 42, 0.42), 0 8px 20px rgba(0, 0, 0, 0.2);
+      transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .group:hover .slate-cascade-backplate {
+      transform: translate(14px, 14px) scale(1.02);
+      box-shadow: 0 32px 60px -8px rgba(15, 23, 42, 0.55);
+      background: linear-gradient(135deg, #0f172a 0%, #283440 60%, #1e293b 100%);
+    }
+
+    /* Speech Bubble Pointer Tails */
+    .cascade-tail-glass {
+      position: absolute;
+      bottom: -13px;
+      left: 42px;
+      width: 0;
+      height: 0;
+      border-left: 13px solid transparent;
+      border-right: 13px solid transparent;
+      border-top: 15px solid rgba(255, 255, 255, 0.9);
+      filter: drop-shadow(0 3px 3px rgba(15, 23, 42, 0.08));
+    }
+
+    .cascade-tail-slate {
+      position: absolute;
+      bottom: -13px;
+      left: 42px;
+      width: 0;
+      height: 0;
+      border-left: 13px solid transparent;
+      border-right: 13px solid transparent;
+      border-top: 15px solid #1e293b;
+    }
+
+    /* ==================== HERO UPLOAD 3-CARD FROSTED GLASS SUITE ==================== */
+    .glass-panel-card {
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      border-radius: 28px;
+      box-shadow: 0 20px 45px -12px rgba(15, 23, 42, 0.08),
+        0 2px 6px rgba(0, 0, 0, 0.03),
+        inset 0 1px 2px rgba(255, 255, 255, 0.98);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-panel-card:hover {
+      background: rgba(255, 255, 255, 0.90);
+      border-color: rgba(252, 179, 40, 0.55);
+      transform: translateY(-6px);
+      box-shadow: 0 28px 60px -15px rgba(245, 158, 11, 0.18),
+        0 0 25px rgba(252, 179, 40, 0.12),
+        inset 0 1px 3px rgba(255, 255, 255, 1);
+    }
+
+    .glass-center-upload {
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(32px);
+      -webkit-backdrop-filter: blur(32px);
+      border: 1.5px solid rgba(255, 255, 255, 0.98);
+      border-radius: 32px;
+      box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.12),
+        inset 0 1px 2px rgba(255, 255, 255, 1);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-center-upload:hover {
+      background: rgba(255, 255, 255, 0.92);
+      border-color: rgba(252, 179, 40, 0.65);
+      box-shadow: 0 32px 75px -15px rgba(245, 158, 11, 0.22),
+        0 0 30px rgba(252, 179, 40, 0.15);
+    }
+  </style>
+</head>
+
+<body
+  class="site-hex-bg font-body text-[#1a1c1b] antialiased relative selection:bg-[#1e293b] selection:text-[#fcb328] overflow-x-hidden">
+
+  <!-- User Uploaded Hexagon Honeycomb Background Layer & Subtle Ambient Lighting -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <!-- Glowing Hexagon Honeycomb Graphic Backdrop -->
+    <div class="fixed inset-0 bg-cover bg-center bg-fixed pointer-events-none z-0"
+      style="background-image: url('assets/custom_bg.pngs?v=7');"></div>
+
+    <!-- Soft Luminous Light Accents -->
+    <div
+      class="absolute top-[15%] right-[5%] w-[650px] h-[650px] rounded-full bg-white/15 blur-[130px] pointer-events-none">
+    </div>
+    <div
+      class="absolute bottom-[20%] right-[15%] w-[550px] h-[550px] rounded-full bg-amber-400/[0.06] blur-[150px] pointer-events-none">
+    </div>
+  </div>
+
+  <!-- ==================== HEADER / NAV ==================== -->
+  <header
+    class="fixed top-0 w-full z-50 backdrop-blur-xl bg-white/80 border-b border-white/60 shadow-sm backdrop-blur-xl transition-all duration-300">
+    <div class="h-20 max-w-[1380px] mx-auto px-6 lg:px-12 flex items-center justify-between gap-6">
+      <!-- Brand Logo -->
+      <a class="flex items-center gap-3.5 shrink-0 group" href="#">
+        <div
+          class="h-12 w-12 rounded-xl bg-white/95 border border-[#d97706]/40 flex items-center justify-center p-1.5 shadow-md shadow-slate-900/15 group-hover:scale-105 transition-all">
+          <img src="assets/app_logo.png" alt="Kanavu Illam Logo" class="h-full w-full object-contain">
+        </div>
+        <div class="flex flex-col">
+          <span
+            class="font-display font-semibold text-xl text-[#1c2520] tracking-tight group-hover:text-[#1e293b] transition-colors"
+            data-i18n="brand_name">Kanavu illam</span>
+
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-9 text-[13.5px] font-sans font-medium text-[#404944]">
+        <a class="text-[#1e293b] font-semibold hover:text-[#b45309] transition-colors" href="#hero"
+          data-i18n="nav_home">Home</a>
+        <a class="hover:text-[#1e293b] transition-colors" href="#how-it-works" data-i18n="nav_how_it_works">How It
+          Works</a>
+        <a class="hover:text-[#1e293b] transition-colors" href="#pillars" data-i18n="nav_reports">Reports</a>
+        <a class="hover:text-[#1e293b] transition-colors" href="#contact" data-i18n="nav_consultation">Consultation</a>
+      </nav>
+
+      <!-- Action & Language Switcher -->
+      <div class="flex items-center gap-3 shrink-0">
+        <!-- Interactive Language Toggle -->
+        <button id="langToggleBtn" type="button"
+          class="inline-flex items-center gap-2 bg-[#1e293b] hover:bg-[#334155] text-[#faf9f7] font-sans text-xs uppercase tracking-wider font-semibold px-4 py-2.5 rounded-lg shadow-md shadow-slate-900/15 transition-all duration-300 hover:scale-[1.03] border border-[#d97706]/35"
+          title="Switch English / தமிழ்">
+          <span class="material-symbols-outlined text-base text-[#f59e0b]">translate</span>
+          <span id="langLabel" class="font-bold">ENG / TAM</span>
+        </button>
+
+        <!-- Mobile Hamburger Toggle -->
+        <button id="mobileMenuBtn" type="button"
+          class="md:hidden p-2 rounded-lg text-[#1c2520] hover:bg-[#efeeec] focus:outline-none"
+          aria-label="Toggle Navigation">
+          <span class="material-symbols-outlined text-2xl">menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobileMenu"
+      class="hidden md:hidden bg-[#faf9f7] border-b border-[#e3e2e0] px-6 py-4 shadow-xl transition-all">
+      <div class="flex flex-col gap-3 text-sm font-medium text-[#404944]">
+        <a class="py-2 text-[#1e293b] font-semibold border-b border-[#e3e2e0]/60" href="#hero"
+          onclick="toggleMobileMenu()">Home</a>
+        <a class="py-2 hover:text-[#1e293b] border-b border-[#e3e2e0]/60" href="#how-it-works"
+          onclick="toggleMobileMenu()">How It Works</a>
+        <a class="py-2 hover:text-[#1e293b] border-b border-[#e3e2e0]/60" href="#pillars"
+          onclick="toggleMobileMenu()">Reports</a>
+        <a class="py-2 hover:text-[#1e293b]" href="#contact" onclick="toggleMobileMenu()">Consultation</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="w-full relative z-10 pt-20">
+    <!-- ==================== 1. HERO SECTION ==================== -->
+    <section class="relative w-full min-h-[90vh] flex items-center justify-center overflow-hidden py-16 lg:py-24"
+      id="hero">
+      <div class="relative z-10 max-w-[1380px] w-full mx-auto px-6 lg:px-12 flex flex-col items-center text-center">
+        <!-- Company Logo (Crescent Moon Consulting Services) on top of App Logo -->
+
+
+        <!-- App Logo Emblem in Hero -->
+        <div
+          class="w-24 h-24 sm:w-28 sm:h-28 mx-auto mb-5 p-2 rounded-3xl bg-white/90 backdrop-blur-md border border-[#d97706]/35 shadow-xl shadow-[#0284c7]/10 animate-float group">
+          <img src="assets/app_logo.png" alt="Kanavu Illam App Logo"
+            class="w-full h-full object-contain group-hover:scale-105 transition-transform">
+        </div>
+
+        <!-- Vāstu & Structural Dossier Badge -->
+
+        <!-- Main Headline -->
+        <h1
+          class="font-display font-medium text-4xl sm:text-6xl lg:text-7xl text-[#1c2520] tracking-tight max-w-4xl leading-[1.15] mb-6 reveal-on-scroll"
+          data-i18n="hero_title">Kanavu<span
+            class="text-transparent bg-clip-text bg-gradient-to-r from-[#fcb328] via-[#f59e0b] to-[#d97706]">
+            illam</span>
+        </h1>
+
+        <!-- Subheading -->
+        <p class="font-body text-base sm:text-lg text-[#404944] max-w-2xl leading-relaxed font-normal mb-9 reveal-on-scroll"
+          data-i18n="hero_desc">
+          Transform 2D floor plans into interactive 3D spaces, Vāstu audit, Cost estimation, and code-verified
+          Structural schedules for discerning homeowners.
+        </p>
+
+        <!-- Download Android APK CTA Button (Razorpay KYC & Official App Download) -->
+        <div class="flex flex-col items-center justify-center gap-3.5 mb-16 reveal-on-scroll">
+          <a href="assets/KanavuIllam.apk" download="KanavuIllam.apk"
+            class="group inline-flex items-center gap-3.5 bg-gradient-to-r from-[#1e293b] via-[#243042] to-[#1e293b] hover:from-[#334155] hover:to-[#1e293b] text-[#faf9f7] font-sans text-sm sm:text-base font-bold px-8 sm:px-10 py-4 rounded-2xl shadow-2xl shadow-slate-900/25 transition-all duration-300 hover:scale-[1.03] active:scale-95 border border-[#d97706]/50 hover:border-[#fcb328] cursor-pointer">
+            <span
+              class="w-11 h-11 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center text-[#3DDC84] group-hover:scale-110 transition-transform shadow-inner">
+              <!-- Official Android Vector Icon -->
+              <svg class="w-6 h-6 text-[#3DDC84] fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9993.4482.9993.9993.0001.5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.414 13.8533 8.082 12 8.082s-3.5902.332-5.1368.8677L4.841 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3432-4.1021-2.6889-7.5743-6.1185-9.4396" />
+              </svg>
+            </span>
+            <div class="flex flex-col text-left">
+              <span
+                class="text-[10px] uppercase tracking-widest text-[#fcb328] font-extrabold leading-none mb-1">Android
+                Official Build</span>
+              <span class="text-base sm:text-lg font-extrabold tracking-tight">Download Android APK</span>
+            </div>
+            <span
+              class="material-symbols-outlined text-xl text-[#fcb328] ml-2 group-hover:translate-y-0.5 transition-transform">download</span>
+          </a>
+
+          <!-- Quick File Info Badges -->
+          <div class="flex items-center gap-2 text-xs text-slate-500 font-medium">
+            <span
+              class="px-2.5 py-1 rounded-md bg-white/90 border border-slate-200 text-[11px] font-bold text-slate-700 shadow-2xs inline-flex items-center">
+              <span class="material-symbols-outlined text-[14px] text-emerald-600 mr-1 font-bold">check_circle</span>
+              v1.0.0 Stable
+            </span>
+            <span>&bull;</span>
+            <span class="text-[11px]">Direct Android Install</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 2. WORKFLOW SHOWCASE (HOW IT WORKS) ==================== -->
+    <section class="w-full py-16 max-w-[1380px] mx-auto px-6 lg:px-12 relative" id="how-it-works">
+      <div class="flex flex-col gap-10">
+        <!-- Section Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 reveal-on-scroll">
+          <div>
+            <span class="font-sans text-xs uppercase tracking-widest text-[#1e293b] font-bold block mb-2"
+              data-i18n="workflow_kicker">Workflow Pipeline</span>
+            <h2 class="font-display font-semibold text-3xl sm:text-4xl text-[#1c2520]" data-i18n="workflow_title">How It
+              Works</h2>
+          </div>
+          <p class="font-body text-sm text-[#404944] max-w-sm" data-i18n="workflow_desc">
+            Transform your 2D floor plan into a detailed 3D home design through a simple, seamless process. From secure
+            payment to intelligent analysis, explore your home design and download your personalized results in just a
+            few steps.
+          </p>
+        </div>
+
+        <!-- 5-Step Continuous Carousel Track -->
+        <div class="relative w-full overflow-hidden marquee-mask py-3">
+          <!-- Gradient Edge Overlays -->
+          <div
+            class="absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-r from-[#faf9f7] to-transparent z-20 pointer-events-none">
+          </div>
+          <div
+            class="absolute right-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-l from-[#faf9f7] to-transparent z-20 pointer-events-none">
+          </div>
+
+          <!-- Marquee Track with Loop -->
+          <div class="animate-workflow-marquee flex gap-5 py-2" id="workflowTrack">
+            <!-- Group 1: 5 Workflow Cards -->
+            <div class="flex gap-5 shrink-0">
+              <!-- Step 01 -->
+              <div
+                class="w-[285px] sm:w-[315px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#1e293b]/15 bg-white/95 shadow-md">
+                <div
+                  class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#1e293b]/10 to-transparent rounded-bl-full pointer-events-none">
+                </div>
+                <div class="flex items-center justify-between mb-3.5 z-10 relative">
+                  <div class="inline-flex items-center gap-2">
+                    <span
+                      class="font-sans text-xs font-bold text-[#1e293b] bg-[#1e293b]/10 px-2.5 py-1 rounded-md border border-[#1e293b]/25">01</span>
+                    <span class="text-[11px] font-sans font-bold text-[#1e293b] tracking-wider uppercase"
+                      data-i18n="step1_tag">Submission</span>
+                  </div>
+                  <span
+                    class="text-[11px] font-mono text-[#707974] bg-[#f4f3f1] px-2 py-0.5 rounded border border-[#e3e2e0]">Step
+                    1</span>
+                </div>
+                <div
+                  class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#1e293b]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative group-hover:border-[#1e293b]/40 transition-colors">
+                  <img alt="Upload 2D Plan Mockup with Tablet"
+                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    src="assets/step1.png"
+                    onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/step1.png';">
+                  <div class="absolute bottom-2.5 right-2.5 animate-float-delayed z-10">
+                    <span
+                      class="px-2 py-1 rounded-md text-[10px] font-bold text-[#1e293b] bg-white/95 backdrop-blur-md border border-[#1e293b]/30 shadow-md flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[13px] text-[#f59e0b]">cloud_upload</span> MAX 10MB
+                    </span>
+                  </div>
+                </div>
+                <div class="z-10 relative">
+                  <h3
+                    class="font-display text-lg text-[#1c2520] font-semibold mb-1 group-hover:text-[#1e293b] transition-colors"
+                    data-i18n="step1_title">Upload 2D Plan</h3>
+                  <p class="font-body text-xs text-[#404944] leading-relaxed mb-3.5" data-i18n="step1_desc">Add your 2D
+                    sketch, blueprint, png, jpg, or technical PDF drawing.</p>
+                  <div
+                    class="pt-3 border-t border-[#e3e2e0] flex items-center justify-between text-[11px] font-medium text-[#707974]">
+                    <span class="inline-flex items-center gap-1 text-[#1e293b] font-semibold"><span
+                        class="w-1.5 h-1.5 rounded-full bg-[#1e293b]"></span> Instant Parser</span>
+                    <span class="bg-[#f4f3f1] text-[#1c2520] px-2 py-0.5 rounded text-[10px] font-mono">JPG &amp;
+                      PDF</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 02 -->
+              <div
+                class="w-[285px] sm:w-[315px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#d97706]/20 bg-white/95 shadow-md">
+                <div
+                  class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#d97706]/15 to-transparent rounded-bl-full pointer-events-none">
+                </div>
+                <div class="flex items-center justify-between mb-3.5 z-10 relative">
+                  <div class="inline-flex items-center gap-2">
+                    <span
+                      class="font-sans text-xs font-bold text-[#b45309] bg-[#d97706]/10 px-2.5 py-1 rounded-md border border-[#d97706]/25">02</span>
+                    <span class="text-[11px] font-sans font-bold text-[#b45309] tracking-wider uppercase"
+                      data-i18n="step2_tag">Verification</span>
+                  </div>
+                  <span
+                    class="text-[11px] font-mono text-[#707974] bg-[#f4f3f1] px-2 py-0.5 rounded border border-[#e3e2e0]">Step
+                    2</span>
+                </div>
+                <div
+                  class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#d97706]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative group-hover:border-[#d97706]/40 transition-colors">
+                  <img alt="Secure Payment and Blueprint Verification"
+                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    src="assets/step2.png"
+                    onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/step2.png';">
+                  <div class="absolute bottom-2.5 left-2.5 animate-float-delayed z-10">
+                    <span
+                      class="px-2 py-0.5 rounded text-[10px] font-bold text-[#b45309] bg-amber-50 border border-amber-200 shadow-sm flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[13px]">receipt_long</span> Fixed Fee
+                    </span>
+                  </div>
+                </div>
+                <div class="z-10 relative">
+                  <h3
+                    class="font-display text-lg text-[#1c2520] font-semibold mb-1 group-hover:text-[#b45309] transition-colors"
+                    data-i18n="step2_title">Secure Payment</h3>
+                  <p class="font-body text-xs text-[#404944] leading-relaxed mb-3.5" data-i18n="step2_desc">Transparent
+                    pricing with flexible packages to suit your home planning needs.</p>
+                  <div
+                    class="pt-3 border-t border-[#e3e2e0] flex items-center justify-between text-[11px] font-medium text-[#707974]">
+                    <span class="inline-flex items-center gap-1 text-[#b45309] font-semibold"><span
+                        class="w-1.5 h-1.5 rounded-full bg-[#d97706]"></span> UPI &amp; NetBanking</span>
+                    <span class="bg-[#f4f3f1] text-[#1c2520] px-2 py-0.5 rounded text-[10px] font-mono">100%
+                      SECURE</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 03 -->
+              <div
+                class="w-[285px] sm:w-[315px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#1e293b]/15 bg-white/95 shadow-md">
+                <div
+                  class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#1e293b]/10 to-transparent rounded-bl-full pointer-events-none">
+                </div>
+                <div class="flex items-center justify-between mb-3.5 z-10 relative">
+                  <div class="inline-flex items-center gap-2">
+                    <span
+                      class="font-sans text-xs font-bold text-[#1e293b] bg-[#1e293b]/10 px-2.5 py-1 rounded-md border border-[#1e293b]/25">03</span>
+                    <span class="text-[11px] font-sans font-bold text-[#1e293b] tracking-wider uppercase"
+                      data-i18n="step3_tag">Analysis Plan</span>
+                  </div>
+                  <span
+                    class="text-[11px] font-mono text-[#707974] bg-[#f4f3f1] px-2 py-0.5 rounded border border-[#e3e2e0]">Step
+                    3</span>
+                </div>
+                <div
+                  class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#1e293b]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative group-hover:border-[#1e293b]/40 transition-colors">
+                  <img alt="Analyze 2D Plan with 3D model parsing"
+                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    src="assets/step3.png"
+                    onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/step3.png';">
+                  <div class="absolute bottom-2.5 right-2.5 animate-float-delayed z-10">
+                    <span
+                      class="px-2 py-0.5 rounded text-[10px] font-bold text-[#1c2520] bg-white/90 backdrop-blur-md border border-gray-300 shadow-sm flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[13px] text-[#1e293b]">straighten</span> Analysis
+                      report
+                    </span>
+                  </div>
+                </div>
+                <div class="z-10 relative">
+                  <h3
+                    class="font-display text-lg text-[#1c2520] font-semibold mb-1 group-hover:text-[#1e293b] transition-colors"
+                    data-i18n="step3_title">Analyze 2D Plan</h3>
+                  <p class="font-body text-xs text-[#404944] leading-relaxed mb-3.5" data-i18n="step3_desc">
+                    Deterministic parsing of walls, room boundaries, structural loads, and cardinal azimuths.</p>
+                  <div
+                    class="pt-3 border-t border-[#e3e2e0] flex items-center justify-between text-[11px] font-medium text-[#707974]">
+                    <span class="inline-flex items-center gap-1 text-[#1e293b] font-semibold"><span
+                        class="w-1.5 h-1.5 rounded-full bg-[#1e293b]"></span> Structural Load Checks</span>
+                    <span class="bg-[#f4f3f1] text-[#1c2520] px-2 py-0.5 rounded text-[10px] font-mono">IS 456</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 04 -->
+              <div
+                class="w-[285px] sm:w-[315px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#d97706]/20 bg-white/95 shadow-md">
+                <div
+                  class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#d97706]/15 to-transparent rounded-bl-full pointer-events-none">
+                </div>
+                <div class="flex items-center justify-between mb-3.5 z-10 relative">
+                  <div class="inline-flex items-center gap-2">
+                    <span
+                      class="font-sans text-xs font-bold text-[#b45309] bg-[#d97706]/10 px-2.5 py-1 rounded-md border border-[#d97706]/25">04</span>
+                    <span class="text-[11px] font-sans font-bold text-[#b45309] tracking-wider uppercase"
+                      data-i18n="step4_tag">View Report</span>
+                  </div>
+                  <span
+                    class="text-[11px] font-mono text-[#707974] bg-[#f4f3f1] px-2 py-0.5 rounded border border-[#e3e2e0]">Step
+                    4</span>
+                </div>
+                <div
+                  class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#d97706]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative group-hover:border-[#d97706]/40 transition-colors">
+                  <img alt="View Reports Mockup"
+                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    src="assets/step4.png"
+                    onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/step4.png';">
+                  <div class="absolute bottom-2.5 left-2.5 animate-float-delayed z-10">
+                    <span
+                      class="px-2 py-0.5 rounded text-[10px] font-bold text-[#1e293b] bg-emerald-50 border border-emerald-200 shadow-sm flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[13px]">calculate</span> Ready
+                    </span>
+                  </div>
+                </div>
+                <div class="z-10 relative">
+                  <h3
+                    class="font-display text-lg text-[#1c2520] font-semibold mb-1 group-hover:text-[#b45309] transition-colors"
+                    data-i18n="step4_title">View Reports</h3>
+                  <p class="font-body text-xs text-[#404944] leading-relaxed mb-3.5" data-i18n="step4_desc">Interactive
+                    3D walkthrough, Vāstu energy matrix, material takeoff, and structural schedules.</p>
+                  <div
+                    class="pt-3 border-t border-[#e3e2e0] flex items-center justify-between text-[11px] font-medium text-[#707974]">
+                    <span class="inline-flex items-center gap-1 text-[#b45309] font-semibold"><span
+                        class="w-1.5 h-1.5 rounded-full bg-[#d97706]"></span> Full Breakdown</span>
+                    <span class="bg-[#f4f3f1] text-[#1c2520] px-2 py-0.5 rounded text-[10px] font-mono">LIVE
+                      PREVIEW</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 05 -->
+              <div
+                class="w-[285px] sm:w-[315px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#1e293b]/15 bg-white/95 shadow-md">
+                <div
+                  class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#1e293b]/10 to-transparent rounded-bl-full pointer-events-none">
+                </div>
+                <div class="flex items-center justify-between mb-3.5 z-10 relative">
+                  <div class="inline-flex items-center gap-2">
+                    <span
+                      class="font-sans text-xs font-bold text-[#1e293b] bg-[#1e293b]/10 px-2.5 py-1 rounded-md border border-[#1e293b]/25">05</span>
+                    <span class="text-[11px] font-sans font-bold text-[#1e293b] tracking-wider uppercase"
+                      data-i18n="step5_tag">Download PDF</span>
+                  </div>
+                  <span
+                    class="text-[11px] font-mono text-[#707974] bg-[#f4f3f1] px-2 py-0.5 rounded border border-[#e3e2e0]">Step
+                    5</span>
+                </div>
+                <div
+                  class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#1e293b]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative group-hover:border-[#1e293b]/40 transition-colors">
+                  <img alt="Download Complete Dossier PDF Package"
+                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    src="assets/step5.png"
+                    onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/step5.png';">
+                  <div class="absolute bottom-2.5 left-2.5 animate-float-delayed z-10">
+                    <span
+                      class="px-2 py-0.5 rounded text-[10px] font-bold text-[#1e293b] bg-white/95 backdrop-blur-md border border-[#1e293b]/30 shadow-sm flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[13px] text-[#1e293b]">verified</span> PDF Ready
+                    </span>
+                  </div>
+                </div>
+                <div class="z-10 relative">
+                  <h3
+                    class="font-display text-lg text-[#1c2520] font-semibold mb-1 group-hover:text-[#1e293b] transition-colors"
+                    data-i18n="step5_title">Download Reports</h3>
+                  <p class="font-body text-xs text-[#404944] leading-relaxed mb-3.5" data-i18n="step5_desc">Instant
+                    download all reports in one click to get PDF, save in device.</p>
+                  <div
+                    class="pt-3 border-t border-[#e3e2e0] flex items-center justify-between text-[11px] font-medium text-[#707974]">
+                    <span class="inline-flex items-center gap-1 text-[#1e293b] font-semibold"><span
+                        class="w-1.5 h-1.5 rounded-full bg-[#1e293b]"></span> Reports Ready</span>
+                    <span class="bg-[#f4f3f1] text-[#1c2520] px-2 py-0.5 rounded text-[10px] font-mono">ONE CLICK</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Group 2: Seamless Clone for Infinite Marquee Loop -->
+            <div class="flex gap-5 shrink-0" aria-hidden="true">
+              <!-- Cloned Steps 01 to 05 -->
+              <div
+                class="w-[285px] sm:w-[315px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#1e293b]/15 bg-white/95 shadow-md">
+                <div class="flex items-center justify-between mb-3.5 z-10 relative">
+                  <span
+                    class="font-sans text-xs font-bold text-[#1e293b] bg-[#1e293b]/10 px-2.5 py-1 rounded-md border border-[#1e293b]/25">01
+                    SUBMISSION</span>
+                  <span
+                    class="text-[11px] font-mono text-[#707974] bg-[#f4f3f1] px-2 py-0.5 rounded border border-[#e3e2e0]">Step
+                    1</span>
+                </div>
+                <div
+                  class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#1e293b]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative">
+                  <img alt="Upload 2D Plan" class="w-full h-full object-cover object-center" src="assets/step1.png">
+                </div>
+                <div class="z-10 relative">
+                  <h3 class="font-display text-lg text-[#1c2520] font-semibold mb-1">Upload 2D Plan</h3>
+                  <p class="font-body text-xs text-[#404944] leading-relaxed mb-3.5">Add your 2D sketch, blueprint,
+                    AutoCAD DWG, DXF, or technical PDF drawing.</p>
+                </div>
+              </div>
+
+              <div
+                class="w-[285px] sm:w-[315px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#d97706]/20 bg-white/95 shadow-md">
+                <div class="flex items-center justify-between mb-3.5 z-10 relative">
+                  <span
+                    class="font-sans text-xs font-bold text-[#b45309] bg-[#d97706]/10 px-2.5 py-1 rounded-md border border-[#d97706]/25">02
+                    VERIFICATION</span>
+                  <span
+                    class="text-[11px] font-mono text-[#707974] bg-[#f4f3f1] px-2 py-0.5 rounded border border-[#e3e2e0]">Step
+                    2</span>
+                </div>
+                <div
+                  class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#d97706]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative">
+                  <img alt="Secure Payment" class="w-full h-full object-cover object-center" src="assets/step2.png">
+                </div>
+                <div class="z-10 relative">
+                  <h3 class="font-display text-lg text-[#1c2520] font-semibold mb-1">Secure Payment</h3>
+                  <p class="font-body text-xs text-[#404944] leading-relaxed mb-3.5">Transparent upfront pricing with
+                    milestone-based fee tiers and GST invoicing.</p>
+                </div>
+              </div>
+
+              <div
+                class="w-[285px] sm:w-[315px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#1e293b]/15 bg-white/95 shadow-md">
+                <div class="flex items-center justify-between mb-3.5 z-10 relative">
+                  <span
+                    class="font-sans text-xs font-bold text-[#1e293b] bg-[#1e293b]/10 px-2.5 py-1 rounded-md border border-[#1e293b]/25">03
+                    ANALYSIS PLAN</span>
+                  <span
+                    class="text-[11px] font-mono text-[#707974] bg-[#f4f3f1] px-2 py-0.5 rounded border border-[#e3e2e0]">Step
+                    3</span>
+                </div>
+                <div
+                  class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#1e293b]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative">
+                  <img alt="Analyze Plan" class="w-full h-full object-cover object-center" src="assets/step3.png">
+                </div>
+                <div class="z-10 relative">
+                  <h3 class="font-display text-lg text-[#1c2520] font-semibold mb-1">Analyze 2D Plan</h3>
+                  <p class="font-body text-xs text-[#404944] leading-relaxed mb-3.5">Deterministic parsing of walls,
+                    room boundaries, structural loads, and cardinal azimuths.</p>
+                </div>
+              </div>
+
+              <div
+                class="w-[285px] sm:w-[315px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#d97706]/20 bg-white/95 shadow-md">
+                <div class="flex items-center justify-between mb-3.5 z-10 relative">
+                  <span
+                    class="font-sans text-xs font-bold text-[#b45309] bg-[#d97706]/10 px-2.5 py-1 rounded-md border border-[#d97706]/25">04
+                    VIEW REPORT</span>
+                  <span
+                    class="text-[11px] font-mono text-[#707974] bg-[#f4f3f1] px-2 py-0.5 rounded border border-[#e3e2e0]">Step
+                    4</span>
+                </div>
+                <div
+                  class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#d97706]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative">
+                  <img alt="View Reports" class="w-full h-full object-cover object-center" src="assets/step4.png">
+                </div>
+                <div class="z-10 relative">
+                  <h3 class="font-display text-lg text-[#1c2520] font-semibold mb-1">View Reports</h3>
+                  <p class="font-body text-xs text-[#404944] leading-relaxed mb-3.5">Interactive 3D walkthrough, Vāstu
+                    energy matrix, material takeoff, and structural schedules.</p>
+                </div>
+              </div>
+
+              <div
+                class="w-[285px] sm:w-[315px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#1e293b]/15 bg-white/95 shadow-md">
+                <div class="flex items-center justify-between mb-3.5 z-10 relative">
+                  <span
+                    class="font-sans text-xs font-bold text-[#1e293b] bg-[#1e293b]/10 px-2.5 py-1 rounded-md border border-[#1e293b]/25">05
+                    DOSSIER PDF</span>
+                  <span
+                    class="text-[11px] font-mono text-[#707974] bg-[#f4f3f1] px-2 py-0.5 rounded border border-[#e3e2e0]">Step
+                    5</span>
+                </div>
+                <div
+                  class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#1e293b]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative">
+                  <img alt="Download Dossier" class="w-full h-full object-cover object-center" src="assets/step5.png">
+                </div>
+                <div class="z-10 relative">
+                  <h3 class="font-display text-lg text-[#1c2520] font-semibold mb-1">Download Dossier</h3>
+                  <p class="font-body text-xs text-[#404944] leading-relaxed mb-3.5">Instant stamped municipal and
+                    bank-sanction-ready engineering dossier PDF.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== UPLOAD 2D PLAN STUDIO CARD (EXACT MATCH TO SECOND IMAGE) ==================== -->
+        <div id="dropzone"
+          class="w-full max-w-5xl mx-auto rounded-[32px] sm:rounded-[36px] bg-white border border-slate-200/90 shadow-2xl shadow-slate-900/5 p-6 sm:p-10 lg:p-12 text-left relative z-20 reveal-on-scroll">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+
+            <!-- LEFT COLUMN: Plan Analysis Studio Info -->
+            <div class="lg:col-span-5 flex flex-col justify-between">
+              <div>
+                <!-- Top Badge: PLAN ANALYSIS STUDIO (App Logo Slate Gray) -->
+                <div
+                  class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1e293b]/10 border border-[#1e293b]/25 text-[#1e293b] text-xs font-bold mb-6 shadow-2xs">
+                  <span class="w-2 h-2 rounded-full bg-[#1e293b] animate-ping"></span>
+                  <span class="tracking-wider uppercase text-[11px]">PLAN ANALYSIS STUDIO</span>
+                </div>
+
+                <!-- Headline in Serif Font -->
+                <h3
+                  class="font-display text-3xl sm:text-4xl lg:text-[42px] font-normal text-[#1c2520] tracking-tight mb-4 leading-[1.15]">
+                  Upload 2D Plan
+                </h3>
+
+                <!-- Subtitle / Description -->
+                <p class="font-sans text-xs sm:text-sm text-[#52525b] leading-relaxed mb-8">
+                  Transform residential sketches and architectural blueprints into millimeter-accurate 3D cutaways,
+                  structural takeoff, and V&#257;stu audit.
+                </p>
+              </div>
+
+              <!-- Accepted Plan Formats Section -->
+              <div class="pt-5 border-t border-slate-200/80">
+                <span class="font-sans text-[11px] uppercase tracking-wider font-extrabold text-slate-500 block mb-3.5">
+                  ACCEPTED PLAN FORMATS
+                </span>
+
+                <!-- 2x2 Formats Grid -->
+                <div class="grid grid-cols-2 gap-2.5">
+                  <!-- 2D Floor Plans -->
+                  <div
+                    class="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-slate-50/90 border border-slate-200/80 text-xs font-semibold text-slate-700 shadow-2xs">
+                    <span class="material-symbols-outlined text-base text-[#1e293b]">description</span>
+                    <span>2D Floor Plans</span>
+                  </div>
+
+                  <!-- DWG / Blueprints -->
+                  <div
+                    class="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-slate-50/90 border border-slate-200/80 text-xs font-semibold text-slate-700 shadow-2xs">
+                    <span class="material-symbols-outlined text-base text-[#0284c7]">architecture</span>
+                    <span>DWG / Blueprints</span>
+                  </div>
+
+                  <!-- Hand Sketches -->
+                  <div
+                    class="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-slate-50/90 border border-slate-200/80 text-xs font-semibold text-slate-700 shadow-2xs">
+                    <span class="material-symbols-outlined text-base text-[#ea580c]">draw</span>
+                    <span>Hand Sketches</span>
+                  </div>
+
+                  <!-- PDF Drawings -->
+                  <div
+                    class="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-slate-50/90 border border-slate-200/80 text-xs font-semibold text-slate-700 shadow-2xs">
+                    <span class="material-symbols-outlined text-base text-[#d97706]">picture_as_pdf</span>
+                    <span>PDF Drawings</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Dashed Drag & Drop Box -->
+            <div class="lg:col-span-7 flex flex-col justify-between">
+              <!-- Dashed Boundary Container -->
+              <div
+                class="h-full rounded-[28px] border-2 border-dashed border-slate-300 bg-slate-50/50 hover:bg-slate-100/60 hover:border-[#1e293b]/40 transition-all duration-300 p-6 sm:p-9 flex flex-col items-center justify-center text-center relative group">
+
+                <!-- Cloud Upload Icon Badge (App Logo Gray & Gold Accent) -->
+                <div
+                  class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#1e293b]/10 to-[#334155]/5 border border-[#1e293b]/20 flex items-center justify-center mb-5 shadow-sm group-hover:scale-105 transition-transform">
+                  <span class="material-symbols-outlined text-2xl text-[#d97706]">cloud_upload</span>
+                </div>
+
+                <!-- Headline -->
+                <h4 class="font-display text-2xl sm:text-[26px] text-[#1c2520] font-normal mb-2">
+                  Drag &amp; drop your floor plan here
+                </h4>
+
+                <!-- Subtitle -->
+                <p class="font-sans text-xs text-[#52525b] max-w-sm mb-6 leading-relaxed">
+                  Support for multi-page CAD, blueprint scans, or high-res layout photos up to 25MB.
+                </p>
+
+                <!-- CTA Button (UPLOAD FLOOR PLAN in App Logo Gunmetal Slate Gray) -->
+                <button type="button"
+                  class="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl bg-[#1e293b] hover:bg-[#334155] text-[#faf9f7] text-xs font-bold tracking-wider uppercase shadow-xl shadow-slate-900/15 border border-[#d97706]/35 transition-all duration-300 hover:scale-[1.02] active:scale-95 cursor-default">
+                  <span class="material-symbols-outlined text-base text-[#f59e0b]">folder_open</span>
+                  <span>UPLOAD FLOOR PLAN</span>
+                </button>
+
+                <!-- Format Badges Row -->
+                <div class="flex items-center justify-center gap-2 flex-wrap mt-5">
+                  <span
+                    class="px-2.5 py-1 rounded-md bg-white border border-slate-200 text-[10px] font-bold text-slate-600 shadow-2xs">PDF</span>
+                  <span
+                    class="px-2.5 py-1 rounded-md bg-white border border-slate-200 text-[10px] font-bold text-slate-600 shadow-2xs">DWG/CAD</span>
+                  <span
+                    class="px-2.5 py-1 rounded-md bg-white border border-slate-200 text-[10px] font-bold text-slate-600 shadow-2xs">JPG</span>
+                  <span
+                    class="px-2.5 py-1 rounded-md bg-white border border-slate-200 text-[10px] font-bold text-slate-600 shadow-2xs">PNG</span>
+                  <span class="text-[10px] font-semibold text-slate-400 ml-1">&bull; Max 25MB</span>
+                </div>
+
+                <!-- Trust Markers -->
+                <div
+                  class="flex items-center justify-center gap-3 text-[11px] text-slate-500 font-medium mt-7 pt-4 border-t border-slate-200/70 w-full flex-wrap">
+                  <span class="inline-flex items-center gap-1">
+                    <span class="material-symbols-outlined text-sm text-[#059669]">verified_user</span>
+                    <span>256-Bit Encrypted</span>
+                  </span>
+                  <span class="text-slate-300">&bull;</span>
+                  <span class="inline-flex items-center gap-1">
+                    <span class="material-symbols-outlined text-sm text-[#f59e0b]">bolt</span>
+                    <span>Instant Plan Parser</span>
+                  </span>
+                  <span class="text-slate-300">&bull;</span>
+                  <span class="inline-flex items-center gap-1">
+                    <span class="material-symbols-outlined text-sm text-[#059669]">lock</span>
+                    <span>Strict Confidentiality</span>
+                  </span>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 3. FOUR CORE PLATFORM PILLARS (REPORTS) ==================== -->
+    <!-- ==================== 3. FOUR CORE PLATFORM PILLARS (3D PERSPECTIVE GLASS DECK) ==================== -->
+    <!-- ==================== 3. FOUR CORE PLATFORM PILLARS (OPTION 3: LAYERED SPEECH-BUBBLE GLASS CASCADE) ==================== -->
+    <!-- ==================== 3. FOUR CORE PLATFORM PILLARS (ARCHITECTURAL SLATE & FROSTED GLASS CASCADE) ==================== -->
+    <section class="w-full py-24 relative overflow-hidden" id="pillars">
+
+      <!-- Subtle Architectural Blueprint Wireframe Backdrop on Clean Slate Surface -->
+      <div
+        class="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:24px_24px]">
+      </div>
+
+      <div class="max-w-[1380px] mx-auto px-6 lg:px-12 flex flex-col gap-12 relative z-10">
+        <!-- Section Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 reveal-on-scroll">
+          <div class="max-w-xl">
+            <span class="font-sans text-xs uppercase tracking-widest text-[#1e293b] font-extrabold block mb-2"
+              data-i18n="reports_kicker">DETAILED DELIVERABLES</span>
+            <h2 class="font-display font-semibold text-3xl sm:text-4xl text-[#1c2520] tracking-tight"
+              data-i18n="reports_title">Certified Reports</h2>
+            <p class="font-body text-sm text-[#404944] mt-2 leading-relaxed" data-i18n="reports_desc">Comprehensive
+              architectural and engineering documentation generated directly from your 2D plan.</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <span
+              class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-slate-200/90 shadow-sm text-xs font-bold text-slate-800 backdrop-blur-md">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#1e293b] animate-pulse"></span>
+              <span>4 Certified Engineering Pillars</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- 4 Speech-Bubble Glass Cascade Cards with App Logo Gunmetal Slate Backplate -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start">
+
+          <!-- CARD 1: 3D Floor Plan (Top Left) -->
+          <div class="relative group cursor-pointer" onclick="openReportModal('3d')">
+            <!-- App Logo Gunmetal Slate Backplate -->
+            <div class="slate-cascade-backplate inset-0 translate-x-3 translate-y-3">
+              <div class="cascade-tail-slate"></div>
+            </div>
+            <!-- Frosted Glass Card Body -->
+            <div class="glass-cascade-card p-6 sm:p-7 relative z-10">
+              <div class="cascade-tail-glass"></div>
+
+              <div class="flex items-center justify-between mb-3 text-xs">
+                <span class="text-[11px] font-bold text-slate-500 tracking-wide">
+                  The Pavilion Residence &bull; Project ID: AR2307
+                </span>
+                <span
+                  class="px-2.5 py-0.5 rounded-full bg-slate-100 text-[#1e293b] text-[10px] font-extrabold uppercase border border-slate-200">
+                  Report #01
+                </span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
+                <!-- 3D Plan Isometric Visual -->
+                <div
+                  class="sm:col-span-5 rounded-2xl overflow-hidden shadow-md border border-white/90 bg-slate-900 h-36 relative group">
+                  <img src="assets/report_3d.png" alt="3D Floor Plan"
+                    class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
+                    onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/report_3d.png';">
+                  <span
+                    class="absolute bottom-2 left-2 px-2 py-0.5 rounded bg-black/60 backdrop-blur-sm text-white text-[9px] font-bold">Scale:
+                    1:50</span>
+                </div>
+
+                <!-- Text & Buttons -->
+                <div class="sm:col-span-7 space-y-2.5">
+                  <h3 class="font-display text-2xl font-black text-slate-900 leading-tight" data-i18n="card1_title">3D
+                    Floor Plan</h3>
+                  <p class="font-body text-xs text-slate-600 line-clamp-2">Complete room-by-room isometric walkthrough
+                    with verified dimensions & wall layouts.</p>
+
+                  <div class="flex items-center gap-2.5 pt-1">
+                    <span
+                      class="px-3.5 py-1.5 rounded-full bg-white/90 border border-slate-200 text-xs font-bold text-slate-800 shadow-sm hover:border-[#fcb328] transition">
+                      Explore Layout
+                    </span>
+                    <button type="button"
+                      class="text-xs font-bold text-[#1e293b] hover:text-[#d97706] transition flex items-center gap-1">
+                      View Details <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 3: Cost & Budget (Top Right - Staggered) -->
+          <div class="relative group cursor-pointer lg:-translate-y-2" onclick="openReportModal('cost')">
+            <!-- App Logo Gunmetal Slate Backplate -->
+            <div class="slate-cascade-backplate inset-0 translate-x-3 translate-y-3">
+              <div class="cascade-tail-slate"></div>
+            </div>
+            <!-- Frosted Glass Card Body -->
+            <div class="glass-cascade-card p-6 sm:p-7 relative z-10">
+              <div class="cascade-tail-glass"></div>
+
+              <div class="flex items-center justify-between mb-3 text-xs">
+                <span class="text-[11px] font-bold text-slate-500 tracking-wide">
+                  The Pavilion Residence &bull; Project ID: AR2307
+                </span>
+                <span
+                  class="px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-900 text-[10px] font-extrabold uppercase border border-amber-200">
+                  Report #03
+                </span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
+                <!-- Circular Cost Graphic with Gunmetal/Gold Ring -->
+                <div
+                  class="sm:col-span-5 rounded-2xl overflow-hidden shadow-md border border-white/90 bg-gradient-to-br from-slate-50 to-slate-100 p-3 h-36 flex flex-col items-center justify-center text-center relative">
+                  <div
+                    class="w-16 h-16 rounded-full border-4 border-[#1e293b] border-t-[#fcb328] flex items-center justify-center shadow-inner">
+                    <i class="fa-solid fa-coins text-[#fcb328] text-base"></i>
+                  </div>
+                  <span class="text-[10px] uppercase font-extrabold text-slate-500 mt-1">Projected Cost</span>
+                  <span class="text-xs font-black text-slate-900">&#8377;34.8 Lakhs</span>
+                </div>
+
+                <!-- Text & Budget Stats -->
+                <div class="sm:col-span-7 space-y-2.5">
+                  <h3 class="font-display text-2xl font-black text-slate-900 leading-tight" data-i18n="card3_title">Cost
+                    & Budget</h3>
+                  <div class="flex items-baseline gap-2">
+                    <span class="text-xs text-slate-500">Current Spend:</span>
+                    <span class="text-sm font-extrabold text-slate-900">&#8377;34,80,000</span>
+                    <span class="text-xs text-slate-400">/ &#8377;35L</span>
+                  </div>
+                  <div class="flex items-center gap-2.5 pt-1">
+                    <span
+                      class="px-3.5 py-1.5 rounded-full bg-white/90 border border-slate-200 text-xs font-bold text-slate-800 shadow-sm">
+                      Review Budget
+                    </span>
+                    <span class="text-xs font-bold text-emerald-600">
+                      <i class="fa-solid fa-check-circle mr-1"></i> 96% Progress
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 2: Vastu Analysis (Bottom Left - Staggered) -->
+          <div class="relative group cursor-pointer lg:translate-y-4" onclick="openReportModal('vastu')">
+            <!-- App Logo Gunmetal Slate Backplate -->
+            <div class="slate-cascade-backplate inset-0 translate-x-3 translate-y-3">
+              <div class="cascade-tail-slate"></div>
+            </div>
+            <!-- Frosted Glass Card Body -->
+            <div class="glass-cascade-card p-6 sm:p-7 relative z-10">
+              <div class="cascade-tail-glass"></div>
+
+              <div class="flex items-center justify-between mb-3 text-xs">
+                <span class="text-[11px] font-bold text-slate-500 tracking-wide">
+                  The Pavilion Residence &bull; Project ID: AR2307
+                </span>
+                <span
+                  class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-900 text-[10px] font-extrabold uppercase border border-emerald-200">
+                  Report #02
+                </span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
+                <!-- Text & Score Info -->
+                <div class="sm:col-span-7 space-y-2.5 order-2 sm:order-1">
+                  <h3 class="font-display text-2xl font-black text-slate-900 leading-tight" data-i18n="card2_title">
+                    Vastu Analysis</h3>
+                  <div class="flex items-center gap-2">
+                    <span class="text-xs text-slate-600 font-semibold">Orientation Score:</span>
+                    <span class="text-sm font-black text-emerald-600">92%</span>
+                  </div>
+                  <div class="flex items-center gap-2.5 pt-1">
+                    <span
+                      class="px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-bold text-emerald-800 shadow-sm">
+                      Compliance Check
+                    </span>
+                    <button type="button"
+                      class="text-xs font-bold text-[#1e293b] hover:text-[#d97706] transition flex items-center gap-1">
+                      Download Report <i class="fa-solid fa-arrow-down text-[10px]"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Glowing Vastu Compass Visual -->
+                <div
+                  class="sm:col-span-5 rounded-2xl overflow-hidden shadow-md border border-white/90 bg-gradient-to-br from-slate-900 via-slate-800 to-[#1e293b] p-2 h-36 flex items-center justify-center relative order-1 sm:order-2 group">
+                  <img src="assets/report_vastu.png" alt="Vastu Compass"
+                    class="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-500"
+                    onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/report_vastu.png';">
+                  <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <i
+                      class="fa-solid fa-compass text-amber-300 text-3xl drop-shadow-[0_0_12px_rgba(252,179,40,0.8)] opacity-90"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 4: Structural Report (Bottom Right - Staggered) -->
+          <div class="relative group cursor-pointer lg:translate-y-6" onclick="openReportModal('structural')">
+            <!-- App Logo Gunmetal Slate Backplate -->
+            <div class="slate-cascade-backplate inset-0 translate-x-3 translate-y-3">
+              <div class="cascade-tail-slate"></div>
+            </div>
+            <!-- Frosted Glass Card Body -->
+            <div class="glass-cascade-card p-6 sm:p-7 relative z-10">
+              <div class="cascade-tail-glass"></div>
+
+              <div class="flex items-center justify-between mb-3 text-xs">
+                <span class="text-[11px] font-bold text-slate-500 tracking-wide">
+                  The Pavilion Residence &bull; Project ID: AR2307
+                </span>
+                <span
+                  class="px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-900 text-[10px] font-extrabold uppercase border border-blue-200">
+                  Report #04
+                </span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
+                <!-- Text & Structural Integrity -->
+                <div class="sm:col-span-7 space-y-2.5">
+                  <h3 class="font-display text-2xl font-black text-slate-900 leading-tight" data-i18n="card4_title">
+                    Structural Report</h3>
+                  <p class="font-body text-xs text-slate-600 line-clamp-1">Beam Load Analysis & Civil Safety</p>
+                  <div class="flex items-center gap-2">
+                    <span class="text-xs text-slate-600 font-semibold">Integrity Score:</span>
+                    <span class="text-sm font-black text-blue-600">94% Safe</span>
+                  </div>
+                  <div class="flex items-center gap-2.5 pt-1">
+                    <span
+                      class="px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-xs font-bold text-blue-800 shadow-sm">
+                      Check Safety
+                    </span>
+                    <button type="button"
+                      class="text-xs font-bold text-[#1e293b] hover:text-[#d97706] transition flex items-center gap-1">
+                      View Summary <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- 3D Structural Wireframe Visual -->
+                <div
+                  class="sm:col-span-5 rounded-2xl overflow-hidden shadow-md border border-white/90 bg-slate-900 h-36 relative group">
+                  <img src="assets/report_structural.png" alt="Structural Frame"
+                    class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
+                    onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/report_structural.png';">
+                  <span
+                    class="absolute bottom-2 left-2 px-2 py-0.5 rounded bg-black/60 backdrop-blur-sm text-white text-[9px] font-bold">IS
+                    456 Compliant</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== 4. CERTIFIED ENGINEERING DOSSIER DOWNLOAD BANNER ==================== -->
+    <section class="w-full py-10 max-w-[1380px] mx-auto px-6 lg:px-12 relative" id="dossier">
+      <div
+        class="p-8 lg:p-12 rounded-3xl backdrop-blur-2xl bg-gradient-to-r from-[#131b28] via-[#1e293b] to-[#131b28] border border-[#fcb328]/40 shadow-2xl shadow-slate-950/40 flex flex-col md:flex-row items-center justify-between gap-8 reveal-on-scroll relative overflow-hidden">
+        <div class="absolute -right-10 -bottom-10 w-60 h-60 rounded-full bg-[#f59e0b]/20 blur-3xl pointer-events-none">
+        </div>
+        <div class="flex items-center gap-6 relative z-10">
+          <div
+            class="w-16 h-16 rounded-2xl bg-white/15 border border-white/25 flex items-center justify-center shrink-0 text-white shadow-lg animate-float">
+            <span class="material-symbols-outlined text-4xl text-[#f59e0b]">picture_as_pdf</span>
+          </div>
+          <div>
+            <h3 class="font-display text-2xl sm:text-3xl text-white font-medium" data-i18n="dossier_title">Download
+              Certified Engineering Dossier PDF</h3>
+            <p class="font-body text-xs sm:text-sm text-white/85 mt-1.5 max-w-xl" data-i18n="dossier_desc">Includes
+              2D/3D Floor Plan, Vāstu Audit, Itemized BOQ, and Structural Reinforcement Schedule.</p>
+            <div class="mt-3.5 flex flex-wrap items-center gap-2.5">
+              <span
+                class="px-3 py-1 rounded-full text-[11px] font-sans font-semibold bg-white/15 border border-white/20 text-white flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#f59e0b]"></span> IS 456 Verified
+              </span>
+              <span
+                class="px-3 py-1 rounded-full text-[11px] font-sans font-semibold bg-white/15 border border-white/20 text-white flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#f59e0b]"></span> Reports Ready
+              </span>
+              <span
+                class="px-3 py-1 rounded-full text-[11px] font-sans font-semibold bg-white/15 border border-white/20 text-white flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#f59e0b]"></span> One-Click Download
+              </span>
+            </div>
+          </div>
+        </div>
+        <button type="button"
+          class="shrink-0 inline-flex items-center gap-2.5 bg-gradient-to-r from-[#fcb328] to-[#d97706] hover:from-[#fca311] hover:to-[#b45309] text-[#0f172a] font-sans text-xs uppercase tracking-wider font-bold px-7 py-4 rounded-xl shadow-lg shadow-amber-500/20 transition-all hover:scale-[1.02] border border-amber-300/40 cursor-default">
+          <span class="material-symbols-outlined text-xl">download</span>
+          <span data-i18n="dossier_btn">Download Dossier PDF</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ==================== 5. CONSULTATION & REGIONAL STUDIOS ==================== -->
+    <section class="w-full py-20 max-w-[1380px] mx-auto px-6 lg:px-12 relative" id="contact">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+        <!-- Inquiry Form -->
+        <div
+          class="lg:col-span-7 p-8 sm:p-10 rounded-3xl architectural-card border border-white/95 shadow-xl reveal-on-scroll">
+          <span class="font-sans text-xs uppercase tracking-widest text-[#1e293b] font-bold block mb-2"
+            data-i18n="contact_kicker">Have a Query?</span>
+          <h2 class="font-display font-semibold text-2xl sm:text-3xl text-[#1c2520] mb-2" data-i18n="contact_title">
+            Contact Us &amp; Architectural Inquiry</h2>
+          <p class="font-body text-xs sm:text-sm text-[#404944] mb-6 leading-relaxed" data-i18n="contact_desc">
+            Connect directly with our engineering and Vāstu specialists. Submit your questions regarding floor planning,
+            structural schedules, or blueprint audits.
+          </p>
+
+          <form id="inquiryForm" class="space-y-4.5" onsubmit="handleInquirySubmit(event)">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block font-sans text-xs uppercase tracking-wider text-[#404944] mb-1.5 font-bold"
+                  data-i18n="form_name">Full Name</label>
+                <input id="formName"
+                  class="w-full bg-white border border-[#bfc9c3] rounded-xl px-4 py-3 text-sm text-[#1c2520] placeholder:text-[#707974]/60 focus:outline-none focus:border-[#1e293b] focus:ring-1 focus:ring-[#fcb328] transition-all"
+                  placeholder="Ramesh Krishnan" required="" type="text">
+              </div>
+              <div>
+                <label class="block font-sans text-xs uppercase tracking-wider text-[#404944] mb-1.5 font-bold"
+                  data-i18n="form_email">Email Address</label>
+                <input id="formEmail"
+                  class="w-full bg-white border border-[#bfc9c3] rounded-xl px-4 py-3 text-sm text-[#1c2520] placeholder:text-[#707974]/60 focus:outline-none focus:border-[#1e293b] focus:ring-1 focus:ring-[#fcb328] transition-all"
+                  placeholder="ramesh@example.com" required="" type="email">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block font-sans text-xs uppercase tracking-wider text-[#404944] mb-1.5 font-bold"
+                  data-i18n="form_phone">Phone Number</label>
+                <div class="flex">
+                  <span
+                    class="inline-flex items-center px-3.5 bg-[#f4f3f1] border border-r-0 border-[#bfc9c3] rounded-l-xl text-[#404944] text-xs font-semibold">+91</span>
+                  <input id="formPhone"
+                    class="w-full bg-white border border-[#bfc9c3] rounded-r-xl px-4 py-3 text-sm text-[#1c2520] placeholder:text-[#707974]/60 focus:outline-none focus:border-[#1e293b] focus:ring-1 focus:ring-[#fcb328] transition-all"
+                    placeholder="98765 43210" required="" type="tel">
+                </div>
+              </div>
+              <div>
+                <label class="block font-sans text-xs uppercase tracking-wider text-[#404944] mb-1.5 font-bold"
+                  data-i18n="form_city">Location / City</label>
+                <input id="formCity"
+                  class="w-full bg-white border border-[#bfc9c3] rounded-xl px-4 py-3 text-sm text-[#1c2520] placeholder:text-[#707974]/60 focus:outline-none focus:border-[#1e293b] focus:ring-1 focus:ring-[#fcb328] transition-all"
+                  placeholder="Bengaluru, Chennai, Coimbatore..." required="" type="text">
+              </div>
+            </div>
+
+            <div>
+              <label class="block font-sans text-xs uppercase tracking-wider text-[#404944] mb-1.5 font-bold"
+                data-i18n="form_query">Your Query / Information Request</label>
+              <textarea id="formQuery"
+                class="w-full bg-white border border-[#bfc9c3] rounded-xl px-4 py-3 text-sm text-[#1c2520] placeholder:text-[#707974]/60 focus:outline-none focus:border-[#1e293b] focus:ring-1 focus:ring-[#fcb328] transition-all"
+                placeholder="Describe your plot requirements, Vāstu questions, or construction dossier needs..."
+                required="" rows="3"></textarea>
+            </div>
+
+            <button
+              class="w-full bg-[#1e293b] hover:bg-[#334155] text-[#faf9f7] font-sans text-sm font-semibold py-3.5 rounded-xl shadow-lg shadow-slate-900/15 transition-all flex items-center justify-center gap-2 mt-3 border border-[#d97706]/35"
+              type="submit">
+              <span class="material-symbols-outlined text-base text-[#f59e0b]">send</span>
+              <span data-i18n="form_submit">Submit Query</span>
+            </button>
+            <div id="formSuccessNotice"
+              class="hidden p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-900 flex items-start gap-2.5 mt-3">
+              <span class="material-symbols-outlined text-base text-emerald-600 shrink-0">check_circle</span>
+              <div>
+                <strong class="font-bold block mb-0.5">Inquiry Routed to support@kanavuillam.in!</strong>
+                <span id="formSuccessMsg">Vanakkam! Your project details have been successfully transmitted. Our
+                  planning advisor will contact you within 24 hours.</span>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Consultation Desk Info -->
+        <div class="lg:col-span-5 flex flex-col gap-5 reveal-on-scroll">
+          <div class="p-8 rounded-3xl architectural-card flex flex-col gap-5 relative overflow-hidden">
+            <div class="flex items-center gap-3.5">
+              <div
+                class="w-14 h-14 rounded-2xl bg-white/95 border border-[#d97706]/40 flex items-center justify-center p-1.5 shadow-md shadow-slate-900/15 shrink-0">
+                <img src="assets/app_logo.png" alt="Kanavu Illam Logo" class="w-full h-full object-contain">
+              </div>
+              <div>
+                <span class="font-sans text-[10px] uppercase tracking-[0.24em] text-[#b45309] font-bold block"
+                  data-i18n="side_kicker">Architectural Platform</span>
+                <h3 class="font-display font-semibold text-2xl text-[#1c2520]" data-i18n="side_title">Kanavuillam</h3>
+              </div>
+            </div>
+
+            <p class="font-body text-xs sm:text-sm text-[#404944] leading-relaxed" data-i18n="side_desc">
+              Kanavuillam delivers deterministic architectural planning for Indian residential construction. We
+              transform 2D blueprints into precision 3D models, Vāstu Shastra, Cost estimation, and structural
+              schedules.
+            </p>
+
+            <div class="pt-2 border-t border-[#e3e2e0] flex flex-col gap-3">
+              <div
+                class="p-4 rounded-2xl bg-gradient-to-br from-[#f4f3f1] to-white border border-[#1e293b]/20 shadow-sm flex flex-col gap-2.5">
+                <div class="flex items-center justify-between">
+                  <span
+                    class="font-sans text-[11px] text-[#707974] uppercase font-bold tracking-wider flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-sm text-[#1e293b]">mail</span> Primary Consultation Desk
+                  </span>
+                  <span
+                    class="inline-flex items-center gap-1 text-[10px] font-sans font-semibold text-[#1e293b] bg-[#1e293b]/10 px-2 py-0.5 rounded-full">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#1e293b]"></span> Email Only
+                  </span>
+                </div>
+
+                <a class="flex items-center justify-between p-3 rounded-xl bg-white border border-[#bfc9c3] hover:border-[#1e293b] transition-all group/mail shadow-inner"
+                  href="mailto:support@kanavuillam.in">
+                  <div class="flex items-center gap-2.5">
+                    <span class="material-symbols-outlined text-xl text-[#1e293b]">alternate_email</span>
+                    <span
+                      class="font-mono text-sm font-bold text-[#1c2520] group-hover/mail:text-[#1e293b] transition-colors">support@kanavuillam.in</span>
+                  </div>
+                  <span
+                    class="material-symbols-outlined text-base text-[#707974] group-hover/mail:text-[#1e293b] transition-transform group-hover/mail:translate-x-0.5">arrow_forward</span>
+                </a>
+
+                <div class="flex items-center justify-between text-[11px] text-[#707974] pt-0.5 px-0.5 font-medium">
+                  <span>Guaranteed reply within 24 hours</span>
+                  <span class="flex items-center gap-1 text-[#1e293b] font-semibold">
+                    <span class="material-symbols-outlined text-xs">lock</span> Encrypted
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2.5 pt-1">
+              <div class="p-2.5 rounded-lg bg-white/90 border border-[#1e293b]/15 flex items-center gap-2">
+                <span class="material-symbols-outlined text-[#1e293b] text-base">verified</span>
+                <span class="font-sans text-[11px] font-semibold text-[#1c2520]">Blueprint Audits</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-white/90 border border-[#d97706]/20 flex items-center gap-2">
+                <span class="material-symbols-outlined text-[#b45309] text-base">schedule</span>
+                <span class="font-sans text-[11px] font-semibold text-[#1c2520]">Daily Inbox Dispatch</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="w-full border-t border-[#e3e2e0] bg-[#efeeec] py-12 relative z-10">
+    <div class="max-w-[1380px] mx-auto px-6 lg:px-12 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <div
+          class="w-9 h-9 rounded-lg bg-white/95 border border-[#d97706]/40 flex items-center justify-center p-1 shadow-sm">
+          <img src="assets/app_logo.png" alt="Kanavu Illam Logo" class="w-full h-full object-contain">
+        </div>
+        <span class="font-display text-base text-[#1c2520] font-semibold">Kanavu illam</span>
+        <span class="text-[#707974] text-xs">•</span>
+      </div>
+      <div class="flex items-center gap-6 text-xs text-[#404944] font-body">
+        <a class="hover:text-[#1e293b] font-semibold transition-colors cursor-pointer" href="privacy-policy.html"
+          onclick="openLegalModal('privacy'); return false;">Privacy Policy</a>
+        <a class="hover:text-[#1e293b] font-semibold transition-colors cursor-pointer" href="terms-conditions.html"
+          onclick="openLegalModal('terms'); return false;">Terms and Conditions</a>
+      </div>
+      <p class="font-body text-xs text-[#707974]">
+        © 2026 Kanavu Illam. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ==================== INTERACTIVE REPORT MODAL ==================== -->
+  <div id="reportModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-6 modal-backdrop">
+    <div
+      class="bg-white rounded-3xl max-w-3xl w-full border border-[#1e293b]/20 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+      <!-- Modal Header -->
+      <div class="p-5 sm:p-6 bg-[#faf9f7] border-b border-[#e3e2e0] flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-[#1e293b] text-white flex items-center justify-center shadow-md">
+            <span id="modalIcon" class="material-symbols-outlined text-xl text-[#f59e0b]">view_in_ar</span>
+          </div>
+          <div>
+            <h3 id="modalTitle" class="font-display text-xl font-semibold text-[#1c2520]">Report Preview</h3>
+            <span id="modalCategory" class="text-xs uppercase font-sans tracking-wider text-[#b45309] font-bold">Spatial
+              Architecture</span>
+          </div>
+        </div>
+        <button onclick="closeReportModal()"
+          class="w-9 h-9 rounded-full bg-[#f4f3f1] hover:bg-[#e9e8e6] flex items-center justify-center text-[#707974] hover:text-[#1c2520] transition-colors">
+          <span class="material-symbols-outlined text-lg">close</span>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 overflow-y-auto" id="modalContent">
+        <!-- Content injected dynamically by JS -->
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-4 sm:p-5 bg-[#faf9f7] border-t border-[#e3e2e0] flex items-center justify-between">
+        <span class="text-xs text-[#707974] font-medium">Kanavu Illam Architectural Dossier Engine</span>
+        <button type="button"
+          class="inline-flex items-center gap-2 bg-[#1e293b] text-white font-sans text-xs uppercase tracking-wider font-semibold px-4.5 py-2.5 rounded-lg shadow-md cursor-default">
+          <span class="material-symbols-outlined text-base text-[#f59e0b]">download</span>
+          <span>Download in Full PDF</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== LEGAL / PRIVACY & TERMS MODAL ==================== -->
+  <div id="legalModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-6 modal-backdrop">
+    <div
+      class="bg-white rounded-3xl max-w-4xl w-full border border-[#1e293b]/20 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+
+      <!-- Modal Header with Interactive Tabs -->
+      <div class="p-5 sm:p-6 bg-[#faf9f7] border-b border-[#e3e2e0] flex items-center justify-between gap-4">
+        <div class="flex items-center gap-2 sm:gap-3">
+          <button id="tabPrivacyBtn" type="button" onclick="switchLegalTab('privacy')"
+            class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 bg-[#1e293b] text-white shadow-md">
+            <i class="fa-solid fa-shield-halved mr-1.5 text-[#f59e0b]"></i> Privacy Policy
+          </button>
+          <button id="tabTermsBtn" type="button" onclick="switchLegalTab('terms')"
+            class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 bg-slate-100 text-slate-700 hover:bg-slate-200">
+            <i class="fa-solid fa-file-contract mr-1.5 text-slate-500"></i> Terms &amp; Conditions
+          </button>
+        </div>
+
+        <button onclick="closeLegalModal()" aria-label="Close Modal"
+          class="w-9 h-9 rounded-full bg-[#f4f3f1] hover:bg-[#e9e8e6] flex items-center justify-center text-[#707974] hover:text-[#1c2520] transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-lg">close</span>
+        </button>
+      </div>
+
+      <!-- Modal Body (Scrollable Legal Content) -->
+      <div class="p-6 sm:p-8 overflow-y-auto space-y-6 text-sm text-slate-700 leading-relaxed font-sans">
+
+        <!-- ==================== TAB 1: PRIVACY POLICY ==================== -->
+        <div id="legalTabPrivacy" class="space-y-6">
+          <div class="pb-4 border-b border-slate-200">
+            <span class="text-[11px] uppercase font-extrabold tracking-widest text-[#d97706] block mb-1">DATA PROTECTION
+              &amp; PRIVACY</span>
+            <h3 class="font-display text-2xl sm:text-3xl font-bold text-[#1c2520]">Privacy Policy: Kanavu Illam</h3>
+            <p class="text-xs text-slate-500 mt-1 font-medium">Effective Date: November 05, 2026</p>
+            <div class="mt-3 p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600">
+              <strong>Operated by:</strong> Crescent Moon Consulting Services, Corporation Ward-32, 134-B,
+              Sengodampalayam, Perundurai Road, Thindal, Erode, Tamil Nadu 638012, India.
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div>
+              <h4 class="font-bold text-slate-900 text-base mb-1">1. About Us</h4>
+              <p>Crescent Moon Consulting Services (“the Company”, “we”) operates the Kanavu Illam mobile app and
+                kanavuillam.in (the “Service”) and acts as the Data Fiduciary. This Policy is framed under the Digital
+                Personal Data Protection Act, 2023 (DPDP Act), the Information Technology Act, 2000 and the SPDI Rules,
+                2011.</p>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-slate-900 text-base mb-1">2. Consent</h4>
+              <p>By creating an account or signing in, you confirm you have read and accept this Policy and our Terms.
+                Email sign-up requires an unticked checkbox accepting both. Google Sign-In shows links to both before
+                sign-in completes. You may withdraw consent by deleting your account; withdrawal does not affect
+                processing already done.</p>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-slate-900 text-base mb-1">3. Data We Collect</h4>
+              <ul class="list-disc pl-5 space-y-1.5 text-slate-600 mt-2">
+                <li><strong>Account info (name, email, optional phone):</strong> for login and support. Stored in our
+                  cloud database until you delete your account.</li>
+                <li><strong>Site address / city (optional):</strong> printed on your PDF. Stored only on your device.
+                </li>
+                <li><strong>Floor plan uploads:</strong> used for automated analysis. Held on temporary server disk and
+                  deleted promptly after processing (or at server restart if processing is interrupted).</li>
+                <li><strong>Calculated results (3D, Vastu, cost, structural):</strong> held temporarily to generate your
+                  report and deleted from our database promptly after you download your PDF, or automatically within 24
+                  hours if the download is not completed. Only your project name and date are kept for your History
+                  list.</li>
+                <li><strong>Payment and delivery records:</strong> order ID, payment ID, amount and download timestamp,
+                  kept for tax, accounting and proof of delivery. We never receive card numbers or UPI PINs.</li>
+                <li><strong>Technical logs:</strong> IP address, device OS and app version, kept up to 30 days for
+                  security and rate limiting.</li>
+                <li><strong>Session token and language:</strong> stored on your device until you sign out or uninstall.
+                </li>
+              </ul>
+              <p
+                class="mt-2.5 text-xs font-semibold text-emerald-800 bg-emerald-50 p-2.5 rounded-lg border border-emerald-200">
+                We do not collect precise location, contacts or advertising IDs, and we do not sell your data.
+              </p>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-slate-900 text-base mb-1">4. How We Use Data</h4>
+              <p>To authenticate your account, analyse floor plans, compile your report, process payments, prevent fraud
+                and abuse, respond to support and comply with law. Drawings are processed by our in-house
+                computer-vision tools and are never sent to any external language model.</p>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-slate-900 text-base mb-1">5. Service Providers</h4>
+              <p>We share data only with providers that act on our instructions: cloud infrastructure and database
+                hosts, Google (Sign-In), Razorpay (RBI-authorised payment aggregator) and a material-price search
+                service that receives short keyword queries only, with no personal data or drawings. Some data may be
+                processed on servers outside India, protected by encryption in transit and contractual safeguards. We
+                may disclose data when required by law, court order or lawful government request, or to protect our
+                rights and the security of the Service. We are not responsible for the independent practices of
+                third-party providers.</p>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-slate-900 text-base mb-1">6. Data Deletion</h4>
+              <ul class="list-disc pl-5 space-y-1.5 text-slate-600 mt-2">
+                <li><strong>On download:</strong> calculated results are deleted promptly after you download your PDF,
+                  or automatically within 24 hours if you do not, and cannot be recovered afterwards.</li>
+                <li><strong>In-app:</strong> Profile &rarr; Delete Account removes your account, profile and history.
+                </li>
+                <li><strong>Web:</strong> kanavuillam.in/delete-account. Deletion is completed within 7 days after email
+                  verification.</li>
+                <li><strong>Retained by law:</strong> payment and billing records are kept as Indian tax and GST laws
+                  require. Backup copies are purged within 30 days. We cannot delete data stored on your device or files
+                  you saved outside the app.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-slate-900 text-base mb-1">7. Your Rights</h4>
+              <p>Under the DPDP Act you may request a summary of your data, correction, erasure, withdrawal of consent
+                and nomination of another person to act for you. Email <a href="mailto:grievance@kanavuillam.in"
+                  class="text-amber-600 font-bold underline">grievance@kanavuillam.in</a> from your registered email. We
+                acknowledge within 24 hours and resolve within 15 days.</p>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-slate-900 text-base mb-1">8. Security, Children and Changes</h4>
+              <p>We use TLS encryption, session verification, access controls and rate limiting. No system is completely
+                secure, and you are responsible for protecting your login and device. We will notify of confirmed
+                breaches as the law requires. The Service is for users aged 18 and above, and minor accounts are deleted
+                once identified. We may update this Policy by posting it with a new date; continued use means
+                acceptance.</p>
+            </div>
+
+            <div class="pt-3 border-t border-slate-200">
+              <h4 class="font-bold text-slate-900 text-base mb-1.5">9. Grievance Officer and Contact</h4>
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 space-y-1">
+                <p><strong>Grievance Officer:</strong> Crescent Moon Consulting Services</p>
+                <p><strong>Address:</strong> Corporation Ward-32, 134-B, Sengodampalayam, Perundurai Road, Thindal,
+                  Erode, Tamil Nadu 638012, India.</p>
+                <p><strong>Email:</strong> <a href="mailto:grievance@kanavuillam.in"
+                    class="text-amber-600 font-bold">grievance@kanavuillam.in</a> (copy: <a
+                    href="mailto:support@kanavuillam.in" class="text-amber-600 font-bold">support@kanavuillam.in</a>)
+                </p>
+                <p><strong>Phone:</strong> <a href="tel:+917550880429" class="text-slate-900 font-bold">+91 75508
+                    80429</a> (Mon–Sat, 10:00–18:00 IST)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== TAB 2: TERMS AND CONDITIONS ==================== -->
+        <div id="legalTabTerms" class="space-y-6 hidden">
+          <div class="pb-4 border-b border-slate-200">
+            <span class="text-[11px] uppercase font-extrabold tracking-widest text-[#d97706] block mb-1">USER AGREEMENT
+              &amp; COMPLIANCE</span>
+            <h3 class="font-display text-2xl sm:text-3xl font-bold text-[#1c2520]">Terms and Conditions: Kanavu Illam
+            </h3>
+            <p class="text-xs text-slate-500 mt-1 font-medium">Effective Date: November 05, 2026</p>
+            <div class="mt-3 p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600">
+              <strong>Operated by:</strong> Crescent Moon Consulting Services, Corporation Ward-32, 134-B,
+              Sengodampalayam, Perundurai Road, Thindal, Erode, Tamil Nadu 638012, India.
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div>
+              <h4 class="font-bold text-slate-900 text-base mb-1">1. Acceptance and Eligibility</h4>
+              <p>By using Kanavu Illam (the “Service”) you accept these Terms and our Privacy Policy. You must be 18 or
+                older and legally able to enter a contract. You are responsible for your account and all activity under
+                it.</p>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-slate-900 text-base mb-1">2. Nature of Service</h4>
+              <p>Kanavu Illam is an automated planning aid offering floor plan reading, 3D visualization, Vastu scoring
+                and preliminary cost and structural estimates for Ground Floor plans only. It is not professional
+                engineering, architectural or legal advice. Reports do not replace licensed civil engineers, soil tests
+                or municipal approvals. Computer vision may misread plans or dimensions, and Vastu scores are for
+                cultural reference only. Always verify with a licensed professional before building. Use of any report
+                is at your own risk.</p>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-slate-900 text-base mb-1">3. Pricing and No-Refund Policy</h4>
+              <ul class="list-disc pl-5 space-y-1.5 text-slate-600 mt-2">
+                <li><strong>Fee:</strong> &#8377;500 per project upload (Ground Floor plan), inclusive of taxes,
+                  displayed before payment. We may change prices for future purchases.</li>
+                <li><strong>No cash refunds:</strong> the fee covers immediate server processing and PDF compilation.
+                  All payments are non-refundable once analysis begins.</li>
+                <li><strong>Technical failure:</strong> if a verified technical error on our side prevents report
+                  delivery, email <a href="mailto:support@kanavuillam.in"
+                    class="text-amber-600 font-bold underline">support@kanavuillam.in</a> within 7 days with your Order
+                  ID for one free re-processing of the same plan.</li>
+                <li><strong>Duplicate or incorrect charges:</strong> contact us with your Order ID; any amount found to
+                  be wrongly charged will be reversed to your original payment method.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-slate-900 text-base mb-1">4. User Responsibility Before Download</h4>
+              <p>Because our system enforces strict data privacy and automatically purges all computational results
+                within 24 hours, you are responsible for maintaining an active internet connection and completing your
+                download immediately. The Company cannot restore or re-process reports that were not saved due to user
+                device closure, connection loss, or app deletion prior to download. By using the Service, you confirm
+                that you have read these Terms and agree to complete your download before leaving the output screen.</p>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-slate-900 text-base mb-1">5. Intellectual Property and Acceptable Use</h4>
+              <p>The Company owns the app, 3D visualizer, algorithms and branding. You retain ownership of your uploaded
+                floor plans and grant us permission to process them only to provide the Service. After your report is
+                generated, you receive a personal, non-exclusive licence to view, download, print and share your PDF.
+                You must not scrape, reverse engineer, copy our algorithms, overload our servers, upload unlawful or
+                infringing files, access others’ data, or bypass payment or security controls.</p>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-slate-900 text-base mb-1">6. Disclaimers and Limitation of Liability</h4>
+              <p>The Service is provided “as is” and “as available”, without warranties of any kind. We are not liable
+                for indirect or consequential loss, including construction defects, contractor disputes, foundation
+                issues or cost overruns arising from automated estimates, or for outages of third-party providers or
+                events beyond our reasonable control. Our total liability for any claim is limited to the amount you
+                paid for the transaction concerned. Nothing in these Terms limits liability that cannot be limited by
+                law, or your rights under the Consumer Protection Act, 2019.</p>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-slate-900 text-base mb-1">7. Indemnity</h4>
+              <p>You agree to indemnify the Company against claims, losses and expenses arising from your breach of
+                these Terms or your uploaded content.</p>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-slate-900 text-base mb-1">8. Accounts and Deletion</h4>
+              <p>You may delete your account at any time in the app (Profile &rarr; Delete Account) or at <a
+                  href="https://kanavuillam.in/delete-account"
+                  class="text-amber-600 font-bold underline">kanavuillam.in/delete-account</a>, subject to records we
+                must retain by law. We may suspend or terminate accounts that violate these Terms.</p>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-slate-900 text-base mb-1">9. Changes</h4>
+              <p>We may update these Terms by posting them with a new date. Continued use means acceptance.</p>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-slate-900 text-base mb-1">10. Governing Law and Disputes</h4>
+              <p>These Terms are governed by the laws of India. Please write to <a href="mailto:support@kanavuillam.in"
+                  class="text-amber-600 font-bold underline">support@kanavuillam.in</a> first so we can try to resolve
+                the matter within 30 days. Otherwise, the courts at Erode jurisdiction, Tamil Nadu, India have exclusive
+                jurisdiction, without affecting any right you have to approach a consumer commission. If any clause is
+                unenforceable, the rest remains in force.</p>
+            </div>
+
+            <div class="pt-3 border-t border-slate-200">
+              <h4 class="font-bold text-slate-900 text-base mb-1.5">11. Contact</h4>
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 space-y-1">
+                <p><strong>Crescent Moon Consulting Services</strong></p>
+                <p><strong>Support:</strong> <a href="mailto:support@kanavuillam.in"
+                    class="text-amber-600 font-bold">support@kanavuillam.in</a></p>
+                <p><strong>Legal &amp; Grievances:</strong> <a href="mailto:grievance@kanavuillam.in"
+                    class="text-amber-600 font-bold">grievance@kanavuillam.in</a></p>
+                <p><strong>Phone:</strong> <a href="tel:+917550880429" class="text-slate-900 font-bold">+91 75508
+                    80429</a> (Mon–Sat, 10:00–18:00 IST)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-4 sm:p-5 bg-[#faf9f7] border-t border-[#e3e2e0] flex items-center justify-between">
+        <span class="text-xs text-[#707974] font-medium">Crescent Moon Consulting Services &bull; DPDP Act 2023
+          Compliant</span>
+        <button type="button" onclick="closeLegalModal()"
+          class="inline-flex items-center gap-1.5 bg-[#1e293b] hover:bg-[#334155] text-white font-sans text-xs uppercase tracking-wider font-semibold px-5 py-2.5 rounded-lg shadow-md transition-colors cursor-pointer">
+          <span>Close</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== UPLOAD PROGRESS SIMULATION MODAL ==================== -->
+  <div id="uploadProgressModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 modal-backdrop">
+    <div class="bg-white rounded-3xl max-w-lg w-full border border-[#1e293b]/20 shadow-2xl p-7 text-center">
+      <div
+        class="w-16 h-16 rounded-2xl bg-[#1e293b]/10 text-[#1e293b] flex items-center justify-center mx-auto mb-4 border border-[#1e293b]/20 animate-pulse">
+        <span class="material-symbols-outlined text-3xl text-[#1e293b]">memory</span>
+      </div>
+      <h3 class="font-display text-2xl text-[#1c2520] font-semibold mb-2">Analyzing 2D Blueprint</h3>
+      <p id="parsingStatusText" class="text-xs sm:text-sm text-[#404944] mb-6">Parsing wall geometries and room
+        boundaries...</p>
+
+      <!-- Progress Bar -->
+      <div class="w-full bg-[#efeeec] rounded-full h-3 overflow-hidden mb-6 border border-[#e3e2e0]">
+        <div id="parsingProgressBar"
+          class="bg-gradient-to-r from-[#1e293b] via-[#fcb328] to-[#d97706] h-full transition-all duration-300 w-1/4">
+        </div>
+      </div>
+
+      <div
+        class="flex items-center justify-between text-[11px] font-mono text-[#707974] pt-2 border-t border-[#e3e2e0]">
+        <span id="parsingPercent">25% Completed</span>
+        <span>IS 456 &amp; Vāstu Engine</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== JAVASCRIPT ==================== -->
+  <script>
+    // Scroll Reveal Intersection Observer
+    document.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+          }
+        });
+      }, {
+        threshold: 0.08,
+        rootMargin: '0px 0px -30px 0px'
+      });
+
+      document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
+        observer.observe(el);
+      });
+    });
+
+    // Mobile Menu Toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+    document.getElementById('mobileMenuBtn').addEventListener('click', toggleMobileMenu);
+
+    // ==================== BILINGUAL TRANSLATION DICTIONARY ====================
+    let currentLang = 'en';
+    const translations = {
+      en: {
+        brand_name: "Kanavu Illam",
+        brand_subtitle: "Heritage Vāstu Architecture",
+        nav_home: "Home",
+        nav_how_it_works: "How It Works",
+        nav_reports: "Reports",
+        nav_consultation: "Consultation",
+        hero_badge: "Vāstu Shastra • IS 456 Structural Dossier",
+        hero_title: "Kanavuillam",
+        hero_desc: "Transform 2D floor plans into interactive 3D spaces, Vāstu audit, Cost estimation, and code-verified Structural schedules for discerning homeowners.",
+        hero_cta_upload: "Upload 2D Plan",
+        hero_cta_explore: "Explore Reports",
+        workflow_kicker: "Workflow Pipeline",
+        workflow_title: "How It Works",
+        workflow_desc: "From initial 2D blueprint upload to municipal-stamped and bank-ready construction dossier in five seamless stages.",
+        step1_tag: "Submission",
+        step1_title: "Upload 2D Plan",
+        step1_desc: "Add your 2D sketch, blueprint, AutoCAD DWG, DXF, or technical PDF drawing.",
+        step2_tag: "Verification",
+        step2_title: "Secure Payment",
+        step2_desc: "Transparent upfront pricing with milestone-based fee tiers and GST invoicing.",
+        step3_tag: "Analysis Plan",
+        step3_title: "Analyze 2D Plan",
+        step3_desc: "Deterministic parsing of walls, room boundaries, structural loads, and cardinal azimuths.",
+        step4_tag: "View Report",
+        step4_title: "View Reports",
+        step4_desc: "Interactive 3D walkthrough, Vāstu energy matrix, material takeoff, and structural schedules.",
+        step5_tag: "Download PDF",
+        step5_title: "Download Reports",
+        step5_desc: "Instant download all reports in one click to get PDF, save in device.",
+        dropzone_kicker: "Interactive Blueprint Ingestion",
+        dropzone_title: "Upload 2D Plan",
+        dropzone_desc: "Upload your 2D sketch, blueprint, architectural layout or CAD file to initiate structural calculation, Vāstu audit, and 3D reconstruction.",
+        upload_btn: "Upload your 2d plan",
+        sample_plans_label: "Or Try Instant Sample Blueprints:",
+        trust_parser: "Instant Parser Engine",
+        trust_privacy: "Encrypted & Privacy Guaranteed",
+        reports_kicker: "DETAILED DELIVERABLES",
+        reports_title: "Reports",
+        reports_desc: "Comprehensive architectural and engineering documentation generated directly from your 2D plan.",
+        card1_tag: "SPATIAL ARCHITECTURE",
+        card1_status: "Ready for Preview",
+        card1_title: "3D Model",
+        card1_desc: "Interactive multi-angle cutaways and realistic spatial layout visualization.",
+        card2_tag: "DIRECTIONAL AUDIT",
+        card2_status: "Compliant",
+        card2_title: "Vastu Analysis",
+        card2_desc: "16-zone orientation audit with directional scoring and non-demolition remedies.",
+        card3_tag: "QUANTITY TAKEOFF (BOQ)",
+        card3_status: "Itemized Breakdown",
+        card3_title: "Cost Estimation",
+        card3_desc: "Itemized material takeoff and cost breakdown calibrated against live market rates.",
+        card4_tag: "CODE COMPLIANCE",
+        card4_status: "Engineer Verified",
+        card4_title: "Structural Report",
+        card4_desc: "RCC column sizing, beam reinforcement, and Bar Bending Schedule strictly validated against IS 456.",
+        dossier_title: "Download Certified Engineering Dossier PDF",
+        dossier_desc: "Includes 2D/3D Floor Plan, Vāstu Audit, Itemized BOQ, and Structural Reinforcement Schedule.",
+        dossier_btn: "Download Dossier PDF",
+        contact_kicker: "Have a Query?",
+        contact_title: "Contact Us & Architectural Inquiry",
+        contact_desc: "Connect directly with our engineering and Vāstu specialists. Submit your questions regarding floor planning, structural schedules, or blueprint audits.",
+        form_name: "Full Name",
+        form_email: "Email Address",
+        form_phone: "Phone Number",
+        form_city: "Location / City",
+        form_query: "Your Query / Information Request",
+        form_submit: "Submit Query",
+        side_kicker: "Architectural Platform",
+        side_title: "Kanavuillam",
+        side_desc: "Kanavuillam delivers deterministic architectural planning for Indian residential construction. We transform 2D blueprints into precision 3D models, Vāstu Shastra, Cost estimation, and structural schedules."
+      },
+      ta: {
+        brand_name: "கனவு இல்லம்",
+        brand_subtitle: "பாரம்பரிய வாஸ்து கட்டடக்கலை",
+        nav_home: "முகப்பு",
+        nav_how_it_works: "செயல்முறை",
+        nav_reports: "அறிக்கைகள்",
+        nav_consultation: "ஆலோசனை",
+        hero_badge: "வாஸ்து சாஸ்திரம் • IS 456 கட்டமைப்பு கோப்பு",
+        hero_title: "கனவு இல்லம்",
+        hero_desc: "உங்கள் 2D வரைபடங்களை உடனடி 3D மாதிரி, வாஸ்து தணிக்கை, கட்டுமான செலவு மதிப்பீடு மற்றும் IS 456 தரநிலை கட்டமைப்பு அறிக்கைகளாக மாற்றுங்கள்.",
+        hero_cta_upload: "Upload 2D Plan",
+        hero_cta_explore: "அறிக்கைகளை காண்க",
+        workflow_kicker: "கட்டமைப்பு படிநிலைகள்",
+        workflow_title: "எப்படி செயல்படுகிறது?",
+        workflow_desc: "2D வரைபடம் பதிவேற்றம் முதல் நகராட்சி மற்றும் வங்கி ஒப்புதல் பெற்ற பொறியியல் ஆவணம் வரை 5 எளிய நிலைகள்.",
+        step1_tag: "பதிவேற்றம்",
+        step1_title: "2D வரைபடம் சமர்ப்பிப்பு",
+        step1_desc: "உங்கள் 2D வரைபடம், புளூபிரிண்ட், AutoCAD DWG, DXF அல்லது PDF பதிவேற்றவும்.",
+        step2_tag: "சரிபார்ப்பு",
+        step2_title: "பாதுகாப்பான கட்டணம்",
+        step2_desc: "வெளிப்படையான நிலையான கட்டணம், UPI மற்றும் உடனடி ஜிஎஸ்டி ரசீது வசதி.",
+        step3_tag: "பகுப்பாய்வு",
+        step3_title: "2D திட்ட பகுப்பாய்வு",
+        step3_desc: "சுவர்கள், அறைகள், கட்டமைப்பு சுமைகள் மற்றும் வாஸ்து திசைகளின் துல்லிய பகுப்பாய்வு.",
+        step4_tag: "அறிக்கை",
+        step4_title: "அறிக்கைகளை காண்க",
+        step4_desc: "3D மாதிரி, வாஸ்து ஆற்றல் வரைபடம், மூலப்பொருள் மதிப்பீடு மற்றும் கட்டமைப்பு விவரங்கள்.",
+        step5_tag: "பதிவிறக்கம்",
+        step5_title: "ஆவண பதிவிறக்கம்",
+        step5_desc: "அனைத்து விரிவான அறிக்கைகளையும் ஒரே கிளிக்கில் PDF கோப்பாக சேமிக்கவும்.",
+        dropzone_kicker: "ஊடாடும் வரைபட பதிவேற்றம்",
+        dropzone_title: "2D திட்டத்தை பதிவேற்றவும்",
+        dropzone_desc: "உங்கள் 2D வரைபடத்தை பதிவேற்றி உடனடி 3D வடிவமைப்பு, வாஸ்து தணிக்கை மற்றும் செலவு விவரங்களை பெறுங்கள்.",
+        upload_btn: "Upload your 2d plan",
+        sample_plans_label: "அல்லது மாதிரி திட்டங்களை கிளிக் செய்து பார்க்கவும்:",
+        trust_parser: "உடனடி பகுப்பாய்வு இயந்திரம்",
+        trust_privacy: "முழு பாதுகாப்பு & ரகசியத்தன்மை",
+        reports_kicker: "முக்கிய ஆவணங்கள்",
+        reports_title: "விரிவான அறிக்கைகள்",
+        reports_desc: "உங்கள் 2D திட்டத்தில் இருந்து உருவாக்கப்பட்ட முழுமையான கட்டடக்கலை மற்றும் பொறியியல் ஆவணங்கள்.",
+        card1_tag: "இடவியல் கட்டமைப்பு",
+        card1_status: "காட்சிக்கு தயார்",
+        card1_title: "3D மாதிரி",
+        card1_desc: "பல கோணங்களில் பார்க்கக்கூடிய நவீன 3D வடிவமைப்பு மற்றும் பரிமாணங்கள்.",
+        card2_tag: "திசை தணிக்கை",
+        card2_status: "வாஸ்து அங்கீகரிக்கப்பட்டது",
+        card2_title: "வாஸ்து பகுப்பாய்வு",
+        card2_desc: "16-மண்டல திசை பகுப்பாய்வு, 98% மதிப்பெண் மற்றும் இடிப்பு இல்லாத வாஸ்து தீர்வுகள்.",
+        card3_tag: "மூலப்பொருள் மதிப்பீடு (BOQ)",
+        card3_status: "விலை விவரங்கள்",
+        card3_title: "கட்டுமான செலவு மதிப்பீடு",
+        card3_desc: "சிமெண்ட், இரும்பு, கொத்து வேலை மற்றும் தற்போதைய சந்தை விலை அடிப்படையிலான மதிப்பீடு.",
+        card4_tag: "கட்டமைப்பு தரம்",
+        card4_status: "பொறியாளர் சரிபார்த்தது",
+        card4_title: "கட்டமைப்பு அறிக்கை",
+        card4_desc: "IS 456 விதிகளுக்கு உட்பட்ட கான்கிரீட் தூண்கள், பீம் மற்றும் கம்பி வளைவு அட்டவணை (BBS).",
+        dossier_title: "சான்றளிக்கப்பட்ட பொறியியல் கோப்பு PDF-ஐ பதிவிறக்குக",
+        dossier_desc: "2D/3D தரைத்தளம், வாஸ்து தணிக்கை, BOQ செலவு பட்டியல் மற்றும் IS 456 கட்டமைப்பு விவரங்கள் அடங்கியது.",
+        dossier_btn: "Download Dossier PDF",
+        contact_kicker: "கேள்விகள் உள்ளதா?",
+        contact_title: "தொடர்பு & ஆலோசனை மையம்",
+        contact_desc: "எங்கள் கட்டடக்கலை மற்றும் வாஸ்து நிபுணர்களுடன் நேரடியாக தொடர்பு கொண்டு உங்கள் சந்தேகங்களை தீர்த்துக்கொள்ளுங்கள்.",
+        form_name: "முழு பெயர்",
+        form_email: "மின்னஞ்சல் முகவரி",
+        form_phone: "தொலைபேசி எண்",
+        form_city: "ஊர் / நகரம்",
+        form_query: "உங்கள் விபரம் / கேள்வி",
+        form_submit: "விசாரணையை அனுப்புக",
+        side_kicker: "கட்டடக்கலை தளம்",
+        side_title: "கனவு இல்லம்",
+        side_desc: "இந்திய குடியிருப்பு கட்டுமானத்திற்கான அதிநவீன கட்டமைப்பு தளம். 2D வரைபடங்களை துல்லியமான 3D, வாஸ்து மற்றும் பொறியியல் அறிக்கைகளாக மாற்றுகிறோம்."
+      }
+    };
+
+    document.getElementById('langToggleBtn').addEventListener('click', () => {
+      currentLang = currentLang === 'en' ? 'ta' : 'en';
+      document.getElementById('langLabel').innerText = currentLang === 'en' ? 'ENG / TAM' : 'தமிழ் / ENG';
+
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[currentLang] && translations[currentLang][key]) {
+          el.innerText = translations[currentLang][key];
+        }
+      });
+    });
+
+    // ==================== DROPZONE & FILE UPLOAD HANDLER ====================
+    const dropArea = document.getElementById('dropArea');
+    const fileInput = document.getElementById('blueprintFileInput');
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+      dropArea.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        dropArea.classList.add('border-[#1e293b]', 'bg-emerald-50/50');
+      }, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+      dropArea.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        dropArea.classList.remove('border-[#1e293b]', 'bg-emerald-50/50');
+      }, false);
+    });
+
+    dropArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+    });
+
+    function handleFileSelected(event) {
+      if (event.target.files.length > 0) {
+        startParsingSimulation(event.target.files[0].name);
+      }
+    }
+
+    function loadSamplePlan(name) {
+      startParsingSimulation(name + '.dwg');
+    }
+
+    function startParsingSimulation(fileName) {
+      const modal = document.getElementById('uploadProgressModal');
+      const text = document.getElementById('parsingStatusText');
+      const bar = document.getElementById('parsingProgressBar');
+      const percent = document.getElementById('parsingPercent');
+
+      modal.classList.remove('hidden');
+
+      const steps = [
+        { pct: '20%', msg: `Reading file "${fileName}" and validating geometry...` },
+        { pct: '45%', msg: 'Detecting load-bearing walls, column grid & room boundaries...' },
+        { pct: '70%', msg: 'Calculating 16-Zone Vāstu Mandala & Cardinal Azimuths...' },
+        { pct: '90%', msg: 'Generating CPWD itemized BOQ & IS 456 Structural Schedule...' },
+        { pct: '100%', msg: 'Analysis Complete! 3D Model & Engineering Dossier Ready.' }
+      ];
+
+      let stepIdx = 0;
+      bar.style.width = '10%';
+      percent.innerText = '10% Completed';
+      text.innerText = steps[0].msg;
+
+      const interval = setInterval(() => {
+        stepIdx++;
+        if (stepIdx < steps.length) {
+          bar.style.width = steps[stepIdx].pct;
+          percent.innerText = `${steps[stepIdx].pct} Completed`;
+          text.innerText = steps[stepIdx].msg;
+        } else {
+          clearInterval(interval);
+          setTimeout(() => {
+            modal.classList.add('hidden');
+            openReportModal('3d');
+          }, 800);
+        }
+      }, 700);
+    }
+
+    // ==================== INTERACTIVE REPORT MODAL ====================
+    const reportData = {
+      '3d': {
+        title: '3D Spatial Reconstruction',
+        category: 'Spatial Architecture & Sun Path',
+        icon: 'view_in_ar',
+        content: `
+          <div class="space-y-4">
+            <div class="w-full h-64 rounded-2xl overflow-hidden border border-[#1e293b]/20 relative shadow-md">
+              <img src="assets/report_3d.png" class="w-full h-full object-cover">
+              <div class="absolute top-3 left-3 bg-[#1e293b] text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">Live 3D View</div>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+              <div class="p-3 bg-[#f4f3f1] rounded-xl"><span class="text-xs text-[#707974] block">Built-up Area</span><strong class="text-sm text-[#1e293b]">2,450 sq.ft</strong></div>
+              <div class="p-3 bg-[#f4f3f1] rounded-xl"><span class="text-xs text-[#707974] block">Ceiling Height</span><strong class="text-sm text-[#1e293b]">11.5 ft Clear</strong></div>
+              <div class="p-3 bg-[#f4f3f1] rounded-xl"><span class="text-xs text-[#707974] block">Natural Lux Level</span><strong class="text-sm text-[#1e293b]">420 Lux (Optimal)</strong></div>
+              <div class="p-3 bg-[#f4f3f1] rounded-xl"><span class="text-xs text-[#707974] block">Ventilation Ratio</span><strong class="text-sm text-[#1e293b]">18.4% (Cross)</strong></div>
+            </div>
+            <p class="text-xs text-[#404944] leading-relaxed">
+              Cutaway spatial visualization constructed deterministically from wall-thickness parsing and window sill height ratios. Compatible with VR headsets and WebGL CAD visualizers.
+            </p>
+          </div>
+        `
+      },
+      'vastu': {
+        title: '16-Zone Vāstu Purusha Mandala Audit',
+        category: 'Directional Energy Compliance',
+        icon: 'explore',
+        content: `
+          <div class="space-y-4">
+            <div class="w-full h-64 rounded-2xl overflow-hidden border border-[#d97706]/30 relative shadow-md">
+              <img src="assets/report_vastu.png" class="w-full h-full object-cover">
+              <div class="absolute top-3 right-3 bg-[#d97706] text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">Score: 98/100</div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200">
+                <strong class="text-[#1e293b] block mb-1">✓ Ishanya (North-East) - Compliant</strong>
+                <span class="text-[#404944]">Pooja Room &amp; Water Sump aligned accurately with morning solar intake.</span>
+              </div>
+              <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200">
+                <strong class="text-[#1e293b] block mb-1">✓ Agneya (South-East) - Compliant</strong>
+                <span class="text-[#404944]">Kitchen hearth faces East with optimal fire quadrant clearance.</span>
+              </div>
+              <div class="p-3 rounded-xl bg-amber-50 border border-amber-200">
+                <strong class="text-[#b45309] block mb-1">⚡ Nairuthi (South-West) - Master Bedroom</strong>
+                <span class="text-[#404944]">Heaviest structural load correctly concentrated in Master Suite zone.</span>
+              </div>
+              <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200">
+                <strong class="text-[#1e293b] block mb-1">✓ Vayavya (North-West) - Compliant</strong>
+                <span class="text-[#404944]">Guest suite &amp; pantry balanced with natural air drift corridors.</span>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      'cost': {
+        title: 'CPWD Itemized Cost Takeoff & BOQ',
+        category: 'Material Quantity Schedule',
+        icon: 'payments',
+        content: `
+          <div class="space-y-4">
+            <div class="w-full h-64 rounded-2xl overflow-hidden border border-[#1e293b]/20 relative shadow-md">
+              <img src="assets/report_cost.png" class="w-full h-full object-cover">
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs border border-[#e3e2e0] rounded-xl overflow-hidden">
+                <thead class="bg-[#f4f3f1] text-[#1c2520] font-bold">
+                  <tr>
+                    <th class="p-2.5">Material Component</th>
+                    <th class="p-2.5">Quantity</th>
+                    <th class="p-2.5">CPWD Base Rate</th>
+                    <th class="p-2.5">Est. Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-[#e3e2e0] text-[#404944]">
+                  <tr><td class="p-2.5 font-medium">M25 Grade Ready-Mix Concrete</td><td class="p-2.5">48.5 cu.m</td><td class="p-2.5">Rs 6,850/m³</td><td class="p-2.5 font-bold text-[#1e293b]">Rs 3,32,225</td></tr>
+                  <tr><td class="p-2.5 font-medium">Fe 550D TMT Reinforcement Steel</td><td class="p-2.5">4,200 kg</td><td class="p-2.5">Rs 72.50/kg</td><td class="p-2.5 font-bold text-[#1e293b]">Rs 3,04,500</td></tr>
+                  <tr><td class="p-2.5 font-medium">Wire Cut Clay Brick Masonry</td><td class="p-2.5">120 sq.m</td><td class="p-2.5">Rs 1,180/m²</td><td class="p-2.5 font-bold text-[#1e293b]">Rs 1,41,600</td></tr>
+                  <tr><td class="p-2.5 font-medium">Internal &amp; External Plastering</td><td class="p-2.5">380 sq.m</td><td class="p-2.5">Rs 320/m²</td><td class="p-2.5 font-bold text-[#1e293b]">Rs 1,21,600</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="flex items-center justify-between p-3.5 bg-[#f4f3f1] rounded-xl text-xs font-semibold">
+              <span class="text-[#1c2520]">Total Civil Structural Subtotal:</span>
+              <span class="text-sm font-bold text-[#1e293b]">Rs 8,99,925 + GST (18%)</span>
+            </div>
+          </div>
+        `
+      },
+      'structural': {
+        title: 'IS 456 Structural Reinforcement & BBS',
+        category: 'Code Compliance Dossier',
+        icon: 'grid_on',
+        content: `
+          <div class="space-y-4">
+            <div class="w-full h-64 rounded-2xl overflow-hidden border border-[#1e293b]/20 relative shadow-md">
+              <img src="assets/report_structural.png" class="w-full h-full object-cover">
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-center text-xs">
+              <div class="p-3 bg-[#f4f3f1] rounded-xl"><span class="text-[#707974] block">Column Size</span><strong class="text-sm text-[#1e293b]">230mm x 450mm</strong></div>
+              <div class="p-3 bg-[#f4f3f1] rounded-xl"><span class="text-[#707974] block">Main Bars</span><strong class="text-sm text-[#1e293b]">6 Nos. 16mm Φ</strong></div>
+              <div class="p-3 bg-[#f4f3f1] rounded-xl"><span class="text-[#707974] block">Lateral Ties</span><strong class="text-sm text-[#1e293b]">8mm @ 150mm c/c</strong></div>
+            </div>
+            <div class="p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-[#1e293b]">
+              <strong>✓ Seismic Zone III Compliance:</strong> Engineered with ductile detailing as per IS 13920. Fully verified for bank construction loans and municipal planning approval.
+            </div>
+          </div>
+        `
+      }
+    };
+
+
+    function openReportModal(type) {
+      const data = reportData[type] || reportData['3d'];
+      document.getElementById('modalTitle').innerText = data.title;
+      document.getElementById('modalCategory').innerText = data.category;
+      document.getElementById('modalIcon').innerText = data.icon;
+      document.getElementById('modalContent').innerHTML = data.content;
+      document.getElementById('reportModal').classList.remove('hidden');
+    }
+
+
+    // ==================== LEGAL / PRIVACY & TERMS MODAL SCRIPT ====================
+    function openLegalModal(tab) {
+      const modal = document.getElementById('legalModal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        switchLegalTab(tab || 'privacy');
+      }
+    }
+
+    function closeLegalModal() {
+      const modal = document.getElementById('legalModal');
+      if (modal) {
+        modal.classList.add('hidden');
+      }
+    }
+
+    function switchLegalTab(tab) {
+      const privTab = document.getElementById('legalTabPrivacy');
+      const termsTab = document.getElementById('legalTabTerms');
+      const privBtn = document.getElementById('tabPrivacyBtn');
+      const termsBtn = document.getElementById('tabTermsBtn');
+
+      if (tab === 'terms') {
+        if (privTab) privTab.classList.add('hidden');
+        if (termsTab) termsTab.classList.remove('hidden');
+        if (privBtn) privBtn.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer";
+        if (termsBtn) termsBtn.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 bg-[#1e293b] text-white shadow-md cursor-pointer";
+      } else {
+        if (termsTab) termsTab.classList.add('hidden');
+        if (privTab) privTab.classList.remove('hidden');
+        if (privBtn) privBtn.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 bg-[#1e293b] text-white shadow-md cursor-pointer";
+        if (termsBtn) termsBtn.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer";
+      }
+    }
+
+    // Auto-open if URL has hash #privacy-policy or #terms-conditions
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.toLowerCase();
+      if (hash === '#privacy-policy' || hash === '#privacy') {
+        openLegalModal('privacy');
+      } else if (hash === '#terms-conditions' || hash === '#terms') {
+        openLegalModal('terms');
+      }
+    });
+
+    function closeReportModal() {
+      document.getElementById('reportModal').classList.add('hidden');
+    }
+
+    // ==================== INQUIRY FORM SUBMIT ====================
+    function handleInquirySubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('formName').value;
+      const email = document.getElementById('formEmail').value;
+      const phone = document.getElementById('formPhone').value;
+      const city = document.getElementById('formCity').value;
+      const query = document.getElementById('formQuery').value;
+
+      const recipientEmail = 'support@kanavuillam.in';
+      const subject = encodeURIComponent(`New Architectural Inquiry from ${name} (${city})`);
+      const body = encodeURIComponent(
+        `Vanakkam Support Team,\n\n` +
+        `New Architectural & Structural Inquiry received via Kanavu Illam Website:\n\n` +
+        `Full Name: ${name}\n` +
+        `Email: ${email}\n` +
+        `Phone Number: +91 ${phone}\n` +
+        `Location / City: ${city}\n\n` +
+        `Client Query / Requirements:\n${query}\n\n` +
+        `---\n` +
+        `Sent via Kanavu Illam Web Portal (kanavuillam.in)`
+      );
+
+      // Open email client pre-addressed to support@kanavuillam.in with filled details
+      window.location.href = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+
+      // Inline success feedback
+      const notice = document.getElementById('formSuccessNotice');
+      const msg = document.getElementById('formSuccessMsg');
+      if (notice && msg) {
+        msg.innerText = `Vanakkam ${name}! Your inquiry for ${city} has been routed to support@kanavuillam.in. Our planning advisor will email you at ${email} and call +91 ${phone} within 24 hours.`;
+        notice.classList.remove('hidden');
+      }
+
+      alert(`Vanakkam ${name}! Your inquiry details for ${city} have been forwarded to support@kanavuillam.in. Our planning advisory team will get in touch with you at ${email} / +91 ${phone} within 24 hours.`);
+      document.getElementById('inquiryForm').reset();
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ta" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Option 2 - Exact 3D Horizontal Perspective Glass Deck Live Preview</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #9da5af;
+      background-image: url('assets/site_bg.jpg');
+      background-size: cover;
+      background-position: right center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      color: #f8fafc;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* 3D Perspective Container */
+    .deck-viewport {
+      perspective: 1400px;
+      perspective-origin: 50% 45%;
+    }
+
+    /* Orange Speech Bubble Backplate */
+    .orange-backplate {
+      background: linear-gradient(135deg, #e9e6e2 0%, #ea580c 60%, #c2410c 100%);
+      border-radius: 28px;
+      position: absolute;
+      box-shadow: 0 20px 45px -10px rgba(234, 88, 12, 0.5), 0 0 25px rgba(251, 146, 60, 0.3);
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .orange-backplate::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 48px;
+      width: 0;
+      height: 0;
+      border-left: 14px solid transparent;
+      border-right: 14px solid transparent;
+      border-top: 14px solid #c2410c;
+    }
+
+    /* Frosted Glassmorphism Card Body */
+    .glass-card-front {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      border-radius: 28px;
+      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.25),
+        0 10px 25px rgba(234, 88, 12, 0.12),
+        inset 0 1px 2px rgba(255, 255, 255, 0.9);
+      color: #0f172a;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .glass-card-front::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 42px;
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-top: 15px solid rgba(255, 255, 255, 0.95);
+      filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.08));
+    }
+
+    /* Studio Floor Reflective Glow */
+    .studio-floor {
+      background: radial-gradient(ellipse at 50% 50%, rgba(251, 146, 60, 0.15) 0%, rgba(15, 23, 42, 0) 70%);
+      filter: blur(30px);
+    }
+
+    /* Card Positions in 3D Runway */
+    .deck-card {
+      position: absolute;
+      transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transform-style: preserve-3d;
+      will-change: transform, opacity;
+    }
+
+    /* Active Spotlight Card */
+    .deck-card.active {
+      transform: translateX(0) translateZ(80px) rotateY(0deg) scale(1);
+      opacity: 1;
+      z-index: 40;
+      pointer-events: auto;
+    }
+
+    /* Next Queue Card 1 */
+    .deck-card.next-1 {
+      transform: translateX(360px) translateZ(-40px) rotateY(-18deg) scale(0.88);
+      opacity: 0.82;
+      z-index: 30;
+      cursor: pointer;
+    }
+
+    /* Next Queue Card 2 */
+    .deck-card.next-2 {
+      transform: translateX(650px) translateZ(-140px) rotateY(-24deg) scale(0.76);
+      opacity: 0.55;
+      z-index: 20;
+      cursor: pointer;
+    }
+
+    /* Next Queue Card 3 */
+    .deck-card.next-3 {
+      transform: translateX(880px) translateZ(-240px) rotateY(-28deg) scale(0.65);
+      opacity: 0.3;
+      z-index: 10;
+      cursor: pointer;
+    }
+
+    /* Previous Cards (Passed) */
+    .deck-card.prev {
+      transform: translateX(-420px) translateZ(-80px) rotateY(22deg) scale(0.82);
+      opacity: 0;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+      .deck-card.active {
+        transform: translateX(0) scale(1);
+      }
+
+      .deck-card.next-1 {
+        transform: translateX(180px) scale(0.82);
+        opacity: 0.5;
+      }
+
+      .deck-card.next-2,
+      .deck-card.next-3 {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body class="py-10 px-4 sm:px-8">
+
+  <!-- Header -->
+  <div class="max-w-6xl mx-auto text-center mb-8">
+    <div
+      class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-bold uppercase tracking-wider mb-3">
+      <i class="fa-solid fa-sparkles"></i> Option 2 Live Interactive Demo
+    </div>
+    <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight mb-3">
+      Horizontal Perspective <span
+        class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-400">Glass
+        Deck</span>
+    </h1>
+    <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto">
+      Nee send panna sample mockup image mathiriye <strong class="text-white">exact-ah live-ah</strong> run aaguthu!
+      Scroll pannalam, or keela irukura Next / Prev buttons click panni experience pannunga.
+    </p>
+  </div>
+
+  <!-- 3D Deck Stage -->
+  <section
+    class="max-w-6xl mx-auto relative min-h-[580px] sm:min-h-[640px] flex items-center justify-center deck-viewport my-6">
+
+    <!-- Floor Ambient Reflection -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 w-4/5 h-44 studio-floor pointer-events-none"></div>
+
+    <!-- Cards Container -->
+    <div id="deckContainer" class="relative w-full max-w-[560px] h-[440px] mx-auto flex items-center justify-center">
+
+      <!-- CARD 1: 3D House Plan -->
+      <div id="card-0" class="deck-card active w-full" onclick="selectCard(0)">
+        <!-- Orange Backplate -->
+        <div class="orange-backplate -top-4 -left-4 w-[96%] h-[94%]"></div>
+        <!-- Frosted Glass Body -->
+        <div class="glass-card-front p-6 sm:p-8">
+          <div class="flex items-center justify-between mb-4">
+            <span
+              class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-100 text-orange-800 text-xs font-bold uppercase tracking-wider">
+              <i class="fa-solid fa-cube"></i> Architectural Report #01
+            </span>
+            <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md">Step 4 Report</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
+            <div class="sm:col-span-5 rounded-2xl overflow-hidden shadow-lg border border-white/60 bg-white">
+              <img src="assets/report_3d.png" alt="3D Spatial House Plan" class="w-full h-44 object-cover">
+            </div>
+            <div class="sm:col-span-7 space-y-3">
+              <h3 class="text-xl sm:text-2xl font-black text-slate-900 leading-tight">3D Spatial House Plan</h3>
+              <p class="text-xs text-slate-600 line-clamp-2">Complete room-by-room isometric walkthrough with verified
+                dimensions & wall layouts.</p>
+              <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-200">
+                <div class="p-2 rounded-xl bg-orange-50/80 border border-orange-100">
+                  <span class="text-[10px] uppercase font-bold text-slate-500 block">Total Area</span>
+                  <span class="text-sm font-extrabold text-orange-600">2,850 sq ft</span>
+                </div>
+                <div class="p-2 rounded-xl bg-slate-50 border border-slate-100">
+                  <span class="text-[10px] uppercase font-bold text-slate-500 block">Rooms</span>
+                  <span class="text-sm font-extrabold text-slate-800">3 BHK Duplex</span>
+                </div>
+              </div>
+              <button
+                class="w-full mt-2 py-2.5 px-4 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 text-white text-xs font-bold shadow-md hover:shadow-orange-500/25 transition">
+                <i class="fa-solid fa-eye mr-1.5"></i> Inspect 3D Plan
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2: Vastu Compliance -->
+      <div id="card-1" class="deck-card next-1 w-full" onclick="selectCard(1)">
+        <!-- Orange Backplate -->
+        <div class="orange-backplate -top-4 -right-4 w-[96%] h-[94%]"></div>
+        <!-- Frosted Glass Body -->
+        <div class="glass-card-front p-6 sm:p-8">
+          <div class="flex items-center justify-between mb-4">
+            <span
+              class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider">
+              <i class="fa-solid fa-compass"></i> Architectural Report #02
+            </span>
+            <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md">92% Optimal</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
+            <div class="sm:col-span-5 rounded-2xl overflow-hidden shadow-lg border border-white/60 bg-white">
+              <img src="assets/report_vastu.png" alt="Vastu Shastra Compliance" class="w-full h-44 object-cover">
+            </div>
+            <div class="sm:col-span-7 space-y-3">
+              <h3 class="text-xl sm:text-2xl font-black text-slate-900 leading-tight">Vastu Shastra Report</h3>
+              <p class="text-xs text-slate-600 line-clamp-2">8-zone directional energy balance check for Pooja room,
+                master bed, kitchen & main door.</p>
+              <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-200">
+                <div class="p-2 rounded-xl bg-emerald-50 border border-emerald-100">
+                  <span class="text-[10px] uppercase font-bold text-slate-500 block">Vastu Score</span>
+                  <span class="text-sm font-extrabold text-emerald-600">92 / 100</span>
+                </div>
+                <div class="p-2 rounded-xl bg-slate-50 border border-slate-100">
+                  <span class="text-[10px] uppercase font-bold text-slate-500 block">Entrance</span>
+                  <span class="text-sm font-extrabold text-slate-800">East-Facing (Uchha)</span>
+                </div>
+              </div>
+              <button
+                class="w-full mt-2 py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-xs font-bold shadow-md hover:shadow-emerald-500/25 transition">
+                <i class="fa-solid fa-eye mr-1.5"></i> Inspect Vastu Details
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 3: Cost Estimation -->
+      <div id="card-2" class="deck-card next-2 w-full" onclick="selectCard(2)">
+        <!-- Orange Backplate -->
+        <div class="orange-backplate -bottom-4 -left-4 w-[96%] h-[94%]"></div>
+        <!-- Frosted Glass Body -->
+        <div class="glass-card-front p-6 sm:p-8">
+          <div class="flex items-center justify-between mb-4">
+            <span
+              class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold uppercase tracking-wider">
+              <i class="fa-solid fa-coins"></i> Architectural Report #03
+            </span>
+            <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md">Live Rates</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
+            <div class="sm:col-span-5 rounded-2xl overflow-hidden shadow-lg border border-white/60 bg-white">
+              <img src="assets/report_cost.png" alt="Estimation & Cost Report" class="w-full h-44 object-cover">
+            </div>
+            <div class="sm:col-span-7 space-y-3">
+              <h3 class="text-xl sm:text-2xl font-black text-slate-900 leading-tight">Cost & Estimation Report</h3>
+              <p class="text-xs text-slate-600 line-clamp-2">Tamil Nadu current market-rate bill of materials: cement,
+                TMT steel, m-sand & labor budget.</p>
+              <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-200">
+                <div class="p-2 rounded-xl bg-amber-50 border border-amber-100">
+                  <span class="text-[10px] uppercase font-bold text-slate-500 block">Est. Cost</span>
+                  <span class="text-sm font-extrabold text-amber-600">&#8377;34.8 Lakhs</span>
+                </div>
+                <div class="p-2 rounded-xl bg-slate-50 border border-slate-100">
+                  <span class="text-[10px] uppercase font-bold text-slate-500 block">Cement & Steel</span>
+                  <span class="text-sm font-extrabold text-slate-800">550 Bags / 4.2T</span>
+                </div>
+              </div>
+              <button
+                class="w-full mt-2 py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white text-xs font-bold shadow-md hover:shadow-amber-500/25 transition">
+                <i class="fa-solid fa-eye mr-1.5"></i> Inspect Cost Sheet
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 4: Structural Engineering -->
+      <div id="card-3" class="deck-card next-3 w-full" onclick="selectCard(3)">
+        <!-- Orange Backplate -->
+        <div class="orange-backplate -bottom-4 -right-4 w-[96%] h-[94%]"></div>
+        <!-- Frosted Glass Body -->
+        <div class="glass-card-front p-6 sm:p-8">
+          <div class="flex items-center justify-between mb-4">
+            <span
+              class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-bold uppercase tracking-wider">
+              <i class="fa-solid fa-cubes-stacked"></i> Architectural Report #04
+            </span>
+            <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md">IS 456 Verified</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
+            <div class="sm:col-span-5 rounded-2xl overflow-hidden shadow-lg border border-white/60 bg-white">
+              <img src="assets/report_structural.png" alt="Structural Design" class="w-full h-44 object-cover">
+            </div>
+            <div class="sm:col-span-7 space-y-3">
+              <h3 class="text-xl sm:text-2xl font-black text-slate-900 leading-tight">Structural & Load Design</h3>
+              <p class="text-xs text-slate-600 line-clamp-2">Column schedules, beam cross-sections, footing
+                reinforcement & soil-bearing safety calculation.</p>
+              <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-200">
+                <div class="p-2 rounded-xl bg-blue-50 border border-blue-100">
+                  <span class="text-[10px] uppercase font-bold text-slate-500 block">Safety Factor</span>
+                  <span class="text-sm font-extrabold text-blue-600">1.65 (High)</span>
+                </div>
+                <div class="p-2 rounded-xl bg-slate-50 border border-slate-100">
+                  <span class="text-[10px] uppercase font-bold text-slate-500 block">Columns</span>
+                  <span class="text-sm font-extrabold text-slate-800">14 Columns (M25)</span>
+                </div>
+              </div>
+              <button
+                class="w-full mt-2 py-2.5 px-4 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-xs font-bold shadow-md hover:shadow-blue-500/25 transition">
+                <i class="fa-solid fa-eye mr-1.5"></i> Inspect Structural Specs
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Navigation Arrows -->
+    <button onclick="prevCard()"
+      class="absolute left-2 sm:left-6 z-50 w-12 h-12 rounded-full bg-slate-800/80 hover:bg-orange-500 text-white backdrop-blur-md border border-slate-700 flex items-center justify-center transition shadow-xl hover:scale-110 active:scale-95">
+      <i class="fa-solid fa-chevron-left text-base"></i>
+    </button>
+    <button onclick="nextCard()"
+      class="absolute right-2 sm:right-6 z-50 w-12 h-12 rounded-full bg-slate-800/80 hover:bg-orange-500 text-white backdrop-blur-md border border-slate-700 flex items-center justify-center transition shadow-xl hover:scale-110 active:scale-95">
+      <i class="fa-solid fa-chevron-right text-base"></i>
+    </button>
+
+  </section>
+
+  <!-- Progress Dots & Status -->
+  <div class="max-w-md mx-auto text-center flex flex-col items-center justify-center gap-3">
+    <div class="flex items-center gap-2.5">
+      <button onclick="selectCard(0)"
+        class="dot w-3 h-3 rounded-full bg-orange-500 transition-all duration-300"></button>
+      <button onclick="selectCard(1)"
+        class="dot w-3 h-3 rounded-full bg-slate-700 transition-all duration-300"></button>
+      <button onclick="selectCard(2)"
+        class="dot w-3 h-3 rounded-full bg-slate-700 transition-all duration-300"></button>
+      <button onclick="selectCard(3)"
+        class="dot w-3 h-3 rounded-full bg-slate-700 transition-all duration-300"></button>
+    </div>
+    <span id="cardIndicator" class="text-xs font-bold text-slate-400">Card 1 of 4: 3D Spatial House Plan</span>
+  </div>
+
+  <!-- Comparison with User's Mockup -->
+  <div class="max-w-5xl mx-auto mt-16 p-6 rounded-2xl bg-slate-900/60 border border-slate-800">
+    <h3 class="text-sm font-bold uppercase tracking-wider text-orange-400 mb-3 flex items-center gap-2">
+      <i class="fa-solid fa-image"></i> Nee Paatha Mockup Image oda Comparison
+    </h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <div>
+        <p class="text-xs text-slate-400 mb-2 font-semibold">1. Mockup Image (Nee choose panna Option 2):</p>
+        <img src="assets/sample_option2_horizontal.jpg" alt="Option 2 Mockup"
+          class="rounded-xl border border-slate-700 w-full h-auto">
+      </div>
+      <div class="space-y-3">
+        <p class="text-xs text-slate-400 font-semibold">2. Live Code Features (Exact Match Checklist):</p>
+        <ul class="text-xs text-slate-300 space-y-2">
+          <li class="flex items-start gap-2"><i class="fa-solid fa-check-circle text-emerald-400 mt-0.5"></i>
+            <strong>Frosted Glass Body:</strong> 28px blur effect + white translucent body + speech-bubble tail.</li>
+          <li class="flex items-start gap-2"><i class="fa-solid fa-check-circle text-emerald-400 mt-0.5"></i>
+            <strong>Orange Backplate:</strong> Vibrant glowing amber/orange speech bubble background layer.</li>
+          <li class="flex items-start gap-2"><i class="fa-solid fa-check-circle text-emerald-400 mt-0.5"></i> <strong>3D
+              Perspective:</strong> Cards lined up to the right with 3D angle depth.</li>
+          <li class="flex items-start gap-2"><i class="fa-solid fa-check-circle text-emerald-400 mt-0.5"></i>
+            <strong>One-by-One Motion:</strong> Mouse scroll or arrow click-la smooth gliding transition.</li>
+          <li class="flex items-start gap-2"><i class="fa-solid fa-check-circle text-emerald-400 mt-0.5"></i>
+            <strong>Real Reports:</strong> Actual 3D, Vastu, Estimation, & Structural diagrams integrated.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let activeIndex = 0;
+    const totalCards = 4;
+    const titles = [
+      "Card 1 of 4: 3D Spatial House Plan",
+      "Card 2 of 4: Vastu Shastra Report",
+      "Card 3 of 4: Cost & Estimation Report",
+      "Card 4 of 4: Structural & Load Design"
+    ];
+
+    function updateDeck() {
+      for (let i = 0; i < totalCards; i++) {
+        const card = document.getElementById(`card-${i}`);
+        card.className = "deck-card w-full";
+
+        const diff = (i - activeIndex + totalCards) % totalCards;
+
+        if (diff === 0) {
+          card.classList.add("active");
+        } else if (diff === 1) {
+          card.classList.add("next-1");
+        } else if (diff === 2) {
+          card.classList.add("next-2");
+        } else if (diff === 3) {
+          card.classList.add("next-3");
+        }
+      }
+
+      // Update dots
+      const dots = document.querySelectorAll('.dot');
+      dots.forEach((dot, idx) => {
+        if (idx === activeIndex) {
+          dot.className = "dot w-6 h-3 rounded-full bg-orange-500 transition-all duration-300";
+        } else {
+          dot.className = "dot w-3 h-3 rounded-full bg-slate-700 transition-all duration-300";
+        }
+      });
+
+      // Update title indicator
+      document.getElementById('cardIndicator').innerText = titles[activeIndex];
+    }
+
+    function nextCard() {
+      activeIndex = (activeIndex + 1) % totalCards;
+      updateDeck();
+    }
+
+    function prevCard() {
+      activeIndex = (activeIndex - 1 + totalCards) % totalCards;
+      updateDeck();
+    }
+
+    function selectCard(idx) {
+      activeIndex = idx;
+      updateDeck();
+    }
+
+    // Scroll wheel trigger
+    let isThrottled = false;
+    window.addEventListener('wheel', (e) => {
+      if (isThrottled) return;
+      if (Math.abs(e.deltaY) > 30) {
+        if (e.deltaY > 0) {
+          nextCard();
+        } else {
+          prevCard();
+        }
+        isThrottled = true;
+        setTimeout(() => { isThrottled = false; }, 600);
+      }
+    }, { passive: true });
+
+    // Touch swipe support
+    let touchStartX = 0;
+    window.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    window.addEventListener('touchend', (e) => {
+      const touchEndX = e.changedTouches[0].clientX;
+      if (touchStartX - touchEndX > 50) nextCard();
+      if (touchEndX - touchStartX > 50) prevCard();
+    }, { passive: true });
+
+    updateDeck();
+  </script>
+
+</body>
+
+</html>
