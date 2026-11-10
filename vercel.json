@@ -1,5 +1,40 @@
 {
   "version": 2,
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/terms",
+      "destination": "/terms-conditions.html"
+    },
+    {
+      "source": "/terms-conditions",
+      "destination": "/terms-conditions.html"
+    },
+    {
+      "source": "/terms-and-conditions",
+      "destination": "/terms-conditions.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy-policy.html"
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/privacy-policy.html"
+    },
+    {
+      "source": "/privacy%20policy",
+      "destination": "/privacy-policy.html"
+    },
+    {
+      "source": "/delete-account",
+      "destination": "/delete-account.html"
+    },
+    {
+      "source": "/delete",
+      "destination": "/delete-account.html"
+    }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)\\.apk",
