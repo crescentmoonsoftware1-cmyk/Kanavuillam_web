@@ -265,29 +265,34 @@
     }
 
     /* Workflow Marquee Animation */
-    @keyframes workflowMarquee {
-      0% {
-        transform: translateX(0);
-      }
-
-      100% {
-        transform: translateX(-50%);
-      }
+    /* Workflow Interactive Track & Continuous Glider */
+    .workflow-scroll-container {
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-y;
+      scroll-behavior: auto;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
-    .animate-workflow-marquee {
-      display: flex;
-      width: max-content;
-      animation: workflowMarquee 42s linear infinite;
+    .workflow-scroll-container::-webkit-scrollbar {
+      display: none;
     }
 
-    .animate-workflow-marquee:hover {
-      animation-play-state: paused;
+    .cursor-grab {
+      cursor: grab;
+    }
+
+    .cursor-grabbing {
+      cursor: grabbing !important;
     }
 
     .marquee-mask {
-      mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%);
     }
 
     /* Scroll Reveal */
@@ -815,38 +820,61 @@
     <!-- ==================== 2. WORKFLOW SHOWCASE (HOW IT WORKS) ==================== -->
     <section class="w-full py-16 max-w-[1380px] mx-auto px-6 lg:px-12 relative" id="how-it-works">
       <div class="flex flex-col gap-10">
-        <!-- Section Header -->
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 reveal-on-scroll">
+        <!-- Section Header with Auto & Manual Controls -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 reveal-on-scroll">
           <div>
             <span class="font-sans text-xs uppercase tracking-widest text-[#1e293b] font-bold block mb-2"
               data-i18n="workflow_kicker">Workflow Pipeline</span>
             <h2 class="font-display font-semibold text-3xl sm:text-4xl text-[#1c2520]" data-i18n="workflow_title">How It
               Works</h2>
+            <p class="font-body text-xs text-slate-500 mt-2 flex items-center gap-2 flex-wrap">
+              <span class="inline-flex items-center gap-1.5 bg-amber-50 text-amber-700 px-2.5 py-0.5 rounded-full border border-amber-200/80 font-bold text-[11px]">
+                <i class="fa-solid fa-arrows-left-right text-[10px]"></i> Drag / Swipe Cards
+              </span>
+              <span>• Auto-glides continuously &amp; pauses on interaction</span>
+            </p>
           </div>
-          <p class="font-body text-sm text-[#404944] max-w-sm" data-i18n="workflow_desc">
-            Transform your 2D floor plan into a detailed 3D home design through a simple, seamless process. From secure
-            payment to intelligent analysis, explore your home design and download your personalized results in just a
-            few steps.
-          </p>
+          <div class="flex items-center gap-4 flex-wrap">
+            <p class="font-body text-sm text-[#404944] max-w-sm hidden lg:block" data-i18n="workflow_desc">
+              Transform your 2D floor plan into a detailed 3D home design through a simple, seamless process.
+            </p>
+            <!-- Navigation Controls (Prev / Next & Auto Toggle) -->
+            <div class="flex items-center gap-2 bg-white/90 backdrop-blur-md p-1.5 rounded-2xl border border-slate-200/80 shadow-xs">
+              <button id="workflowPrevBtn" type="button" aria-label="Previous step" title="Previous Step"
+                class="w-10 h-10 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 hover:text-amber-600 shadow-2xs flex items-center justify-center transition active:scale-95 cursor-pointer">
+                <i class="fa-solid fa-chevron-left text-xs"></i>
+              </button>
+              <button id="workflowAutoToggle" type="button" aria-label="Toggle auto scroll" title="Toggle Auto Scroll"
+                class="px-3.5 h-10 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700 flex items-center gap-2 shadow-2xs transition active:scale-95 cursor-pointer">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" id="autoScrollDot"></span>
+                <span id="autoScrollLabel" class="text-xs font-bold text-slate-800">Auto: ON</span>
+              </button>
+              <button id="workflowNextBtn" type="button" aria-label="Next step" title="Next Step"
+                class="w-10 h-10 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 hover:text-amber-600 shadow-2xs flex items-center justify-center transition active:scale-95 cursor-pointer">
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+              </button>
+            </div>
+          </div>
         </div>
 
-        <!-- 5-Step Continuous Carousel Track -->
-        <div class="relative w-full overflow-hidden marquee-mask py-3">
+        <!-- 5-Step Continuous Carousel Track (Auto + Manual Drag / Scroll) -->
+        <div class="relative w-full py-2 select-none">
           <!-- Gradient Edge Overlays -->
           <div
-            class="absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-r from-[#faf9f7] to-transparent z-20 pointer-events-none">
+            class="absolute left-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-r from-[#faf9f7] to-transparent z-20 pointer-events-none">
           </div>
           <div
-            class="absolute right-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-l from-[#faf9f7] to-transparent z-20 pointer-events-none">
+            class="absolute right-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-l from-[#faf9f7] to-transparent z-20 pointer-events-none">
           </div>
 
-          <!-- Marquee Track with Loop -->
-          <div class="animate-workflow-marquee flex gap-5 py-2" id="workflowTrack">
-            <!-- Group 1: 5 Workflow Cards -->
-            <div class="flex gap-5 shrink-0">
+          <!-- Scroll Container -->
+          <div id="workflowScrollContainer" class="workflow-scroll-container cursor-grab relative w-full py-3 select-none">
+            <!-- Marquee Track with Loop -->
+            <div class="flex gap-5 py-2 w-max" id="workflowTrack">
+            <div class="flex gap-5 shrink-0" id="workflowGroup1">
               <!-- Step 01 -->
               <div
-                class="w-[285px] sm:w-[315px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#1e293b]/15 bg-white/95 shadow-md">
+                class="w-[285px] sm:w-[325px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#1e293b]/15 bg-white/95 backdrop-blur-md shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 select-none">
                 <div
                   class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#1e293b]/10 to-transparent rounded-bl-full pointer-events-none">
                 </div>
@@ -863,8 +891,8 @@
                 </div>
                 <div
                   class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#1e293b]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative group-hover:border-[#1e293b]/40 transition-colors">
-                  <img alt="Upload 2D Plan Mockup with Tablet"
-                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  <img draggable="false" alt="Upload 2D Plan Mockup with Tablet"
+                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none"
                     src="assets/step1.png"
                     onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/step1.png';">
                   <div class="absolute bottom-2.5 right-2.5 animate-float-delayed z-10">
@@ -889,10 +917,9 @@
                   </div>
                 </div>
               </div>
-
               <!-- Step 02 -->
               <div
-                class="w-[285px] sm:w-[315px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#d97706]/20 bg-white/95 shadow-md">
+                class="w-[285px] sm:w-[325px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#d97706]/25 bg-white/95 backdrop-blur-md shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 select-none">
                 <div
                   class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#d97706]/15 to-transparent rounded-bl-full pointer-events-none">
                 </div>
@@ -909,8 +936,8 @@
                 </div>
                 <div
                   class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#d97706]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative group-hover:border-[#d97706]/40 transition-colors">
-                  <img alt="Secure Payment and Blueprint Verification"
-                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  <img draggable="false" alt="Secure Payment and Blueprint Verification"
+                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none"
                     src="assets/step2.png"
                     onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/step2.png';">
                   <div class="absolute bottom-2.5 left-2.5 animate-float-delayed z-10">
@@ -935,10 +962,9 @@
                   </div>
                 </div>
               </div>
-
               <!-- Step 03 -->
               <div
-                class="w-[285px] sm:w-[315px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#1e293b]/15 bg-white/95 shadow-md">
+                class="w-[285px] sm:w-[325px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#1e293b]/15 bg-white/95 backdrop-blur-md shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 select-none">
                 <div
                   class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#1e293b]/10 to-transparent rounded-bl-full pointer-events-none">
                 </div>
@@ -955,8 +981,8 @@
                 </div>
                 <div
                   class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#1e293b]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative group-hover:border-[#1e293b]/40 transition-colors">
-                  <img alt="Analyze 2D Plan with 3D model parsing"
-                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  <img draggable="false" alt="Analyze 2D Plan with 3D model parsing"
+                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none"
                     src="assets/step3.png"
                     onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/step3.png';">
                   <div class="absolute bottom-2.5 right-2.5 animate-float-delayed z-10">
@@ -981,10 +1007,9 @@
                   </div>
                 </div>
               </div>
-
               <!-- Step 04 -->
               <div
-                class="w-[285px] sm:w-[315px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#d97706]/20 bg-white/95 shadow-md">
+                class="w-[285px] sm:w-[325px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#d97706]/25 bg-white/95 backdrop-blur-md shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 select-none">
                 <div
                   class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#d97706]/15 to-transparent rounded-bl-full pointer-events-none">
                 </div>
@@ -1001,8 +1026,8 @@
                 </div>
                 <div
                   class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#d97706]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative group-hover:border-[#d97706]/40 transition-colors">
-                  <img alt="View Reports Mockup"
-                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  <img draggable="false" alt="View Reports Mockup"
+                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none"
                     src="assets/step4.png"
                     onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/step4.png';">
                   <div class="absolute bottom-2.5 left-2.5 animate-float-delayed z-10">
@@ -1027,10 +1052,9 @@
                   </div>
                 </div>
               </div>
-
               <!-- Step 05 -->
               <div
-                class="w-[285px] sm:w-[315px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#1e293b]/15 bg-white/95 shadow-md">
+                class="w-[285px] sm:w-[325px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#1e293b]/15 bg-white/95 backdrop-blur-md shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 select-none">
                 <div
                   class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#1e293b]/10 to-transparent rounded-bl-full pointer-events-none">
                 </div>
@@ -1047,8 +1071,8 @@
                 </div>
                 <div
                   class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#1e293b]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative group-hover:border-[#1e293b]/40 transition-colors">
-                  <img alt="Download Complete Dossier PDF Package"
-                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  <img draggable="false" alt="Download Complete Dossier PDF Package"
+                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none"
                     src="assets/step5.png"
                     onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/step5.png';">
                   <div class="absolute bottom-2.5 left-2.5 animate-float-delayed z-10">
@@ -1073,115 +1097,478 @@
                 </div>
               </div>
             </div>
-
-            <!-- Group 2: Seamless Clone for Infinite Marquee Loop -->
-            <div class="flex gap-5 shrink-0" aria-hidden="true">
-              <!-- Cloned Steps 01 to 05 -->
+            <div class="flex gap-5 shrink-0" id="workflowGroup2" aria-hidden="true">
+              <!-- Step 01 -->
               <div
-                class="w-[285px] sm:w-[315px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#1e293b]/15 bg-white/95 shadow-md">
+                class="w-[285px] sm:w-[325px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#1e293b]/15 bg-white/95 backdrop-blur-md shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 select-none">
+                <div
+                  class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#1e293b]/10 to-transparent rounded-bl-full pointer-events-none">
+                </div>
                 <div class="flex items-center justify-between mb-3.5 z-10 relative">
-                  <span
-                    class="font-sans text-xs font-bold text-[#1e293b] bg-[#1e293b]/10 px-2.5 py-1 rounded-md border border-[#1e293b]/25">01
-                    SUBMISSION</span>
+                  <div class="inline-flex items-center gap-2">
+                    <span
+                      class="font-sans text-xs font-bold text-[#1e293b] bg-[#1e293b]/10 px-2.5 py-1 rounded-md border border-[#1e293b]/25">01</span>
+                    <span class="text-[11px] font-sans font-bold text-[#1e293b] tracking-wider uppercase"
+                      data-i18n="step1_tag">Submission</span>
+                  </div>
                   <span
                     class="text-[11px] font-mono text-[#707974] bg-[#f4f3f1] px-2 py-0.5 rounded border border-[#e3e2e0]">Step
                     1</span>
                 </div>
                 <div
-                  class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#1e293b]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative">
-                  <img alt="Upload 2D Plan" class="w-full h-full object-cover object-center" src="assets/step1.png">
+                  class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#1e293b]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative group-hover:border-[#1e293b]/40 transition-colors">
+                  <img draggable="false" alt="Upload 2D Plan Mockup with Tablet"
+                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none"
+                    src="assets/step1.png"
+                    onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/step1.png';">
+                  <div class="absolute bottom-2.5 right-2.5 animate-float-delayed z-10">
+                    <span
+                      class="px-2 py-1 rounded-md text-[10px] font-bold text-[#1e293b] bg-white/95 backdrop-blur-md border border-[#1e293b]/30 shadow-md flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[13px] text-[#f59e0b]">cloud_upload</span> MAX 10MB
+                    </span>
+                  </div>
                 </div>
                 <div class="z-10 relative">
-                  <h3 class="font-display text-lg text-[#1c2520] font-semibold mb-1">Upload 2D Plan</h3>
-                  <p class="font-body text-xs text-[#404944] leading-relaxed mb-3.5">Add your 2D sketch, blueprint,
-                    AutoCAD DWG, DXF, or technical PDF drawing.</p>
+                  <h3
+                    class="font-display text-lg text-[#1c2520] font-semibold mb-1 group-hover:text-[#1e293b] transition-colors"
+                    data-i18n="step1_title">Upload 2D Plan</h3>
+                  <p class="font-body text-xs text-[#404944] leading-relaxed mb-3.5" data-i18n="step1_desc">Add your 2D
+                    sketch, blueprint, png, jpg, or technical PDF drawing.</p>
+                  <div
+                    class="pt-3 border-t border-[#e3e2e0] flex items-center justify-between text-[11px] font-medium text-[#707974]">
+                    <span class="inline-flex items-center gap-1 text-[#1e293b] font-semibold"><span
+                        class="w-1.5 h-1.5 rounded-full bg-[#1e293b]"></span> Instant Parser</span>
+                    <span class="bg-[#f4f3f1] text-[#1c2520] px-2 py-0.5 rounded text-[10px] font-mono">JPG &amp;
+                      PDF</span>
+                  </div>
                 </div>
               </div>
-
+              <!-- Step 02 -->
               <div
-                class="w-[285px] sm:w-[315px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#d97706]/20 bg-white/95 shadow-md">
+                class="w-[285px] sm:w-[325px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#d97706]/25 bg-white/95 backdrop-blur-md shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 select-none">
+                <div
+                  class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#d97706]/15 to-transparent rounded-bl-full pointer-events-none">
+                </div>
                 <div class="flex items-center justify-between mb-3.5 z-10 relative">
-                  <span
-                    class="font-sans text-xs font-bold text-[#b45309] bg-[#d97706]/10 px-2.5 py-1 rounded-md border border-[#d97706]/25">02
-                    VERIFICATION</span>
+                  <div class="inline-flex items-center gap-2">
+                    <span
+                      class="font-sans text-xs font-bold text-[#b45309] bg-[#d97706]/10 px-2.5 py-1 rounded-md border border-[#d97706]/25">02</span>
+                    <span class="text-[11px] font-sans font-bold text-[#b45309] tracking-wider uppercase"
+                      data-i18n="step2_tag">Verification</span>
+                  </div>
                   <span
                     class="text-[11px] font-mono text-[#707974] bg-[#f4f3f1] px-2 py-0.5 rounded border border-[#e3e2e0]">Step
                     2</span>
                 </div>
                 <div
-                  class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#d97706]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative">
-                  <img alt="Secure Payment" class="w-full h-full object-cover object-center" src="assets/step2.png">
+                  class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#d97706]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative group-hover:border-[#d97706]/40 transition-colors">
+                  <img draggable="false" alt="Secure Payment and Blueprint Verification"
+                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none"
+                    src="assets/step2.png"
+                    onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/step2.png';">
+                  <div class="absolute bottom-2.5 left-2.5 animate-float-delayed z-10">
+                    <span
+                      class="px-2 py-0.5 rounded text-[10px] font-bold text-[#b45309] bg-amber-50 border border-amber-200 shadow-sm flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[13px]">receipt_long</span> Fixed Fee
+                    </span>
+                  </div>
                 </div>
                 <div class="z-10 relative">
-                  <h3 class="font-display text-lg text-[#1c2520] font-semibold mb-1">Secure Payment</h3>
-                  <p class="font-body text-xs text-[#404944] leading-relaxed mb-3.5">Transparent upfront pricing with
-                    milestone-based fee tiers and GST invoicing.</p>
+                  <h3
+                    class="font-display text-lg text-[#1c2520] font-semibold mb-1 group-hover:text-[#b45309] transition-colors"
+                    data-i18n="step2_title">Secure Payment</h3>
+                  <p class="font-body text-xs text-[#404944] leading-relaxed mb-3.5" data-i18n="step2_desc">Transparent
+                    pricing with flexible packages to suit your home planning needs.</p>
+                  <div
+                    class="pt-3 border-t border-[#e3e2e0] flex items-center justify-between text-[11px] font-medium text-[#707974]">
+                    <span class="inline-flex items-center gap-1 text-[#b45309] font-semibold"><span
+                        class="w-1.5 h-1.5 rounded-full bg-[#d97706]"></span> UPI &amp; NetBanking</span>
+                    <span class="bg-[#f4f3f1] text-[#1c2520] px-2 py-0.5 rounded text-[10px] font-mono">100%
+                      SECURE</span>
+                  </div>
                 </div>
               </div>
-
+              <!-- Step 03 -->
               <div
-                class="w-[285px] sm:w-[315px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#1e293b]/15 bg-white/95 shadow-md">
+                class="w-[285px] sm:w-[325px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#1e293b]/15 bg-white/95 backdrop-blur-md shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 select-none">
+                <div
+                  class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#1e293b]/10 to-transparent rounded-bl-full pointer-events-none">
+                </div>
                 <div class="flex items-center justify-between mb-3.5 z-10 relative">
-                  <span
-                    class="font-sans text-xs font-bold text-[#1e293b] bg-[#1e293b]/10 px-2.5 py-1 rounded-md border border-[#1e293b]/25">03
-                    ANALYSIS PLAN</span>
+                  <div class="inline-flex items-center gap-2">
+                    <span
+                      class="font-sans text-xs font-bold text-[#1e293b] bg-[#1e293b]/10 px-2.5 py-1 rounded-md border border-[#1e293b]/25">03</span>
+                    <span class="text-[11px] font-sans font-bold text-[#1e293b] tracking-wider uppercase"
+                      data-i18n="step3_tag">Analysis Plan</span>
+                  </div>
                   <span
                     class="text-[11px] font-mono text-[#707974] bg-[#f4f3f1] px-2 py-0.5 rounded border border-[#e3e2e0]">Step
                     3</span>
                 </div>
                 <div
-                  class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#1e293b]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative">
-                  <img alt="Analyze Plan" class="w-full h-full object-cover object-center" src="assets/step3.png">
+                  class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#1e293b]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative group-hover:border-[#1e293b]/40 transition-colors">
+                  <img draggable="false" alt="Analyze 2D Plan with 3D model parsing"
+                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none"
+                    src="assets/step3.png"
+                    onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/step3.png';">
+                  <div class="absolute bottom-2.5 right-2.5 animate-float-delayed z-10">
+                    <span
+                      class="px-2 py-0.5 rounded text-[10px] font-bold text-[#1c2520] bg-white/90 backdrop-blur-md border border-gray-300 shadow-sm flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[13px] text-[#1e293b]">straighten</span> Analysis
+                      report
+                    </span>
+                  </div>
                 </div>
                 <div class="z-10 relative">
-                  <h3 class="font-display text-lg text-[#1c2520] font-semibold mb-1">Analyze 2D Plan</h3>
-                  <p class="font-body text-xs text-[#404944] leading-relaxed mb-3.5">Deterministic parsing of walls,
-                    room boundaries, structural loads, and cardinal azimuths.</p>
+                  <h3
+                    class="font-display text-lg text-[#1c2520] font-semibold mb-1 group-hover:text-[#1e293b] transition-colors"
+                    data-i18n="step3_title">Analyze 2D Plan</h3>
+                  <p class="font-body text-xs text-[#404944] leading-relaxed mb-3.5" data-i18n="step3_desc">
+                    Deterministic parsing of walls, room boundaries, structural loads, and cardinal azimuths.</p>
+                  <div
+                    class="pt-3 border-t border-[#e3e2e0] flex items-center justify-between text-[11px] font-medium text-[#707974]">
+                    <span class="inline-flex items-center gap-1 text-[#1e293b] font-semibold"><span
+                        class="w-1.5 h-1.5 rounded-full bg-[#1e293b]"></span> Structural Load Checks</span>
+                    <span class="bg-[#f4f3f1] text-[#1c2520] px-2 py-0.5 rounded text-[10px] font-mono">IS 456</span>
+                  </div>
                 </div>
               </div>
-
+              <!-- Step 04 -->
               <div
-                class="w-[285px] sm:w-[315px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#d97706]/20 bg-white/95 shadow-md">
+                class="w-[285px] sm:w-[325px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#d97706]/25 bg-white/95 backdrop-blur-md shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 select-none">
+                <div
+                  class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#d97706]/15 to-transparent rounded-bl-full pointer-events-none">
+                </div>
                 <div class="flex items-center justify-between mb-3.5 z-10 relative">
-                  <span
-                    class="font-sans text-xs font-bold text-[#b45309] bg-[#d97706]/10 px-2.5 py-1 rounded-md border border-[#d97706]/25">04
-                    VIEW REPORT</span>
+                  <div class="inline-flex items-center gap-2">
+                    <span
+                      class="font-sans text-xs font-bold text-[#b45309] bg-[#d97706]/10 px-2.5 py-1 rounded-md border border-[#d97706]/25">04</span>
+                    <span class="text-[11px] font-sans font-bold text-[#b45309] tracking-wider uppercase"
+                      data-i18n="step4_tag">View Report</span>
+                  </div>
                   <span
                     class="text-[11px] font-mono text-[#707974] bg-[#f4f3f1] px-2 py-0.5 rounded border border-[#e3e2e0]">Step
                     4</span>
                 </div>
                 <div
-                  class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#d97706]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative">
-                  <img alt="View Reports" class="w-full h-full object-cover object-center" src="assets/step4.png">
+                  class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#d97706]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative group-hover:border-[#d97706]/40 transition-colors">
+                  <img draggable="false" alt="View Reports Mockup"
+                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none"
+                    src="assets/step4.png"
+                    onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/step4.png';">
+                  <div class="absolute bottom-2.5 left-2.5 animate-float-delayed z-10">
+                    <span
+                      class="px-2 py-0.5 rounded text-[10px] font-bold text-[#1e293b] bg-emerald-50 border border-emerald-200 shadow-sm flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[13px]">calculate</span> Ready
+                    </span>
+                  </div>
                 </div>
                 <div class="z-10 relative">
-                  <h3 class="font-display text-lg text-[#1c2520] font-semibold mb-1">View Reports</h3>
-                  <p class="font-body text-xs text-[#404944] leading-relaxed mb-3.5">Interactive 3D walkthrough, Vāstu
-                    energy matrix, material takeoff, and structural schedules.</p>
+                  <h3
+                    class="font-display text-lg text-[#1c2520] font-semibold mb-1 group-hover:text-[#b45309] transition-colors"
+                    data-i18n="step4_title">View Reports</h3>
+                  <p class="font-body text-xs text-[#404944] leading-relaxed mb-3.5" data-i18n="step4_desc">Interactive
+                    3D walkthrough, Vāstu energy matrix, material takeoff, and structural schedules.</p>
+                  <div
+                    class="pt-3 border-t border-[#e3e2e0] flex items-center justify-between text-[11px] font-medium text-[#707974]">
+                    <span class="inline-flex items-center gap-1 text-[#b45309] font-semibold"><span
+                        class="w-1.5 h-1.5 rounded-full bg-[#d97706]"></span> Full Breakdown</span>
+                    <span class="bg-[#f4f3f1] text-[#1c2520] px-2 py-0.5 rounded text-[10px] font-mono">LIVE
+                      PREVIEW</span>
+                  </div>
                 </div>
               </div>
-
+              <!-- Step 05 -->
               <div
-                class="w-[285px] sm:w-[315px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#1e293b]/15 bg-white/95 shadow-md">
+                class="w-[285px] sm:w-[325px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#1e293b]/15 bg-white/95 backdrop-blur-md shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 select-none">
+                <div
+                  class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#1e293b]/10 to-transparent rounded-bl-full pointer-events-none">
+                </div>
                 <div class="flex items-center justify-between mb-3.5 z-10 relative">
-                  <span
-                    class="font-sans text-xs font-bold text-[#1e293b] bg-[#1e293b]/10 px-2.5 py-1 rounded-md border border-[#1e293b]/25">05
-                    DOSSIER PDF</span>
+                  <div class="inline-flex items-center gap-2">
+                    <span
+                      class="font-sans text-xs font-bold text-[#1e293b] bg-[#1e293b]/10 px-2.5 py-1 rounded-md border border-[#1e293b]/25">05</span>
+                    <span class="text-[11px] font-sans font-bold text-[#1e293b] tracking-wider uppercase"
+                      data-i18n="step5_tag">Download PDF</span>
+                  </div>
                   <span
                     class="text-[11px] font-mono text-[#707974] bg-[#f4f3f1] px-2 py-0.5 rounded border border-[#e3e2e0]">Step
                     5</span>
                 </div>
                 <div
-                  class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#1e293b]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative">
-                  <img alt="Download Dossier" class="w-full h-full object-cover object-center" src="assets/step5.png">
+                  class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#1e293b]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative group-hover:border-[#1e293b]/40 transition-colors">
+                  <img draggable="false" alt="Download Complete Dossier PDF Package"
+                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none"
+                    src="assets/step5.png"
+                    onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/step5.png';">
+                  <div class="absolute bottom-2.5 left-2.5 animate-float-delayed z-10">
+                    <span
+                      class="px-2 py-0.5 rounded text-[10px] font-bold text-[#1e293b] bg-white/95 backdrop-blur-md border border-[#1e293b]/30 shadow-sm flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[13px] text-[#1e293b]">verified</span> PDF Ready
+                    </span>
+                  </div>
                 </div>
                 <div class="z-10 relative">
-                  <h3 class="font-display text-lg text-[#1c2520] font-semibold mb-1">Download Dossier</h3>
-                  <p class="font-body text-xs text-[#404944] leading-relaxed mb-3.5">Instant stamped municipal and
-                    bank-sanction-ready engineering dossier PDF.</p>
+                  <h3
+                    class="font-display text-lg text-[#1c2520] font-semibold mb-1 group-hover:text-[#1e293b] transition-colors"
+                    data-i18n="step5_title">Download Reports</h3>
+                  <p class="font-body text-xs text-[#404944] leading-relaxed mb-3.5" data-i18n="step5_desc">Instant
+                    download all reports in one click to get PDF, save in device.</p>
+                  <div
+                    class="pt-3 border-t border-[#e3e2e0] flex items-center justify-between text-[11px] font-medium text-[#707974]">
+                    <span class="inline-flex items-center gap-1 text-[#1e293b] font-semibold"><span
+                        class="w-1.5 h-1.5 rounded-full bg-[#1e293b]"></span> Reports Ready</span>
+                    <span class="bg-[#f4f3f1] text-[#1c2520] px-2 py-0.5 rounded text-[10px] font-mono">ONE CLICK</span>
+                  </div>
                 </div>
               </div>
             </div>
+            <div class="flex gap-5 shrink-0" id="workflowGroup3" aria-hidden="true">
+              <!-- Step 01 -->
+              <div
+                class="w-[285px] sm:w-[325px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#1e293b]/15 bg-white/95 backdrop-blur-md shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 select-none">
+                <div
+                  class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#1e293b]/10 to-transparent rounded-bl-full pointer-events-none">
+                </div>
+                <div class="flex items-center justify-between mb-3.5 z-10 relative">
+                  <div class="inline-flex items-center gap-2">
+                    <span
+                      class="font-sans text-xs font-bold text-[#1e293b] bg-[#1e293b]/10 px-2.5 py-1 rounded-md border border-[#1e293b]/25">01</span>
+                    <span class="text-[11px] font-sans font-bold text-[#1e293b] tracking-wider uppercase"
+                      data-i18n="step1_tag">Submission</span>
+                  </div>
+                  <span
+                    class="text-[11px] font-mono text-[#707974] bg-[#f4f3f1] px-2 py-0.5 rounded border border-[#e3e2e0]">Step
+                    1</span>
+                </div>
+                <div
+                  class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#1e293b]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative group-hover:border-[#1e293b]/40 transition-colors">
+                  <img draggable="false" alt="Upload 2D Plan Mockup with Tablet"
+                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none"
+                    src="assets/step1.png"
+                    onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/step1.png';">
+                  <div class="absolute bottom-2.5 right-2.5 animate-float-delayed z-10">
+                    <span
+                      class="px-2 py-1 rounded-md text-[10px] font-bold text-[#1e293b] bg-white/95 backdrop-blur-md border border-[#1e293b]/30 shadow-md flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[13px] text-[#f59e0b]">cloud_upload</span> MAX 10MB
+                    </span>
+                  </div>
+                </div>
+                <div class="z-10 relative">
+                  <h3
+                    class="font-display text-lg text-[#1c2520] font-semibold mb-1 group-hover:text-[#1e293b] transition-colors"
+                    data-i18n="step1_title">Upload 2D Plan</h3>
+                  <p class="font-body text-xs text-[#404944] leading-relaxed mb-3.5" data-i18n="step1_desc">Add your 2D
+                    sketch, blueprint, png, jpg, or technical PDF drawing.</p>
+                  <div
+                    class="pt-3 border-t border-[#e3e2e0] flex items-center justify-between text-[11px] font-medium text-[#707974]">
+                    <span class="inline-flex items-center gap-1 text-[#1e293b] font-semibold"><span
+                        class="w-1.5 h-1.5 rounded-full bg-[#1e293b]"></span> Instant Parser</span>
+                    <span class="bg-[#f4f3f1] text-[#1c2520] px-2 py-0.5 rounded text-[10px] font-mono">JPG &amp;
+                      PDF</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Step 02 -->
+              <div
+                class="w-[285px] sm:w-[325px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#d97706]/25 bg-white/95 backdrop-blur-md shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 select-none">
+                <div
+                  class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#d97706]/15 to-transparent rounded-bl-full pointer-events-none">
+                </div>
+                <div class="flex items-center justify-between mb-3.5 z-10 relative">
+                  <div class="inline-flex items-center gap-2">
+                    <span
+                      class="font-sans text-xs font-bold text-[#b45309] bg-[#d97706]/10 px-2.5 py-1 rounded-md border border-[#d97706]/25">02</span>
+                    <span class="text-[11px] font-sans font-bold text-[#b45309] tracking-wider uppercase"
+                      data-i18n="step2_tag">Verification</span>
+                  </div>
+                  <span
+                    class="text-[11px] font-mono text-[#707974] bg-[#f4f3f1] px-2 py-0.5 rounded border border-[#e3e2e0]">Step
+                    2</span>
+                </div>
+                <div
+                  class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#d97706]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative group-hover:border-[#d97706]/40 transition-colors">
+                  <img draggable="false" alt="Secure Payment and Blueprint Verification"
+                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none"
+                    src="assets/step2.png"
+                    onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/step2.png';">
+                  <div class="absolute bottom-2.5 left-2.5 animate-float-delayed z-10">
+                    <span
+                      class="px-2 py-0.5 rounded text-[10px] font-bold text-[#b45309] bg-amber-50 border border-amber-200 shadow-sm flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[13px]">receipt_long</span> Fixed Fee
+                    </span>
+                  </div>
+                </div>
+                <div class="z-10 relative">
+                  <h3
+                    class="font-display text-lg text-[#1c2520] font-semibold mb-1 group-hover:text-[#b45309] transition-colors"
+                    data-i18n="step2_title">Secure Payment</h3>
+                  <p class="font-body text-xs text-[#404944] leading-relaxed mb-3.5" data-i18n="step2_desc">Transparent
+                    pricing with flexible packages to suit your home planning needs.</p>
+                  <div
+                    class="pt-3 border-t border-[#e3e2e0] flex items-center justify-between text-[11px] font-medium text-[#707974]">
+                    <span class="inline-flex items-center gap-1 text-[#b45309] font-semibold"><span
+                        class="w-1.5 h-1.5 rounded-full bg-[#d97706]"></span> UPI &amp; NetBanking</span>
+                    <span class="bg-[#f4f3f1] text-[#1c2520] px-2 py-0.5 rounded text-[10px] font-mono">100%
+                      SECURE</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Step 03 -->
+              <div
+                class="w-[285px] sm:w-[325px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#1e293b]/15 bg-white/95 backdrop-blur-md shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 select-none">
+                <div
+                  class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#1e293b]/10 to-transparent rounded-bl-full pointer-events-none">
+                </div>
+                <div class="flex items-center justify-between mb-3.5 z-10 relative">
+                  <div class="inline-flex items-center gap-2">
+                    <span
+                      class="font-sans text-xs font-bold text-[#1e293b] bg-[#1e293b]/10 px-2.5 py-1 rounded-md border border-[#1e293b]/25">03</span>
+                    <span class="text-[11px] font-sans font-bold text-[#1e293b] tracking-wider uppercase"
+                      data-i18n="step3_tag">Analysis Plan</span>
+                  </div>
+                  <span
+                    class="text-[11px] font-mono text-[#707974] bg-[#f4f3f1] px-2 py-0.5 rounded border border-[#e3e2e0]">Step
+                    3</span>
+                </div>
+                <div
+                  class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#1e293b]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative group-hover:border-[#1e293b]/40 transition-colors">
+                  <img draggable="false" alt="Analyze 2D Plan with 3D model parsing"
+                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none"
+                    src="assets/step3.png"
+                    onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/step3.png';">
+                  <div class="absolute bottom-2.5 right-2.5 animate-float-delayed z-10">
+                    <span
+                      class="px-2 py-0.5 rounded text-[10px] font-bold text-[#1c2520] bg-white/90 backdrop-blur-md border border-gray-300 shadow-sm flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[13px] text-[#1e293b]">straighten</span> Analysis
+                      report
+                    </span>
+                  </div>
+                </div>
+                <div class="z-10 relative">
+                  <h3
+                    class="font-display text-lg text-[#1c2520] font-semibold mb-1 group-hover:text-[#1e293b] transition-colors"
+                    data-i18n="step3_title">Analyze 2D Plan</h3>
+                  <p class="font-body text-xs text-[#404944] leading-relaxed mb-3.5" data-i18n="step3_desc">
+                    Deterministic parsing of walls, room boundaries, structural loads, and cardinal azimuths.</p>
+                  <div
+                    class="pt-3 border-t border-[#e3e2e0] flex items-center justify-between text-[11px] font-medium text-[#707974]">
+                    <span class="inline-flex items-center gap-1 text-[#1e293b] font-semibold"><span
+                        class="w-1.5 h-1.5 rounded-full bg-[#1e293b]"></span> Structural Load Checks</span>
+                    <span class="bg-[#f4f3f1] text-[#1c2520] px-2 py-0.5 rounded text-[10px] font-mono">IS 456</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Step 04 -->
+              <div
+                class="w-[285px] sm:w-[325px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#d97706]/25 bg-white/95 backdrop-blur-md shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 select-none">
+                <div
+                  class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#d97706]/15 to-transparent rounded-bl-full pointer-events-none">
+                </div>
+                <div class="flex items-center justify-between mb-3.5 z-10 relative">
+                  <div class="inline-flex items-center gap-2">
+                    <span
+                      class="font-sans text-xs font-bold text-[#b45309] bg-[#d97706]/10 px-2.5 py-1 rounded-md border border-[#d97706]/25">04</span>
+                    <span class="text-[11px] font-sans font-bold text-[#b45309] tracking-wider uppercase"
+                      data-i18n="step4_tag">View Report</span>
+                  </div>
+                  <span
+                    class="text-[11px] font-mono text-[#707974] bg-[#f4f3f1] px-2 py-0.5 rounded border border-[#e3e2e0]">Step
+                    4</span>
+                </div>
+                <div
+                  class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#d97706]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative group-hover:border-[#d97706]/40 transition-colors">
+                  <img draggable="false" alt="View Reports Mockup"
+                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none"
+                    src="assets/step4.png"
+                    onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/step4.png';">
+                  <div class="absolute bottom-2.5 left-2.5 animate-float-delayed z-10">
+                    <span
+                      class="px-2 py-0.5 rounded text-[10px] font-bold text-[#1e293b] bg-emerald-50 border border-emerald-200 shadow-sm flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[13px]">calculate</span> Ready
+                    </span>
+                  </div>
+                </div>
+                <div class="z-10 relative">
+                  <h3
+                    class="font-display text-lg text-[#1c2520] font-semibold mb-1 group-hover:text-[#b45309] transition-colors"
+                    data-i18n="step4_title">View Reports</h3>
+                  <p class="font-body text-xs text-[#404944] leading-relaxed mb-3.5" data-i18n="step4_desc">Interactive
+                    3D walkthrough, Vāstu energy matrix, material takeoff, and structural schedules.</p>
+                  <div
+                    class="pt-3 border-t border-[#e3e2e0] flex items-center justify-between text-[11px] font-medium text-[#707974]">
+                    <span class="inline-flex items-center gap-1 text-[#b45309] font-semibold"><span
+                        class="w-1.5 h-1.5 rounded-full bg-[#d97706]"></span> Full Breakdown</span>
+                    <span class="bg-[#f4f3f1] text-[#1c2520] px-2 py-0.5 rounded text-[10px] font-mono">LIVE
+                      PREVIEW</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Step 05 -->
+              <div
+                class="w-[285px] sm:w-[325px] shrink-0 architectural-card sweep-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group relative overflow-hidden border border-[#1e293b]/15 bg-white/95 backdrop-blur-md shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 select-none">
+                <div
+                  class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#1e293b]/10 to-transparent rounded-bl-full pointer-events-none">
+                </div>
+                <div class="flex items-center justify-between mb-3.5 z-10 relative">
+                  <div class="inline-flex items-center gap-2">
+                    <span
+                      class="font-sans text-xs font-bold text-[#1e293b] bg-[#1e293b]/10 px-2.5 py-1 rounded-md border border-[#1e293b]/25">05</span>
+                    <span class="text-[11px] font-sans font-bold text-[#1e293b] tracking-wider uppercase"
+                      data-i18n="step5_tag">Download PDF</span>
+                  </div>
+                  <span
+                    class="text-[11px] font-mono text-[#707974] bg-[#f4f3f1] px-2 py-0.5 rounded border border-[#e3e2e0]">Step
+                    5</span>
+                </div>
+                <div
+                  class="w-full h-44 rounded-xl overflow-hidden mb-4 border border-[#1e293b]/20 bg-gradient-to-b from-[#f4f3f1] to-white relative group-hover:border-[#1e293b]/40 transition-colors">
+                  <img draggable="false" alt="Download Complete Dossier PDF Package"
+                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 pointer-events-none select-none"
+                    src="assets/step5.png"
+                    onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/step5.png';">
+                  <div class="absolute bottom-2.5 left-2.5 animate-float-delayed z-10">
+                    <span
+                      class="px-2 py-0.5 rounded text-[10px] font-bold text-[#1e293b] bg-white/95 backdrop-blur-md border border-[#1e293b]/30 shadow-sm flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[13px] text-[#1e293b]">verified</span> PDF Ready
+                    </span>
+                  </div>
+                </div>
+                <div class="z-10 relative">
+                  <h3
+                    class="font-display text-lg text-[#1c2520] font-semibold mb-1 group-hover:text-[#1e293b] transition-colors"
+                    data-i18n="step5_title">Download Reports</h3>
+                  <p class="font-body text-xs text-[#404944] leading-relaxed mb-3.5" data-i18n="step5_desc">Instant
+                    download all reports in one click to get PDF, save in device.</p>
+                  <div
+                    class="pt-3 border-t border-[#e3e2e0] flex items-center justify-between text-[11px] font-medium text-[#707974]">
+                    <span class="inline-flex items-center gap-1 text-[#1e293b] font-semibold"><span
+                        class="w-1.5 h-1.5 rounded-full bg-[#1e293b]"></span> Reports Ready</span>
+                    <span class="bg-[#f4f3f1] text-[#1c2520] px-2 py-0.5 rounded text-[10px] font-mono">ONE CLICK</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <!-- Step Indicator Navigation Pills -->
+          <div class="flex items-center justify-center gap-2 sm:gap-3 flex-wrap pt-4">
+            <button type="button" onclick="scrollWorkflowToStep(1)" class="workflow-step-pill px-3 py-1.5 rounded-full border border-slate-200 bg-white hover:bg-slate-50 text-xs font-bold text-slate-700 shadow-2xs transition active:scale-95 flex items-center gap-1.5 cursor-pointer">
+              <span class="w-2 h-2 rounded-full bg-[#1e293b]"></span> 01 Submission
+            </button>
+            <button type="button" onclick="scrollWorkflowToStep(2)" class="workflow-step-pill px-3 py-1.5 rounded-full border border-slate-200 bg-white hover:bg-slate-50 text-xs font-bold text-slate-700 shadow-2xs transition active:scale-95 flex items-center gap-1.5 cursor-pointer">
+              <span class="w-2 h-2 rounded-full bg-[#d97706]"></span> 02 Verification
+            </button>
+            <button type="button" onclick="scrollWorkflowToStep(3)" class="workflow-step-pill px-3 py-1.5 rounded-full border border-slate-200 bg-white hover:bg-slate-50 text-xs font-bold text-slate-700 shadow-2xs transition active:scale-95 flex items-center gap-1.5 cursor-pointer">
+              <span class="w-2 h-2 rounded-full bg-[#1e293b]"></span> 03 Analysis
+            </button>
+            <button type="button" onclick="scrollWorkflowToStep(4)" class="workflow-step-pill px-3 py-1.5 rounded-full border border-slate-200 bg-white hover:bg-slate-50 text-xs font-bold text-slate-700 shadow-2xs transition active:scale-95 flex items-center gap-1.5 cursor-pointer">
+              <span class="w-2 h-2 rounded-full bg-[#d97706]"></span> 04 View Report
+            </button>
+            <button type="button" onclick="scrollWorkflowToStep(5)" class="workflow-step-pill px-3 py-1.5 rounded-full border border-slate-200 bg-white hover:bg-slate-50 text-xs font-bold text-slate-700 shadow-2xs transition active:scale-95 flex items-center gap-1.5 cursor-pointer">
+              <span class="w-2 h-2 rounded-full bg-[#1e293b]"></span> 05 Download
+            </button>
           </div>
         </div>
 
@@ -2655,6 +3042,186 @@
         openLegalModal('delete');
       }
     });
+
+    // ==================== WORKFLOW INTERACTIVE CAROUSEL (AUTO + MANUAL SCROLL) ====================
+    (function initWorkflowCarousel() {
+      const container = document.getElementById('workflowScrollContainer');
+      const track = document.getElementById('workflowTrack');
+      const group1 = document.getElementById('workflowGroup1');
+      const prevBtn = document.getElementById('workflowPrevBtn');
+      const nextBtn = document.getElementById('workflowNextBtn');
+      const autoToggle = document.getElementById('workflowAutoToggle');
+      const autoDot = document.getElementById('autoScrollDot');
+      const autoLabel = document.getElementById('autoScrollLabel');
+      const stepPills = document.querySelectorAll('.workflow-step-pill');
+
+      if (!container || !track || !group1) return;
+
+      let isAutoScrolling = true;
+      let isUserInteracting = false;
+      const autoSpeed = 0.85; // smooth px per frame
+      let resumeTimer = null;
+      let animationFrameId = null;
+
+      // Mouse drag state
+      let isMouseDown = false;
+      let startX = 0;
+      let scrollLeftStart = 0;
+
+      function getSingleGroupWidth() {
+        return group1.offsetWidth + 20; // card group width + 20px gap
+      }
+
+      // Initial center scroll position so user can scroll both left and right immediately
+      function initScrollPosition() {
+        const singleWidth = getSingleGroupWidth();
+        if (singleWidth > 100 && container.scrollLeft === 0) {
+          container.scrollLeft = singleWidth;
+        }
+      }
+
+      window.addEventListener('load', initScrollPosition);
+      setTimeout(initScrollPosition, 150);
+
+      // Continuous RAF Auto-scroll Loop
+      function autoScrollTick() {
+        if (isAutoScrolling && !isUserInteracting) {
+          container.scrollLeft += autoSpeed;
+
+          const singleWidth = getSingleGroupWidth();
+          if (singleWidth > 100) {
+            // Seamless infinite wrap
+            if (container.scrollLeft >= singleWidth * 2) {
+              container.scrollLeft -= singleWidth;
+            } else if (container.scrollLeft <= 5) {
+              container.scrollLeft += singleWidth;
+            }
+          }
+        }
+        animationFrameId = requestAnimationFrame(autoScrollTick);
+      }
+      animationFrameId = requestAnimationFrame(autoScrollTick);
+
+      function pauseAndScheduleResume(delayMs = 2600) {
+        isUserInteracting = true;
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(() => {
+          isUserInteracting = false;
+        }, delayMs);
+      }
+
+      // Desktop Mouse Drag to Scroll
+      container.addEventListener('mousedown', (e) => {
+        isMouseDown = true;
+        isUserInteracting = true;
+        clearTimeout(resumeTimer);
+        container.classList.add('cursor-grabbing');
+        container.classList.remove('cursor-grab');
+        startX = e.pageX - container.offsetLeft;
+        scrollLeftStart = container.scrollLeft;
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (isMouseDown) {
+          isMouseDown = false;
+          container.classList.remove('cursor-grabbing');
+          container.classList.add('cursor-grab');
+          pauseAndScheduleResume(2200);
+        }
+      });
+
+      container.addEventListener('mousemove', (e) => {
+        if (!isMouseDown) return;
+        e.preventDefault();
+        const x = e.pageX - container.offsetLeft;
+        const walk = (x - startX) * 1.45; // drag sensitivity multiplier
+        container.scrollLeft = scrollLeftStart - walk;
+
+        const singleWidth = getSingleGroupWidth();
+        if (singleWidth > 100) {
+          if (container.scrollLeft <= 5) {
+            container.scrollLeft += singleWidth;
+            scrollLeftStart += singleWidth;
+          } else if (container.scrollLeft >= singleWidth * 2) {
+            container.scrollLeft -= singleWidth;
+            scrollLeftStart -= singleWidth;
+          }
+        }
+      });
+
+      // Mouse enter & leave pauses
+      container.addEventListener('mouseenter', () => {
+        if (!isMouseDown) isUserInteracting = true;
+      });
+
+      container.addEventListener('mouseleave', () => {
+        if (!isMouseDown) {
+          pauseAndScheduleResume(1500);
+        }
+      });
+
+      // Wheel / Trackpad horizontal scroll
+      container.addEventListener('wheel', () => {
+        pauseAndScheduleResume(2200);
+      }, { passive: true });
+
+      // Mobile / Tablet Touch gestures
+      container.addEventListener('touchstart', () => {
+        isUserInteracting = true;
+        clearTimeout(resumeTimer);
+      }, { passive: true });
+
+      container.addEventListener('touchend', () => {
+        pauseAndScheduleResume(2500);
+      }, { passive: true });
+
+      // Prev and Next Buttons (one card step = ~345px)
+      const cardStepWidth = 345;
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          pauseAndScheduleResume(3500);
+          container.scrollBy({ left: -cardStepWidth, behavior: 'smooth' });
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          pauseAndScheduleResume(3500);
+          container.scrollBy({ left: cardStepWidth, behavior: 'smooth' });
+        });
+      }
+
+      // Auto-scroll ON / PAUSE Toggle Button
+      if (autoToggle) {
+        autoToggle.addEventListener('click', () => {
+          isAutoScrolling = !isAutoScrolling;
+          if (isAutoScrolling) {
+            if (autoDot) autoDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse";
+            if (autoLabel) {
+              autoLabel.textContent = "Auto: ON";
+              autoLabel.className = "text-xs font-bold text-slate-800";
+            }
+            isUserInteracting = false;
+          } else {
+            if (autoDot) autoDot.className = "w-2.5 h-2.5 rounded-full bg-slate-400";
+            if (autoLabel) {
+              autoLabel.textContent = "Paused";
+              autoLabel.className = "text-xs font-bold text-slate-500";
+            }
+          }
+        });
+      }
+
+      // Step Pill Jump Navigation (Step 1 to 5)
+      window.scrollWorkflowToStep = function(stepNum) {
+        pauseAndScheduleResume(4000);
+        const singleWidth = getSingleGroupWidth();
+        const baseOffset = singleWidth; // Middle group
+        const targetScroll = baseOffset + (stepNum - 1) * cardStepWidth;
+        container.scrollTo({ left: targetScroll, behavior: 'smooth' });
+      };
+    })();
 
     function closeReportModal() {
       document.getElementById('reportModal').classList.add('hidden');
