@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kanavu Illam - 3D Cover Flow Card Animation Demo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #8ca38f;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      overflow-x: hidden;
+      color: white;
+    }
+
+    .coverflow-stage {
+      perspective: 1200px;
+      perspective-origin: 50% 50%;
+      position: relative;
+      width: 100%;
+      height: 440px;
+      overflow: hidden;
+      touch-action: pan-y;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    @media (min-width: 640px) {
+      .coverflow-stage {
+        height: 480px;
+      }
+    }
+
+    .coverflow-card {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 260px;
+      max-width: 85vw;
+      height: 380px;
+      transform-origin: center center;
+      transform-style: preserve-3d;
+      will-change: transform, opacity, filter, box-shadow;
+      transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        filter 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+
+    @media (min-width: 640px) {
+      .coverflow-card {
+        width: 290px;
+        height: 420px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .coverflow-card {
+        width: 315px;
+        height: 445px;
+      }
+    }
+
+    /* Video-matched Squircle Poster Card (Slightly Reduced Size) */
+    .coverflow-poster-card {
+      width: 100%;
+      height: 100%;
+      border-radius: 36px;
+      border: 1.5px solid rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      box-shadow: 0 16px 38px -8px rgba(0, 0, 0, 0.3), inset 0 1.5px 2px rgba(255, 255, 255, 0.45);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.35rem 1.25rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .coverflow-card.active .coverflow-poster-card {
+      border-color: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 183, 3, 0.5), inset 0 1.5px 2px rgba(255, 255, 255, 0.8);
+    }
+  </style>
+</head>
+
+<body class="bg-[#8ca38f] text-white flex flex-col items-center justify-center min-h-screen p-4 antialiased">
+
+  <!-- Interactive 3D Cover Flow Viewport -->
+  <div class="w-full max-w-4xl mx-auto flex flex-col items-center my-auto">
+
+    <!-- Header / Tip -->
+    <div class="text-center mb-4">
+      <span
+        class="inline-block px-3 py-1 rounded-full bg-black/25 backdrop-blur-md border border-white/20 text-xs font-mono uppercase tracking-wider text-[#ffb703] font-bold mb-1.5">
+        ✦ Kanavu Illam Workflow
+      </span>
+      <h2 class="text-2xl sm:text-3xl font-serif font-bold text-white mb-1">How It Works</h2>
+      <p class="text-xs sm:text-sm text-white/80 font-medium">Click any side card, swipe/drag, or use arrows to slide
+      </p>
+    </div>
+
+    <!-- Stage Container with Floating Nav Buttons -->
+    <div class="relative w-full">
+      <div class="coverflow-stage" id="coverflowStage">
+
+        <!-- Card 01: Submission -->
+        <div class="coverflow-card active" data-step="0"
+          style="transform: translate(-50%, -50%) translate3d(0, 0, 60px) scale(1) rotateY(0deg); opacity: 1; z-index: 30;">
+          <div class="coverflow-poster-card"
+            style="background: linear-gradient(165deg, #18281d 0%, #172a1e 40%, #b86e3a 100%);">
+            <div class="flex items-center justify-between text-white/80 z-10 relative">
+              <div class="inline-flex items-center gap-1 font-mono text-[11px] font-bold tracking-widest uppercase">
+                <span class="text-[#ffb703] text-sm leading-none">✦</span>
+                <span class="text-white font-bold">Submission</span>
+              </div>
+              <span
+                class="text-[10px] font-mono text-white/70 bg-white/15 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20 font-bold">01
+                / 05</span>
+            </div>
+
+            <div class="my-auto text-center px-1 z-10 relative flex flex-col items-center">
+              <div
+                class="w-32 h-32 sm:w-36 sm:h-36 mb-3 rounded-2xl sm:rounded-3xl overflow-hidden bg-white/10 backdrop-blur-xl border border-white/30 shadow-2xl shadow-black/35 group-hover:scale-105 transition-all duration-500 relative flex items-center justify-center">
+                <img src="assets/step1.png" alt="Upload 2D Plan" class="w-full h-full object-cover">
+              </div>
+              <h3 class="font-serif text-xl sm:text-2xl text-white font-bold leading-tight tracking-tight mb-1.5">
+                Upload 2D Plan<br>
+                <span class="italic font-serif font-normal text-[#ffb703]">In One Click</span>
+              </h3>
+            </div>
+
+            <div class="z-10 relative pt-2.5 border-t border-white/15 text-center">
+              <p class="text-xs sm:text-[12.5px] text-white/85 leading-relaxed font-normal mb-2">
+                Add your 2D sketch, blueprint, png, jpg, or technical PDF drawing.
+              </p>
+              <div
+                class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/25 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono text-white/90 font-bold">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#ffb703] animate-pulse"></span>
+                Instant Parser Engine • JPG &amp; PDF
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 02: Verification -->
+        <div class="coverflow-card" data-step="1"
+          style="transform: translate(calc(-50% + 225px), -50%) translate3d(0, 0, -20px) scale(0.85) rotateY(-12deg); opacity: 0.65; z-index: 20;">
+          <div class="coverflow-poster-card"
+            style="background: linear-gradient(165deg, #241e17 0%, #2f2418 40%, #c97d39 100%);">
+            <div class="flex items-center justify-between text-white/80 z-10 relative">
+              <div class="inline-flex items-center gap-1 font-mono text-[11px] font-bold tracking-widest uppercase">
+                <span class="text-[#ffb703] text-sm leading-none">✦</span>
+                <span class="text-white font-bold">Verification</span>
+              </div>
+              <span
+                class="text-[10px] font-mono text-white/70 bg-white/15 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20 font-bold">02
+                / 05</span>
+            </div>
+
+            <div class="my-auto text-center px-1 z-10 relative flex flex-col items-center">
+              <div
+                class="w-32 h-32 sm:w-36 sm:h-36 mb-3 rounded-2xl sm:rounded-3xl overflow-hidden bg-white/10 backdrop-blur-xl border border-white/30 shadow-2xl shadow-black/35 group-hover:scale-105 transition-all duration-500 relative flex items-center justify-center">
+                <img src="assets/step2.png" alt="Secure Payment" class="w-full h-full object-cover">
+              </div>
+              <h3 class="font-serif text-xl sm:text-2xl text-white font-bold leading-tight tracking-tight mb-1.5">
+                Secure Payment<br>
+                <span class="italic font-serif font-normal text-[#ffb703]">Instant Receipt</span>
+              </h3>
+            </div>
+
+            <div class="z-10 relative pt-2.5 border-t border-white/15 text-center">
+              <p class="text-xs sm:text-[12.5px] text-white/85 leading-relaxed font-normal mb-2">
+                Transparent pricing with flexible packages to suit your home planning needs.
+              </p>
+              <div
+                class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/25 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono text-white/90 font-bold">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#ffb703] animate-pulse"></span>
+                UPI &amp; NetBanking • 100% SECURE
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 03: Analysis -->
+        <div class="coverflow-card" data-step="2"
+          style="transform: translate(calc(-50% + 400px), -50%) translate3d(0, 0, -60px) scale(0.70) rotateY(-20deg); opacity: 0.28; z-index: 10;">
+          <div class="coverflow-poster-card"
+            style="background: linear-gradient(165deg, #13221b 0%, #1a3426 40%, #3e7b5b 100%);">
+            <div class="flex items-center justify-between text-white/80 z-10 relative">
+              <div class="inline-flex items-center gap-1 font-mono text-[11px] font-bold tracking-widest uppercase">
+                <span class="text-[#ffb703] text-sm leading-none">✦</span>
+                <span class="text-white font-bold">Analysis Plan</span>
+              </div>
+              <span
+                class="text-[10px] font-mono text-white/70 bg-white/15 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20 font-bold">03
+                / 05</span>
+            </div>
+
+            <div class="my-auto text-center px-1 z-10 relative flex flex-col items-center">
+              <div
+                class="w-32 h-32 sm:w-36 sm:h-36 mb-3 rounded-2xl sm:rounded-3xl overflow-hidden bg-white/10 backdrop-blur-xl border border-white/30 shadow-2xl shadow-black/35 group-hover:scale-105 transition-all duration-500 relative flex items-center justify-center">
+                <img src="assets/step3.png" alt="Analyze 2D Plan" class="w-full h-full object-cover">
+              </div>
+              <h3 class="font-serif text-xl sm:text-2xl text-white font-bold leading-tight tracking-tight mb-1.5">
+                Analyze 2D Plan<br>
+                <span class="italic font-serif font-normal text-[#ffb703]">Vāstu Energy Grid</span>
+              </h3>
+            </div>
+
+            <div class="z-10 relative pt-2.5 border-t border-white/15 text-center">
+              <p class="text-xs sm:text-[12.5px] text-white/85 leading-relaxed font-normal mb-2">
+                Deterministic parsing of walls, room boundaries, structural loads, and azimuths.
+              </p>
+              <div
+                class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/25 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono text-white/90 font-bold">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#ffb703] animate-pulse"></span>
+                IS 456 Structural Checks • Validated
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 04: View Reports -->
+        <div class="coverflow-card" data-step="3"
+          style="transform: translate(calc(-50% - 400px), -50%) translate3d(0, 0, -60px) scale(0.70) rotateY(20deg); opacity: 0.28; z-index: 10;">
+          <div class="coverflow-poster-card"
+            style="background: linear-gradient(165deg, #15251b 0%, #1f3a2a 40%, #548762 100%);">
+            <div class="flex items-center justify-between text-white/80 z-10 relative">
+              <div class="inline-flex items-center gap-1 font-mono text-[11px] font-bold tracking-widest uppercase">
+                <span class="text-[#ffb703] text-sm leading-none">✦</span>
+                <span class="text-white font-bold">View Report</span>
+              </div>
+              <span
+                class="text-[10px] font-mono text-white/70 bg-white/15 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20 font-bold">04
+                / 05</span>
+            </div>
+
+            <div class="my-auto text-center px-1 z-10 relative flex flex-col items-center">
+              <div
+                class="w-32 h-32 sm:w-36 sm:h-36 mb-3 rounded-2xl sm:rounded-3xl overflow-hidden bg-white/10 backdrop-blur-xl border border-white/30 shadow-2xl shadow-black/35 group-hover:scale-105 transition-all duration-500 relative flex items-center justify-center">
+                <img src="assets/step4.png" alt="View Reports" class="w-full h-full object-cover">
+              </div>
+              <h3 class="font-serif text-xl sm:text-2xl text-white font-bold leading-tight tracking-tight mb-1.5">
+                View Reports<br>
+                <span class="italic font-serif font-normal text-[#ffb703]">Spatial Walkthrough</span>
+              </h3>
+            </div>
+
+            <div class="z-10 relative pt-2.5 border-t border-white/15 text-center">
+              <p class="text-xs sm:text-[12.5px] text-white/85 leading-relaxed font-normal mb-2">
+                Interactive 3D walkthrough, Vāstu energy matrix, material takeoff &amp; schedules.
+              </p>
+              <div
+                class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/25 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono text-white/90 font-bold">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#ffb703] animate-pulse"></span>
+                Full BIM Breakdown • LIVE PREVIEW
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 05: Download PDF -->
+        <div class="coverflow-card" data-step="4"
+          style="transform: translate(calc(-50% - 225px), -50%) translate3d(0, 0, -20px) scale(0.85) rotateY(12deg); opacity: 0.65; z-index: 20;">
+          <div class="coverflow-poster-card"
+            style="background: linear-gradient(165deg, #221a14 0%, #352619 40%, #b26c36 100%);">
+            <div class="flex items-center justify-between text-white/80 z-10 relative">
+              <div class="inline-flex items-center gap-1 font-mono text-[11px] font-bold tracking-widest uppercase">
+                <span class="text-[#ffb703] text-sm leading-none">✦</span>
+                <span class="text-white font-bold">Download PDF</span>
+              </div>
+              <span
+                class="text-[10px] font-mono text-white/70 bg-white/15 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20 font-bold">05
+                / 05</span>
+            </div>
+
+            <div class="my-auto text-center px-1 z-10 relative flex flex-col items-center">
+              <div
+                class="w-32 h-32 sm:w-36 sm:h-36 mb-3 rounded-2xl sm:rounded-3xl overflow-hidden bg-white/10 backdrop-blur-xl border border-white/30 shadow-2xl shadow-black/35 group-hover:scale-105 transition-all duration-500 relative flex items-center justify-center">
+                <img src="assets/step5.png" alt="Download Reports" class="w-full h-full object-cover">
+              </div>
+              <h3 class="font-serif text-xl sm:text-2xl text-white font-bold leading-tight tracking-tight mb-1.5">
+                Download Reports<br>
+                <span class="italic font-serif font-normal text-[#ffb703]">PDF &amp; Save to device</span>
+              </h3>
+            </div>
+
+            <div class="z-10 relative pt-2.5 border-t border-white/15 text-center">
+              <p class="text-xs sm:text-[12.5px] text-white/85 leading-relaxed font-normal mb-2">
+                Instant download all reports in one click to get PDF, save in device.
+              </p>
+              <div
+                class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/25 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono text-white/90 font-bold">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#ffb703] animate-pulse"></span>
+                Certified Dossier • ONE CLICK
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Left & Right Arrow Buttons -->
+      <button type="button" id="coverflowPrevBtn"
+        class="absolute left-1 sm:left-3 top-1/2 -translate-y-1/2 z-40 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/45 hover:bg-black/75 backdrop-blur-xl border border-white/25 text-white flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
+        aria-label="Previous step">
+        <svg class="w-6 h-6 -translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button type="button" id="coverflowNextBtn"
+        class="absolute right-1 sm:right-3 top-1/2 -translate-y-1/2 z-40 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/45 hover:bg-black/75 backdrop-blur-xl border border-white/25 text-white flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
+        aria-label="Next step">
+        <svg class="w-6 h-6 translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Capsule Pill Indicator (Exact Video Style) -->
+    <div class="flex items-center justify-center mt-4 z-20">
+      <div
+        class="px-4 py-2 rounded-full bg-black/45 backdrop-blur-xl border border-white/25 shadow-xl flex items-center gap-2">
+        <button type="button"
+          class="coverflow-dot w-6 h-2 rounded-full bg-[#ffb703] shadow-sm transition-all duration-300 cursor-pointer"
+          aria-label="Step 1"></button>
+        <button type="button"
+          class="coverflow-dot w-2 h-2 rounded-full bg-white/45 hover:bg-white/80 transition-all duration-300 cursor-pointer"
+          aria-label="Step 2"></button>
+        <button type="button"
+          class="coverflow-dot w-2 h-2 rounded-full bg-white/45 hover:bg-white/80 transition-all duration-300 cursor-pointer"
+          aria-label="Step 3"></button>
+        <button type="button"
+          class="coverflow-dot w-2 h-2 rounded-full bg-white/45 hover:bg-white/80 transition-all duration-300 cursor-pointer"
+          aria-label="Step 4"></button>
+        <button type="button"
+          class="coverflow-dot w-2 h-2 rounded-full bg-white/45 hover:bg-white/80 transition-all duration-300 cursor-pointer"
+          aria-label="Step 5"></button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    (function initCoverFlow() {
+      const stage = document.getElementById('coverflowStage');
+      if (!stage) return;
+      const cards = Array.from(stage.querySelectorAll('.coverflow-card'));
+      const dots = Array.from(document.querySelectorAll('.coverflow-dot'));
+      const prevBtn = document.getElementById('coverflowPrevBtn');
+      const nextBtn = document.getElementById('coverflowNextBtn');
+      const total = cards.length;
+      if (total === 0) return;
+
+      let currentIndex = 0;
+      let autoPlayTimer = null;
+
+      function updateCards() {
+        const stageWidth = stage.clientWidth || window.innerWidth;
+        const isMobile = stageWidth < 640;
+        const isTablet = stageWidth < 1024;
+        const step1 = isMobile ? 105 : (isTablet ? 160 : 225);
+        const step2 = isMobile ? 185 : (isTablet ? 290 : 400);
+
+        cards.forEach((card, i) => {
+          let offset = i - currentIndex;
+          while (offset > total / 2) offset -= total;
+          while (offset < -total / 2) offset += total;
+
+          let transform = '';
+          let opacity = 0;
+          let zIndex = 0;
+          let filter = 'blur(0px)';
+          let pointerEvents = 'none';
+
+          if (offset === 0) {
+            transform = 'translate(-50%, -50%) translate3d(0, 0, 60px) scale(1) rotateY(0deg)';
+            opacity = 1;
+            zIndex = 30;
+            filter = 'blur(0px)';
+            pointerEvents = 'auto';
+            card.classList.add('active');
+          } else if (offset === -1) {
+            transform = `translate(calc(-50% - ${step1}px), -50%) translate3d(0, 0, -20px) scale(0.85) rotateY(12deg)`;
+            opacity = 0.65;
+            zIndex = 20;
+            filter = 'blur(0.3px)';
+            pointerEvents = 'auto';
+            card.classList.remove('active');
+          } else if (offset === 1) {
+            transform = `translate(calc(-50% + ${step1}px), -50%) translate3d(0, 0, -20px) scale(0.85) rotateY(-12deg)`;
+            opacity = 0.65;
+            zIndex = 20;
+            filter = 'blur(0.3px)';
+            pointerEvents = 'auto';
+            card.classList.remove('active');
+          } else if (offset === -2) {
+            transform = `translate(calc(-50% - ${step2}px), -50%) translate3d(0, 0, -60px) scale(0.70) rotateY(20deg)`;
+            opacity = isMobile ? 0 : 0.28;
+            zIndex = 10;
+            filter = 'blur(1.2px)';
+            pointerEvents = isMobile ? 'none' : 'auto';
+            card.classList.remove('active');
+          } else if (offset === 2) {
+            transform = `translate(calc(-50% + ${step2}px), -50%) translate3d(0, 0, -60px) scale(0.70) rotateY(-20deg)`;
+            opacity = isMobile ? 0 : 0.28;
+            zIndex = 10;
+            filter = 'blur(1.2px)';
+            pointerEvents = isMobile ? 'none' : 'auto';
+            card.classList.remove('active');
+          } else {
+            const dir = offset > 0 ? 1 : -1;
+            transform = `translate(calc(-50% + ${dir * (step2 + 80)}px), -50%) translate3d(0, 0, -100px) scale(0.5) rotateY(${dir * -25}deg)`;
+            opacity = 0;
+            zIndex = 0;
+            filter = 'blur(3px)';
+            pointerEvents = 'none';
+            card.classList.remove('active');
+          }
+
+          card.style.transform = transform;
+          card.style.opacity = opacity;
+          card.style.zIndex = zIndex;
+          card.style.filter = filter;
+          card.style.pointerEvents = pointerEvents;
+        });
+
+        dots.forEach((dot, idx) => {
+          if (idx === currentIndex) {
+            dot.className = 'coverflow-dot w-6 h-2 rounded-full bg-[#ffb703] shadow-sm transition-all duration-300 cursor-pointer';
+          } else {
+            dot.className = 'coverflow-dot w-2 h-2 rounded-full bg-white/45 hover:bg-white/80 transition-all duration-300 cursor-pointer';
+          }
+        });
+      }
+
+      function goTo(idx) {
+        currentIndex = (idx + total) % total;
+        updateCards();
+      }
+
+      function next() {
+        goTo(currentIndex + 1);
+      }
+
+      function prev() {
+        goTo(currentIndex - 1);
+      }
+
+      // Card click
+      cards.forEach((card, idx) => {
+        card.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (idx === currentIndex) {
+            next();
+          } else {
+            goTo(idx);
+          }
+          restartAutoplay();
+        });
+      });
+
+      // Arrow buttons
+      if (prevBtn) {
+        prevBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          prev();
+          restartAutoplay();
+        });
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          next();
+          restartAutoplay();
+        });
+      }
+
+      // Dots
+      dots.forEach((dot, idx) => {
+        dot.addEventListener('click', (e) => {
+          e.stopPropagation();
+          goTo(idx);
+          restartAutoplay();
+        });
+      });
+
+      // Mouse drag & touch swipe
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let isDragging = false;
+
+      stage.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        touchStartX = e.clientX;
+      });
+
+      window.addEventListener('mouseup', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        const diff = e.clientX - touchStartX;
+        if (Math.abs(diff) > 35) {
+          if (diff < 0) next();
+          else prev();
+          restartAutoplay();
+        }
+      });
+
+      stage.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+
+      stage.addEventListener('touchend', (e) => {
+        const diffX = e.changedTouches[0].clientX - touchStartX;
+        const diffY = e.changedTouches[0].clientY - touchStartY;
+        if (Math.abs(diffX) > 30 && Math.abs(diffX) > Math.abs(diffY)) {
+          if (diffX < 0) next();
+          else prev();
+          restartAutoplay();
+        }
+      }, { passive: true });
+
+      function startAutoplay() {
+        stopAutoplay();
+        autoPlayTimer = setInterval(() => {
+          next();
+        }, 3200);
+      }
+
+      function stopAutoplay() {
+        if (autoPlayTimer) {
+          clearInterval(autoPlayTimer);
+          autoPlayTimer = null;
+        }
+      }
+
+      let userPauseTimer = null;
+      function pauseAutoplayTemporarily(ms = 4000) {
+        stopAutoplay();
+        if (userPauseTimer) clearTimeout(userPauseTimer);
+        userPauseTimer = setTimeout(() => {
+          startAutoplay();
+        }, ms);
+      }
+
+      function restartAutoplay() {
+        pauseAutoplayTemporarily(4500);
+      }
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') { prev(); restartAutoplay(); }
+        else if (e.key === 'ArrowRight') { next(); restartAutoplay(); }
+      });
+
+      stage.addEventListener('mouseenter', () => { pauseAutoplayTemporarily(4000); });
+      stage.addEventListener('mouseleave', () => { startAutoplay(); });
+
+      window.addEventListener('resize', updateCards);
+
+      updateCards();
+      startAutoplay();
+    })();
+  </script>
+</body>
+
+</html>
