@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /sample_*.html
 
 Sitemap: https://kanavuillam.in/sitemap.xml
 
