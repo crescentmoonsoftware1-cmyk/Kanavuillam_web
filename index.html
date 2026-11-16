@@ -272,7 +272,7 @@
       -webkit-backdrop-filter: blur(28px);
       border-radius: 28px;
       border: 1.5px solid rgba(255, 255, 255, 0.30);
-      box-shadow: 
+      box-shadow:
         0 30px 60px -15px rgba(0, 0, 0, 0.3),
         inset 0 1.5px 2px rgba(255, 255, 255, 0.45);
       overflow: hidden;
@@ -283,7 +283,7 @@
       transform: translateY(-4px);
       background: rgba(255, 255, 255, 0.16);
       border-color: rgba(255, 183, 3, 0.55);
-      box-shadow: 
+      box-shadow:
         0 35px 70px -15px rgba(0, 0, 0, 0.35),
         0 0 30px rgba(255, 183, 3, 0.15),
         inset 0 1.5px 2px rgba(255, 255, 255, 0.6);
@@ -774,32 +774,32 @@
 
   <!-- ==================== HEADER / NAV ==================== -->
   <header
-    class="fixed top-0 w-full z-50 backdrop-blur-md bg-[#839b87]/60 border-b border-white/10 shadow-sm transition-all duration-300">
+    class="fixed top-0 w-full z-50 backdrop-blur-md bg-black/30 border-b border-white/10 shadow-sm transition-all duration-300">
     <div class="h-20 max-w-[1400px] mx-auto px-6 lg:px-12 flex items-center justify-between gap-6">
       <!-- Brand Logo -->
       <a class="flex items-center gap-3.5 shrink-0 group" href="#">
         <div
-          class="h-12 w-12 rounded-2xl bg-[#faf6ee] border border-white/40 flex items-center justify-center p-2 shadow-sm group-hover:scale-105 transition-all">
+          class="h-11 w-11 rounded-xl bg-white border border-white/40 flex items-center justify-center p-1.5 shadow-md group-hover:scale-105 transition-all">
           <img src="assets/app_logo.png" alt="Kanavu Illam Logo" class="h-full w-full object-contain">
         </div>
         <div class="flex items-baseline font-serif text-2xl sm:text-3xl font-normal tracking-wide"
           data-i18n="brand_name">
-          <span class="text-white">Kanavu</span><span class="text-[#ffb703] ml-1.5 font-bold">illam</span>
+          <span class="text-white">Kanavu</span><span class="text-[#ffd043] ml-1.5 font-bold">illam</span>
         </div>
       </a>
 
       <!-- Desktop Nav (Exact Reference Image Style) -->
-      <nav class="hidden md:flex items-center text-sm font-serif text-white/90">
-        <a class="text-white font-medium border-b-2 border-[#ffb703] pb-0.5 tracking-wide hover:text-[#ffb703] transition-colors"
+      <nav class="hidden md:flex items-center text-sm font-serif text-white/95">
+        <a class="text-white font-medium border-b-2 border-[#ffd043] pb-0.5 tracking-wide hover:text-[#ffd043] transition-colors"
           href="#hero" data-i18n="nav_home">Home</a>
-        <span class="text-[#ffb703] text-xs mx-3.5">&bull;</span>
-        <a class="text-white/90 hover:text-[#ffb703] transition-colors tracking-wide" href="#how-it-works"
+        <span class="text-[#ffd043] text-xs mx-3.5">&bull;</span>
+        <a class="text-white/90 hover:text-[#ffd043] transition-colors tracking-wide" href="#how-it-works"
           data-i18n="nav_how_it_works">How it Works</a>
-        <span class="text-[#ffb703] text-xs mx-3.5">&bull;</span>
-        <a class="text-white/90 hover:text-[#ffb703] transition-colors tracking-wide" href="#pillars"
+        <span class="text-[#ffd043] text-xs mx-3.5">&bull;</span>
+        <a class="text-white/90 hover:text-[#ffd043] transition-colors tracking-wide" href="#pillars"
           data-i18n="nav_reports">Reports</a>
-        <span class="text-[#ffb703] text-xs mx-3.5">&bull;</span>
-        <a class="text-white/90 hover:text-[#ffb703] transition-colors tracking-wide" href="#contact"
+        <span class="text-[#ffd043] text-xs mx-3.5">&bull;</span>
+        <a class="text-white/90 hover:text-[#ffd043] transition-colors tracking-wide" href="#contact"
           data-i18n="nav_consultation">Consultation</a>
       </nav>
 
@@ -807,7 +807,7 @@
       <div class="flex items-center gap-3 shrink-0">
         <!-- Interactive Language Toggle -->
         <button id="langToggleBtn" type="button"
-          class="inline-flex items-center gap-2 rounded-full px-5 py-2.5 bg-[#2b4131]/80 hover:bg-[#223527] text-white font-sans text-xs uppercase tracking-wider font-bold border border-white/20 shadow-sm transition-all duration-300 hover:scale-[1.02]"
+          class="inline-flex items-center gap-2 rounded-full px-4.5 py-2 bg-black/40 hover:bg-black/60 backdrop-blur-md text-white font-sans text-xs uppercase tracking-wider font-bold border border-white/20 shadow-sm transition-all duration-300 hover:scale-[1.02]"
           title="Switch English / தமிழ்">
           <!-- Translate Icon (文A) -->
           <svg class="w-4 h-4 text-white/90 fill-current" viewBox="0 0 24 24">
@@ -845,27 +845,45 @@
   </header>
 
   <main class="w-full relative z-10">
-    <!-- ==================== 1. HERO SECTION (2-COLUMN EXACT REFERENCE LAYOUT) ==================== -->
-    <section class="relative w-full min-h-[90vh] lg:min-h-screen flex items-center overflow-hidden pt-24 pb-12 lg:py-16"
-      id="hero" style="background-color: #8ca38f;">
+    <!-- ==================== 1. HERO SECTION (SCENIC HERITAGE ESTATE HERO) ==================== -->
+    <section class="relative w-full min-h-[92vh] lg:min-h-screen flex items-center overflow-hidden pt-24 pb-16 lg:py-24"
+      id="hero">
 
-      <!-- Hero Content Container (2-Column Grid: Text on Left, Clean House Cutout on Right) -->
+      <!-- High-Resolution Scenic Heritage Estate Background -->
+      <div class="absolute inset-0 z-0">
+        <picture>
+          <source srcset="assets/hero_scenic_bg_2x.jpg" media="(min-width: 1024px)">
+          <img src="assets/hero_scenic_bg.jpg" alt="Kanavu Illam Heritage Architecture"
+            class="w-full h-full object-cover object-[70%_center] sm:object-[60%_center] lg:object-center select-none pointer-events-none">
+        </picture>
+
+        <!-- Subtle Left-Side Vignette & Contrast Scrim for Pristine Text Readability -->
+        <div class="absolute inset-0 bg-gradient-to-r from-black/65 via-black/35 to-black/10 sm:from-black/55 sm:via-black/25 sm:to-transparent pointer-events-none"></div>
+
+        <!-- Subtle Top Vignette for Navbar Readability -->
+        <div class="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-black/45 via-black/15 to-transparent pointer-events-none"></div>
+
+        <!-- Seamless Bottom Gradient Blend into Sage Green Canvas (#8ca38f) -->
+        <div class="absolute bottom-0 inset-x-0 h-28 bg-gradient-to-t from-[#8ca38f] via-[#8ca38f]/50 to-transparent pointer-events-none"></div>
+      </div>
+
+      <!-- Hero Content Container (Text positioned over left side, allowing traditional house on the right to shine) -->
       <div
-        class="relative z-10 max-w-[1440px] w-full mx-auto px-6 sm:px-10 lg:px-14 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center">
+        class="relative z-10 max-w-[1440px] w-full mx-auto px-6 sm:px-10 lg:px-14 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
 
         <!-- Left Column: Typography & Download Button (5 Columns) -->
-        <div class="lg:col-span-5 text-left py-4 sm:py-8 z-10">
+        <div class="lg:col-span-6 xl:col-span-5 text-left py-4 sm:py-8 z-10">
 
           <!-- Main Headline: "Plan Your Home The Smarter Way" with "Your" in italic gold serif -->
           <h1
-            class="font-serif text-4xl sm:text-5xl lg:text-[50px] xl:text-[58px] text-white font-normal leading-[1.12] tracking-tight mb-5"
+            class="font-serif text-4xl sm:text-5xl lg:text-[54px] xl:text-[62px] text-white font-normal leading-[1.12] tracking-tight mb-5 drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)]"
             data-i18n="hero_title">
-            Plan <span class="italic font-serif text-[#ffb703] font-normal">Your</span> Home<br>
+            Plan <span class="italic font-serif text-[#ffd043] font-normal">Your</span> Home<br>
             The Smarter Way
           </h1>
 
           <!-- Subheading -->
-          <p class="font-sans text-xs sm:text-sm lg:text-[14.5px] text-[#e6ede8]/90 max-w-[430px] leading-relaxed font-normal mb-8"
+          <p class="font-sans text-xs sm:text-sm lg:text-[14.5px] text-white/95 max-w-[460px] leading-relaxed font-normal mb-8 drop-shadow-[0_1px_5px_rgba(0,0,0,0.45)]"
             data-i18n="hero_desc">
             Transform 2D floor plans into Interactive 3D spaces, Vastu audit, Cost estimation, and code-verified
             Structural schedules for discerning homeowners.
@@ -874,7 +892,7 @@
           <!-- Download Android APK CTA Button (App Logo Vibrant Golden Yellow Pill) -->
           <div class="flex items-center">
             <a href="assets/KanavuIllam.apk" download="KanavuIllam.apk"
-              class="inline-flex items-center justify-between gap-5 px-7 py-3.5 rounded-full bg-gradient-to-r from-[#ffd043] via-[#ffaa00] to-[#e68200] hover:from-[#ffe066] hover:to-[#ffaa00] text-[#1a1f26] font-bold text-sm sm:text-[15px] shadow-xl shadow-black/20 hover:shadow-[#ffaa00]/45 hover:scale-[1.02] active:scale-95 transition-all duration-300 border border-white/60 cursor-pointer group">
+              class="inline-flex items-center justify-between gap-5 px-7 py-3.5 rounded-full bg-gradient-to-r from-[#ffd043] via-[#ffaa00] to-[#e68200] hover:from-[#ffe066] hover:to-[#ffaa00] text-[#1a1f26] font-bold text-sm sm:text-[15px] shadow-2xl shadow-black/35 hover:shadow-[#ffaa00]/50 hover:scale-[1.02] active:scale-95 transition-all duration-300 border border-white/60 cursor-pointer group">
               <div class="flex items-center gap-3">
                 <!-- Official Android Bugdroid Icon in Deep Gunmetal -->
                 <svg class="w-5 h-5 text-[#1a1f26] fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -895,13 +913,8 @@
 
         </div>
 
-        <!-- Right Column: Clean Isolated Traditional House Cutout (7 Columns) -->
-        <div class="lg:col-span-7 flex items-center justify-center lg:justify-end relative">
-          <div class="relative w-full max-w-[800px] group">
-            <img src="assets/Traditional South Indian House Cutout.png" alt="Kanavu Illam Heritage Architecture"
-              class="w-full h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.22)] transition-transform duration-700 group-hover:scale-[1.01]">
-          </div>
-        </div>
+        <!-- Right Column: Clean spacious area showcasing the traditional house in the background image -->
+        <div class="hidden lg:block lg:col-span-6 xl:col-span-7 h-[360px] lg:h-[460px] pointer-events-none"></div>
 
       </div>
     </section>
@@ -1213,7 +1226,8 @@
                 </h3>
 
                 <!-- Subtitle / Description -->
-                <p class="font-sans text-xs sm:text-sm text-[#2d3748] font-medium leading-relaxed mb-8" data-i18n="dropzone_desc">
+                <p class="font-sans text-xs sm:text-sm text-[#2d3748] font-medium leading-relaxed mb-8"
+                  data-i18n="dropzone_desc">
                   Transform residential sketches and architectural blueprints into millimeter-accurate 3D cutaways,
                   structural takeoff, and V&#257;stu audit.
                 </p>
@@ -1347,11 +1361,13 @@
         <!-- Section Header -->
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 reveal-on-scroll">
           <div class="max-w-xl">
-            <span class="font-sans text-xs uppercase tracking-widest text-[#1a1f26] font-extrabold flex items-center gap-1.5 mb-2"
+            <span
+              class="font-sans text-xs uppercase tracking-widest text-[#1a1f26] font-extrabold flex items-center gap-1.5 mb-2"
               data-i18n="reports_kicker"><span class="text-[#ffb703]">✦</span> DETAILED DELIVERABLES</span>
             <h2 class="font-display font-bold text-3xl sm:text-4xl text-[#1a1f26] tracking-tight"
               data-i18n="reports_title">Certified Reports</h2>
-            <p class="font-body text-sm text-[#2d3748] font-medium mt-2 leading-relaxed" data-i18n="reports_desc">Comprehensive
+            <p class="font-body text-sm text-[#2d3748] font-medium mt-2 leading-relaxed" data-i18n="reports_desc">
+              Comprehensive
               architectural and engineering documentation generated directly from your 2D plan.</p>
           </div>
           <div class="flex items-center gap-3">
@@ -1462,7 +1478,8 @@
                       class="px-4 py-1.5 rounded-full bg-gradient-to-r from-[#ffd043] via-[#ffaa00] to-[#e68200] hover:from-[#ffe066] hover:to-[#ffaa00] text-[#1a1f26] text-xs font-bold shadow-md hover:scale-[1.03] active:scale-95 transition-all">
                       Review Budget
                     </span>
-                    <span class="px-3 py-1 rounded-full bg-[#1a1f26] text-[#4ade80] text-xs font-bold border border-emerald-500/30 flex items-center gap-1.5 shadow-sm">
+                    <span
+                      class="px-3 py-1 rounded-full bg-[#1a1f26] text-[#4ade80] text-xs font-bold border border-emerald-500/30 flex items-center gap-1.5 shadow-sm">
                       <i class="fa-solid fa-check-circle text-emerald-400"></i> 96% Progress
                     </span>
                   </div>
@@ -1495,7 +1512,8 @@
                   </h3>
                   <div class="flex items-center gap-2">
                     <span class="text-xs text-[#4a5568] font-medium">Orientation Score:</span>
-                    <span class="px-3 py-1 rounded-full bg-[#1a1f26] text-[#4ade80] text-xs font-bold border border-emerald-500/30 flex items-center gap-1.5 shadow-sm">
+                    <span
+                      class="px-3 py-1 rounded-full bg-[#1a1f26] text-[#4ade80] text-xs font-bold border border-emerald-500/30 flex items-center gap-1.5 shadow-sm">
                       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                       92% Compliant
                     </span>
@@ -1549,11 +1567,13 @@
                   <h3 class="font-serif text-2xl font-bold text-[#1a1f26] leading-tight" data-i18n="card4_title">
                     Structural Report
                   </h3>
-                  <p class="font-sans text-xs text-[#2d3748] font-medium line-clamp-1 leading-relaxed">Beam Load Analysis &amp; Civil
+                  <p class="font-sans text-xs text-[#2d3748] font-medium line-clamp-1 leading-relaxed">Beam Load
+                    Analysis &amp; Civil
                     Safety</p>
                   <div class="flex items-center gap-2">
                     <span class="text-xs text-[#4a5568] font-medium">Integrity Score:</span>
-                    <span class="px-3 py-1 rounded-full bg-[#1a1f26] text-[#38bdf8] text-xs font-bold border border-sky-400/30 flex items-center gap-1.5 shadow-sm">
+                    <span
+                      class="px-3 py-1 rounded-full bg-[#1a1f26] text-[#38bdf8] text-xs font-bold border border-sky-400/30 flex items-center gap-1.5 shadow-sm">
                       94% Safe
                     </span>
                   </div>
@@ -1595,7 +1615,8 @@
         class="p-7 sm:p-9 lg:p-11 rounded-[32px] sm:rounded-[36px] bg-white/[0.12] backdrop-blur-2xl border border-white/30 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8 reveal-on-scroll relative overflow-hidden"
         style="box-shadow: 0 30px 60px -15px rgba(0,0,0,0.3), inset 0 1.5px 2px rgba(255,255,255,0.45);">
         <!-- Soft ambient warm illumination -->
-        <div class="absolute -right-12 -bottom-12 w-64 h-64 rounded-full bg-[#ffb703]/15 blur-3xl pointer-events-none"></div>
+        <div class="absolute -right-12 -bottom-12 w-64 h-64 rounded-full bg-[#ffb703]/15 blur-3xl pointer-events-none">
+        </div>
 
         <div class="flex items-center gap-5 sm:gap-6 relative z-10">
           <div
@@ -1603,10 +1624,12 @@
             <span class="material-symbols-outlined text-3xl sm:text-4xl text-[#ffb703]">picture_as_pdf</span>
           </div>
           <div>
-            <h3 class="font-serif text-2xl sm:text-3xl text-[#1a1f26] font-bold tracking-tight" data-i18n="dossier_title">
+            <h3 class="font-serif text-2xl sm:text-3xl text-[#1a1f26] font-bold tracking-tight"
+              data-i18n="dossier_title">
               Download Certified Engineering Dossier PDF
             </h3>
-            <p class="font-sans text-xs sm:text-sm text-[#2d3748] font-medium mt-1.5 max-w-xl leading-relaxed" data-i18n="dossier_desc">
+            <p class="font-sans text-xs sm:text-sm text-[#2d3748] font-medium mt-1.5 max-w-xl leading-relaxed"
+              data-i18n="dossier_desc">
               Includes 2D/3D Floor Plan, Vāstu Audit, Itemized BOQ, and Structural Reinforcement Schedule.
             </p>
             <div class="mt-3.5 flex flex-wrap items-center gap-2">
@@ -1665,7 +1688,8 @@
                     data-i18n="side_kicker">
                     Architectural Platform
                   </span>
-                  <h3 class="font-serif font-bold text-lg text-[#1a1f26] tracking-tight" data-i18n="side_title">Kanavuillam
+                  <h3 class="font-serif font-bold text-lg text-[#1a1f26] tracking-tight" data-i18n="side_title">
+                    Kanavuillam
                   </h3>
                 </div>
               </div>
@@ -1690,7 +1714,8 @@
                     <span class="material-symbols-outlined text-base text-[#ffb703]">mail</span>
                   </div>
                   <div>
-                    <span class="block text-[9px] font-mono uppercase tracking-wider text-[#4a5568] font-bold">Primary Consultation
+                    <span class="block text-[9px] font-mono uppercase tracking-wider text-[#4a5568] font-bold">Primary
+                      Consultation
                       Desk</span>
                     <span
                       class="font-mono text-xs sm:text-[13px] font-bold text-[#1a1f26] group-hover:text-[#ffb703] transition-colors">support@kanavuillam.in</span>
@@ -1746,14 +1771,16 @@
             <form id="inquiryForm" class="space-y-3.5 relative z-10" onsubmit="handleInquirySubmit(event)">
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <div>
-                  <label class="block font-mono text-[10.5px] uppercase tracking-wider text-[#1a1f26] mb-1 font-extrabold"
+                  <label
+                    class="block font-mono text-[10.5px] uppercase tracking-wider text-[#1a1f26] mb-1 font-extrabold"
                     data-i18n="form_name">Name*</label>
                   <input id="formName"
                     class="w-full bg-[#1a1f26]/10 hover:bg-[#1a1f26]/15 focus:bg-white/90 border border-[#1a1f26]/25 focus:border-[#1a1f26] rounded-2xl px-3.5 py-2.5 sm:py-3 text-[13px] text-[#1a1f26] placeholder:text-[#4a5568]/70 focus:outline-none focus:ring-1.5 focus:ring-[#1a1f26]/30 backdrop-blur-md transition-all shadow-[inset_0_1px_3px_rgba(0,0,0,0.08)]"
                     placeholder="Name" required="" type="text">
                 </div>
                 <div>
-                  <label class="block font-mono text-[10.5px] uppercase tracking-wider text-[#1a1f26] mb-1 font-extrabold"
+                  <label
+                    class="block font-mono text-[10.5px] uppercase tracking-wider text-[#1a1f26] mb-1 font-extrabold"
                     data-i18n="form_email">Email*</label>
                   <input id="formEmail"
                     class="w-full bg-[#1a1f26]/10 hover:bg-[#1a1f26]/15 focus:bg-white/90 border border-[#1a1f26]/25 focus:border-[#1a1f26] rounded-2xl px-3.5 py-2.5 sm:py-3 text-[13px] text-[#1a1f26] placeholder:text-[#4a5568]/70 focus:outline-none focus:ring-1.5 focus:ring-[#1a1f26]/30 backdrop-blur-md transition-all shadow-[inset_0_1px_3px_rgba(0,0,0,0.08)]"
@@ -1812,7 +1839,8 @@
           class="w-8 h-8 rounded-lg bg-white/95 border border-[#ffb703]/60 flex items-center justify-center p-1 shadow-sm">
           <img src="assets/app_logo.png" alt="Kanavu Illam Logo" class="w-full h-full object-contain">
         </div>
-        <span class="font-serif text-base text-white font-medium">Kanavu <span class="text-[#ffb703]">illam</span></span>
+        <span class="font-serif text-base text-white font-medium">Kanavu <span
+            class="text-[#ffb703]">illam</span></span>
         <span class="text-[#ffb703] text-xs">•</span>
       </div>
       <div class="flex items-center gap-4 sm:gap-6 text-xs text-white/80 font-body flex-wrap justify-center">
@@ -2264,14 +2292,14 @@
     let currentLang = 'en';
     const translations = {
       en: {
-        brand_name: '<span class="text-white">Kanavu</span><span class="text-[#ffb703] ml-1.5">illam</span>',
+        brand_name: '<span class="text-white">Kanavu</span><span class="text-[#ffd043] ml-1.5 font-bold">illam</span>',
         brand_subtitle: "Heritage Vāstu Architecture",
         nav_home: "Home",
         nav_how_it_works: "How It Works",
         nav_reports: "Reports",
         nav_consultation: "Consultation",
         hero_badge: "Vāstu Shastra • IS 456 Structural Dossier",
-        hero_title: 'Plan <span class="italic font-serif text-[#ffb703] font-normal">Your</span> Home<br>The Smarter Way',
+        hero_title: 'Plan <span class="italic font-serif text-[#ffd043] font-normal">Your</span> Home<br>The Smarter Way',
         hero_desc: "Transform 2D floor plans into Interactive 3D spaces, Vastu audit, Cost estimation, and code-verified Structural schedules for discerning homeowners.",
         hero_cta_upload: "Upload 2D Plan",
         hero_cta_explore: "Explore Reports",
@@ -2336,14 +2364,14 @@
         side_desc: "Kanavuillam delivers deterministic architectural planning for Indian residential construction. We transform 2D blueprints into precision 3D models, Vāstu Shastra, Cost estimation, and structural schedules."
       },
       ta: {
-        brand_name: '<span class="text-white">கனவு</span><span class="text-[#ffb703] ml-1.5">இல்லம்</span>',
+        brand_name: '<span class="text-white">கனவு</span><span class="text-[#ffd043] ml-1.5 font-bold">இல்லம்</span>',
         brand_subtitle: "பாரம்பரிய வாஸ்து கட்டடக்கலை",
         nav_home: "முகப்பு",
         nav_how_it_works: "செயல்முறை",
         nav_reports: "அறிக்கைகள்",
         nav_consultation: "ஆலோசனை",
         hero_badge: "வாஸ்து சாஸ்திரம் • IS 456 கட்டமைப்பு கோப்பு",
-        hero_title: 'உங்கள் வீட்டை<br><span class="italic font-serif text-[#ffb703] font-normal">புத்திசாலித்தனமாக</span> திட்டமிடுங்கள்',
+        hero_title: 'உங்கள் வீட்டை<br><span class="italic font-serif text-[#ffd043] font-normal">புத்திசாலித்தனமாக</span> திட்டமிடுங்கள்',
         hero_desc: "உங்கள் 2D வரைபடங்களை உடனடி 3D மாதிரி, வாஸ்து தணிக்கை, கட்டுமான செலவு மதிப்பீடு மற்றும் IS 456 தரநிலை கட்டமைப்பு அறிக்கைகளாக மாற்றுங்கள்.",
         hero_cta_upload: "Upload 2D Plan",
         hero_cta_explore: "அறிக்கைகளை காண்க",
