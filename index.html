@@ -784,12 +784,26 @@
 
     @media (max-width: 1023px) {
       .cards-hanging-deck {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 3.5rem 1.5rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
       }
       .overhead-cable-svg {
-        display: none;
+        display: none !important;
+      }
+      /* On mobile, remove the disconnected hanging runner ball and upper wire loop */
+      .hanging-assembly-unit .cable-runner-ball,
+      .hanging-assembly-unit .card-sway-rig > svg:first-child {
+        display: none !important;
+      }
+      .hanging-assembly-unit {
+        margin-top: 0 !important;
+        max-width: 260px;
+        width: 100%;
+      }
+      .tag-badge-card {
+        width: 250px;
+        height: 395px;
       }
     }
 
@@ -1769,6 +1783,65 @@
           </div>
         </div>
 
+        <!-- PERMANENT PERSISTENT SVG DEFS (NEVER DISPLAY: NONE - ACCESSIBLE TO ALL DEVICES & VIEWPORTS) -->
+        <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none;" id="persistentGlassCardDefs">
+          <defs>
+            <!-- Realistic Burnished Bronze Eyelet / Grommet Gradient -->
+            <linearGradient id="grommetGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f59e0b" />
+              <stop offset="30%" stop-color="#d97706" />
+              <stop offset="70%" stop-color="#92400e" />
+              <stop offset="100%" stop-color="#78350f" />
+            </linearGradient>
+
+            <!-- Clean Architectural Dossier Foil for Back Face -->
+            <linearGradient id="holoFoil1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ffffff" />
+              <stop offset="40%" stop-color="#fefdfa" />
+              <stop offset="75%" stop-color="#f8fafc" />
+              <stop offset="100%" stop-color="#f1f5f9" />
+            </linearGradient>
+
+            <!-- Ultra-Luxury Translucent Frosted Glass Silhouette Gradients -->
+            <linearGradient id="glassTagFrontGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+              <stop offset="25%" stop-color="#f8fafc" stop-opacity="0.88" />
+              <stop offset="70%" stop-color="#edf2f7" stop-opacity="0.82" />
+              <stop offset="100%" stop-color="#ffffff" stop-opacity="0.92" />
+            </linearGradient>
+
+            <linearGradient id="glassTagBackGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.96" />
+              <stop offset="30%" stop-color="#f8fafc" stop-opacity="0.90" />
+              <stop offset="70%" stop-color="#edf2f7" stop-opacity="0.86" />
+              <stop offset="100%" stop-color="#ffffff" stop-opacity="0.94" />
+            </linearGradient>
+
+            <!-- Crystal Glass Rim Highlight Border Gradient -->
+            <linearGradient id="glassRimGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.98" />
+              <stop offset="25%" stop-color="#ffd043" stop-opacity="0.80" />
+              <stop offset="60%" stop-color="#ffffff" stop-opacity="0.55" />
+              <stop offset="85%" stop-color="#cbd5e1" stop-opacity="0.80" />
+              <stop offset="100%" stop-color="#ffffff" stop-opacity="0.98" />
+            </linearGradient>
+
+            <!-- Specular Glass Light Sheen Diagonal Gradient -->
+            <linearGradient id="glassSheenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55" />
+              <stop offset="30%" stop-color="#ffffff" stop-opacity="0.22" />
+              <stop offset="70%" stop-color="#ffffff" stop-opacity="0.05" />
+              <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+            </linearGradient>
+
+            <!-- Photorealistic Luggage Tag Silhouette Drop Shadow -->
+            <filter id="tagBadgeShadow" x="-20%" y="-15%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="16" stdDeviation="14" flood-color="#0e1711" flood-opacity="0.25" />
+              <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#0e1711" flood-opacity="0.10" />
+            </filter>
+          </defs>
+        </svg>
+
         <!-- HANGING RIG CONTAINER: UNIFIED SVG CABLE & SUSPENDED CARDS -->
         <div class="hanging-rig-container" id="hangingRigContainer">
 
@@ -1806,60 +1879,6 @@
                 <stop offset="80%" stop-color="#64748b" />
                 <stop offset="100%" stop-color="#334155" />
               </linearGradient>
-
-              <!-- Realistic Burnished Bronze Eyelet / Grommet Gradient -->
-              <linearGradient id="grommetGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#f59e0b" />
-                <stop offset="30%" stop-color="#d97706" />
-                <stop offset="70%" stop-color="#92400e" />
-                <stop offset="100%" stop-color="#78350f" />
-              </linearGradient>
-
-              <!-- Clean Architectural Dossier Foil for Back Face -->
-              <linearGradient id="holoFoil1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#ffffff" />
-                <stop offset="40%" stop-color="#fefdfa" />
-                <stop offset="75%" stop-color="#f8fafc" />
-                <stop offset="100%" stop-color="#f1f5f9" />
-              </linearGradient>
-
-              <!-- Ultra-Luxury Translucent Frosted Glass Silhouette Gradients -->
-              <linearGradient id="glassTagFrontGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.75" />
-                <stop offset="25%" stop-color="#f8fafc" stop-opacity="0.48" />
-                <stop offset="70%" stop-color="#e2e8f0" stop-opacity="0.42" />
-                <stop offset="100%" stop-color="#ffffff" stop-opacity="0.68" />
-              </linearGradient>
-
-              <linearGradient id="glassTagBackGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.78" />
-                <stop offset="30%" stop-color="#f8fafc" stop-opacity="0.52" />
-                <stop offset="70%" stop-color="#edf2f7" stop-opacity="0.48" />
-                <stop offset="100%" stop-color="#ffffff" stop-opacity="0.72" />
-              </linearGradient>
-
-              <!-- Crystal Glass Rim Highlight Border Gradient -->
-              <linearGradient id="glassRimGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
-                <stop offset="25%" stop-color="#ffd043" stop-opacity="0.65" />
-                <stop offset="60%" stop-color="#ffffff" stop-opacity="0.40" />
-                <stop offset="85%" stop-color="#cbd5e1" stop-opacity="0.65" />
-                <stop offset="100%" stop-color="#ffffff" stop-opacity="0.90" />
-              </linearGradient>
-
-              <!-- Specular Glass Light Sheen Diagonal Gradient -->
-              <linearGradient id="glassSheenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.52" />
-                <stop offset="30%" stop-color="#ffffff" stop-opacity="0.18" />
-                <stop offset="70%" stop-color="#ffffff" stop-opacity="0.04" />
-                <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
-              </linearGradient>
-
-              <!-- Photorealistic Luggage Tag Silhouette Drop Shadow -->
-              <filter id="tagBadgeShadow" x="-20%" y="-15%" width="140%" height="140%">
-                <feDropShadow dx="0" dy="14" stdDeviation="12" flood-color="#142117" flood-opacity="0.22" />
-                <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#142117" flood-opacity="0.10" />
-              </filter>
             </defs>
 
             <!-- Overhead Cable Path (Dynamically passes THROUGH every ball center) -->
@@ -1896,7 +1915,7 @@
                 </svg>
 
                 <!-- 3D Flip Luggage Tag Card -->
-                <div class="tag-badge-card" onclick="openReportModal('3d')">
+                <div class="tag-badge-card">
 
                   <!-- FRONT FACE: Pristine Image Showcase -->
                   <div class="tag-face tag-front">
@@ -1949,7 +1968,7 @@
 
                       <div class="pt-2 flex items-center justify-between border-t border-slate-100">
                         <span class="text-[9px] font-mono font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
-                          <span>HOVER TO INSPECT</span>
+                          <span><span class="hidden md:inline">HOVER TO INSPECT</span><span class="md:hidden">TAP TO FLIP</span></span>
                           <i class="fa-solid fa-rotate text-[8px] animate-spin" style="animation-duration: 8s;"></i>
                         </span>
                         <div class="tag-arrow-pill">
@@ -2079,7 +2098,7 @@
                   <rect x="10" y="24" width="4" height="18" rx="2" fill="none" stroke="url(#linkGrad1)" stroke-width="1.8" />
                 </svg>
 
-                <div class="tag-badge-card" onclick="openReportModal('cost')">
+                <div class="tag-badge-card">
                   <!-- FRONT FACE -->
                   <div class="tag-face tag-front">
                     <svg class="tag-silhouette-svg" viewBox="0 0 240 380" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2131,7 +2150,7 @@
 
                       <div class="pt-2 flex items-center justify-between border-t border-slate-100">
                         <span class="text-[9px] font-mono font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
-                          <span>HOVER TO INSPECT</span>
+                          <span><span class="hidden md:inline">HOVER TO INSPECT</span><span class="md:hidden">TAP TO FLIP</span></span>
                           <i class="fa-solid fa-rotate text-[8px] animate-spin" style="animation-duration: 8s;"></i>
                         </span>
                         <div class="tag-arrow-pill">
@@ -2262,7 +2281,7 @@
                   <rect x="10" y="24" width="4" height="18" rx="2" fill="none" stroke="url(#linkGrad1)" stroke-width="1.8" />
                 </svg>
 
-                <div class="tag-badge-card" onclick="openReportModal('vastu')">
+                <div class="tag-badge-card">
                   <!-- FRONT FACE -->
                   <div class="tag-face tag-front">
                     <svg class="tag-silhouette-svg" viewBox="0 0 240 380" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2314,7 +2333,7 @@
 
                       <div class="pt-2 flex items-center justify-between border-t border-slate-100">
                         <span class="text-[9px] font-mono font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
-                          <span>HOVER TO INSPECT</span>
+                          <span><span class="hidden md:inline">HOVER TO INSPECT</span><span class="md:hidden">TAP TO FLIP</span></span>
                           <i class="fa-solid fa-rotate text-[8px] animate-spin" style="animation-duration: 8s;"></i>
                         </span>
                         <div class="tag-arrow-pill">
@@ -2445,7 +2464,7 @@
                   <rect x="10" y="24" width="4" height="18" rx="2" fill="none" stroke="url(#linkGrad1)" stroke-width="1.8" />
                 </svg>
 
-                <div class="tag-badge-card" onclick="openReportModal('structural')">
+                <div class="tag-badge-card">
                   <!-- FRONT FACE -->
                   <div class="tag-face tag-front">
                     <svg class="tag-silhouette-svg" viewBox="0 0 240 380" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2497,7 +2516,7 @@
 
                       <div class="pt-2 flex items-center justify-between border-t border-slate-100">
                         <span class="text-[9px] font-mono font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
-                          <span>HOVER TO INSPECT</span>
+                          <span><span class="hidden md:inline">HOVER TO INSPECT</span><span class="md:hidden">TAP TO FLIP</span></span>
                           <i class="fa-solid fa-rotate text-[8px] animate-spin" style="animation-duration: 8s;"></i>
                         </span>
                         <div class="tag-arrow-pill">
@@ -4124,6 +4143,7 @@
   <script>
     // 1. UPDATE OVERHEAD CABLE GEOMETRY: PASSES DIRECTLY THROUGH EVERY BALL
     function updateOverheadCableGeometry() {
+      if (window.innerWidth < 1024) return;
       const container = document.getElementById('hangingRigContainer');
       const cablePath = document.getElementById('overheadCablePath');
       const pinL = document.getElementById('anchorPinLeft');
