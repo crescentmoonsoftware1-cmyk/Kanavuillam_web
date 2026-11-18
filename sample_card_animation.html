@@ -6,567 +6,1005 @@
   <link rel="canonical" href="https://kanavuillam.in/">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kanavu Illam - 3D Cover Flow Card Animation Demo</title>
+  <title>Kanavu Illam - Workflow Architecture (Globe Express Luxury Slider)</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&display=swap"
+    rel="stylesheet">
   <style>
-    body {
+    :root {
+      --primary-gold: #ffd043;
+      --accent-gold: #ffb703;
+      --deep-forest: #0d1a12;
+      --sage-glow: rgba(140, 163, 143, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
       margin: 0;
       padding: 0;
-      background-color: #8ca38f;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      overflow-x: hidden;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #060c08;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       color: white;
     }
 
-    .coverflow-stage {
-      perspective: 1200px;
-      perspective-origin: 50% 50%;
+    .font-serif-luxury {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    .font-cinzel {
+      font-family: 'Cinzel', serif;
+    }
+
+    /* ========================================================================= */
+    /* GLOBE EXPRESS LUXURY SPLIT SLIDER                                         */
+    /* ========================================================================= */
+    .globe-slider-wrapper {
       position: relative;
       width: 100%;
-      height: 440px;
+      height: 100vh;
+      max-height: 100vh;
       overflow: hidden;
-      touch-action: pan-y;
-      user-select: none;
-      -webkit-user-select: none;
-    }
-
-    @media (min-width: 640px) {
-      .coverflow-stage {
-        height: 480px;
-      }
-    }
-
-    .coverflow-card {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 260px;
-      max-width: 85vw;
-      height: 380px;
-      transform-origin: center center;
-      transform-style: preserve-3d;
-      will-change: transform, opacity, filter, box-shadow;
-      transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-        opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-        filter 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: pointer;
-    }
-
-    @media (min-width: 640px) {
-      .coverflow-card {
-        width: 290px;
-        height: 420px;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .coverflow-card {
-        width: 315px;
-        height: 445px;
-      }
-    }
-
-    /* Video-matched Squircle Poster Card (Slightly Reduced Size) */
-    .coverflow-poster-card {
-      width: 100%;
-      height: 100%;
-      border-radius: 36px;
-      border: 1.5px solid rgba(255, 255, 255, 0.35);
-      backdrop-filter: blur(28px);
-      -webkit-backdrop-filter: blur(28px);
-      box-shadow: 0 16px 38px -8px rgba(0, 0, 0, 0.3), inset 0 1.5px 2px rgba(255, 255, 255, 0.45);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 1.35rem 1.25rem;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+      background: #060c08;
     }
 
-    .coverflow-card.active .coverflow-poster-card {
-      border-color: rgba(255, 255, 255, 0.85);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 183, 3, 0.5), inset 0 1.5px 2px rgba(255, 255, 255, 0.8);
+    /* 1. Full-Bleed Active Hero Background Stage */
+    .bg-stage-container {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .bg-slide-item {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transform: scale(1.08);
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 2.8s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+      will-change: opacity, transform;
+      z-index: 1;
+    }
+
+    .bg-slide-item.active {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+      z-index: 3;
+    }
+
+    .bg-slide-item.prev-active {
+      opacity: 0;
+      transform: scale(1.02);
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .bg-slide-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      filter: contrast(1.04) saturate(1.08);
+      image-rendering: high-quality;
+    }
+
+    /* Studio Vignette: Darkens behind text and cards to isolate floating cards */
+    .bg-slide-overlay {
+      position: absolute;
+      inset: 0;
+      background: 
+        linear-gradient(90deg, 
+          rgba(6, 12, 8, 0.94) 0%, 
+          rgba(6, 12, 8, 0.74) 34%, 
+          rgba(6, 12, 8, 0.3) 55%, 
+          rgba(6, 12, 8, 0.75) 78%, 
+          rgba(6, 12, 8, 0.96) 100%),
+        linear-gradient(180deg, 
+          rgba(5, 10, 7, 0.65) 0%, 
+          transparent 20%, 
+          transparent 65%, 
+          rgba(5, 10, 7, 0.95) 100%);
+      pointer-events: none;
+    }
+
+    /* ========================================================================= */
+    /* 2. CARD-TO-BACKGROUND EXPANSION MORPH PORTAL (THE VIDEO SIGNATURE EFFECT) */
+    /* ========================================================================= */
+    .card-morph-portal {
+      position: fixed;
+      z-index: 15; /* Above background, behind main stage content */
+      overflow: hidden;
+      will-change: top, left, width, height, border-radius, box-shadow;
+      pointer-events: none;
+      box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.85);
+    }
+
+    .card-morph-portal img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      filter: contrast(1.04) saturate(1.08);
+    }
+
+    .card-morph-overlay {
+      position: absolute;
+      inset: 0;
+      background: 
+        linear-gradient(90deg, 
+          rgba(6, 12, 8, 0.94) 0%, 
+          rgba(6, 12, 8, 0.74) 34%, 
+          rgba(6, 12, 8, 0.3) 55%, 
+          rgba(6, 12, 8, 0.75) 78%, 
+          rgba(6, 12, 8, 0.96) 100%),
+        linear-gradient(180deg, 
+          rgba(5, 10, 7, 0.65) 0%, 
+          transparent 20%, 
+          transparent 65%, 
+          rgba(5, 10, 7, 0.95) 100%);
+      opacity: 0;
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    .card-morph-portal.expanded .card-morph-overlay {
+      opacity: 1;
+    }
+
+    /* 3. Top Universal Brand Bar */
+    .globe-top-bar {
+      position: relative;
+      z-index: 40;
+      width: 100%;
+      height: 60px;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      background: linear-gradient(180deg, rgba(6, 12, 8, 0.8) 0%, transparent 100%);
+    }
+
+    @media (min-width: 1024px) {
+      .globe-top-bar {
+        padding: 0 4.5rem;
+        height: 68px;
+      }
+    }
+
+    /* 4. Main Split Stage: Left Editorial + Right Edge-Bleeding Deck */
+    .globe-main-stage {
+      position: relative;
+      z-index: 30;
+      width: 100%;
+      margin: 0;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: center;
+      flex: 1 1 auto;
+      overflow: visible;
+    }
+
+    @media (min-width: 1024px) {
+      .globe-main-stage {
+        grid-template-columns: minmax(380px, 480px) 1fr;
+        padding-left: 4.5rem;
+        padding-right: 0; /* Bleed cards directly to the right viewport edge */
+        gap: 3.5rem;
+        align-items: center;
+      }
+
+      /* Card deck aligned towards bottom right (Exact Video Layout) */
+      .card-deck-viewport {
+        align-self: flex-end;
+        padding-bottom: 2rem;
+        transform: translateY(24px);
+      }
+    }
+
+    /* Left Editorial Typography Mask Animation */
+    .text-mask-wrapper {
+      overflow: hidden;
+      display: block;
+    }
+
+    .masked-line {
+      display: block;
+      will-change: transform, opacity;
+      transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* 5. Right Floating Card Deck: Tall, Elegant Squircle Posters (Video Style) */
+    .card-deck-viewport {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      touch-action: pan-y;
+      user-select: none;
+      padding-right: 2rem;
+      z-index: 20;
+    }
+
+    .card-deck-track {
+      display: flex;
+      gap: 1.5rem;
+      transition: transform 1.05s cubic-bezier(0.2, 1, 0.28, 1);
+      will-change: transform;
+      padding: 1rem 0.5rem 1.5rem 0;
+    }
+
+    /* Squircle Poster Card (Exact Video Proportions) */
+    .deck-poster-card {
+      flex: 0 0 200px;
+      height: 310px;
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      border: 1.5px solid rgba(255, 255, 255, 0.28);
+      background: #0d1710;
+      box-shadow: 
+        0 18px 40px -10px rgba(0, 0, 0, 0.75),
+        0 4px 12px rgba(0, 0, 0, 0.5),
+        inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.45);
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.4s ease,
+                  box-shadow 0.45s ease,
+                  opacity 0.35s ease;
+      will-change: transform, box-shadow, opacity;
+    }
+
+    @media (min-width: 640px) {
+      .deck-poster-card {
+        flex: 0 0 220px;
+        height: 340px;
+        border-radius: 24px;
+      }
+    }
+
+    @media (min-width: 1280px) {
+      .deck-poster-card {
+        flex: 0 0 240px;
+        height: 365px;
+        border-radius: 26px;
+      }
+    }
+
+    .deck-poster-card:hover {
+      transform: translateY(-8px) scale(1.025);
+      border-color: rgba(255, 208, 67, 0.95);
+      box-shadow: 
+        0 24px 50px -10px rgba(0, 0, 0, 0.85),
+        0 0 25px rgba(255, 208, 67, 0.35),
+        inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .deck-poster-card.card-active-expanding {
+      transform: translateY(-12px) scale(1.05);
+      border-color: #ffd043;
+      box-shadow: 0 0 35px rgba(255, 208, 67, 0.65), inset 0 2px 3px rgba(255, 255, 255, 0.9);
+    }
+
+    .deck-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .deck-poster-card:hover .deck-card-img {
+      transform: scale(1.05);
+    }
+
+    /* Glass Sheen at top-left */
+    .deck-glass-sheen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 44%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.05) 35%, transparent 65%);
+      pointer-events: none;
+      z-index: 5;
+      border-radius: 24px 24px 60px 0;
+    }
+
+    /* Bottom Dark Gradient for Poster Typography (Video Style) */
+    .deck-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, 
+        transparent 0%, 
+        transparent 45%, 
+        rgba(8, 15, 11, 0.72) 72%, 
+        rgba(5, 10, 7, 0.96) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.35rem 1.15rem;
+      z-index: 6;
+      border-radius: inherit;
+    }
+
+    /* 6. Bottom Controls Bar: Minimal Circular Arrows + Pills + Giant Step Counter */
+    .globe-controls-bar {
+      position: relative;
+      z-index: 35;
+      width: 100%;
+      height: 64px;
+      padding: 0 1.5rem 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    @media (min-width: 1024px) {
+      .globe-controls-bar {
+        padding: 0 4.5rem 0.95rem 4.5rem;
+        height: 70px;
+      }
+    }
+
+    /* Minimal Circular Navigation Arrows (Video Style) */
+    .nav-circle-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nav-circle-btn:hover {
+      background: #ffd043;
+      color: #060c08;
+      border-color: #ffd043;
+      transform: scale(1.08);
+      box-shadow: 0 0 15px rgba(255, 208, 67, 0.5);
+    }
+
+    .progress-pill-dot {
+      height: 5px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.3);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+
+    .progress-pill-dot.active {
+      width: 26px;
+      background: #ffd043;
+      box-shadow: 0 0 10px rgba(255, 208, 67, 0.55);
+    }
+
+    .progress-pill-dot:not(.active) {
+      width: 7px;
+    }
+
+    .progress-pill-dot:hover:not(.active) {
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .counter-display {
+      font-family: 'Cinzel', serif;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      will-change: opacity, transform;
+    }
+
+    .autoplay-timer-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2.5px;
+      background: linear-gradient(90deg, #ffd043, #ffb703);
+      width: 0%;
+      z-index: 50;
+      transition: width 0.05s linear;
     }
   </style>
 </head>
 
-<body class="bg-[#8ca38f] text-white flex flex-col items-center justify-center min-h-screen p-4 antialiased">
+<body>
 
-  <!-- Interactive 3D Cover Flow Viewport -->
-  <div class="w-full max-w-4xl mx-auto flex flex-col items-center my-auto">
+  <!-- ========================================================================= -->
+  <!-- GLOBE EXPRESS LUXURY SPLIT SLIDER                                         -->
+  <!-- ========================================================================= -->
+  <div id="globeSliderSection" class="globe-slider-wrapper">
 
-    <!-- Header / Tip -->
-    <div class="text-center mb-4">
-      <span
-        class="inline-block px-3 py-1 rounded-full bg-black/25 backdrop-blur-md border border-white/20 text-xs font-mono uppercase tracking-wider text-[#ffb703] font-bold mb-1.5">
-        ✦ Kanavu Illam Workflow
-      </span>
-      <h2 class="text-2xl sm:text-3xl font-serif font-bold text-white mb-1">How It Works</h2>
-      <p class="text-xs sm:text-sm text-white/80 font-medium">Click any side card, swipe/drag, or use arrows to slide
-      </p>
+    <!-- Autoplay Timer Bar along bottom edge -->
+    <div id="autoplayProgress" class="autoplay-timer-bar"></div>
+
+    <!-- 1. FULL-BLEED ACTIVE HERO BACKGROUND STAGE -->
+    <div class="bg-stage-container" id="bgStageContainer">
+      <div class="bg-slide-item active" data-index="0">
+        <img src="assets/step1.png" alt="Upload 2D Plan">
+        <div class="bg-slide-overlay"></div>
+      </div>
+      <div class="bg-slide-item" data-index="1">
+        <img src="assets/step2.png" alt="Secure Payment">
+        <div class="bg-slide-overlay"></div>
+      </div>
+      <div class="bg-slide-item" data-index="2">
+        <img src="assets/step3.png" alt="Analyze 2D Plan">
+        <div class="bg-slide-overlay"></div>
+      </div>
+      <div class="bg-slide-item" data-index="3">
+        <img src="assets/step4.png" alt="View Reports">
+        <div class="bg-slide-overlay"></div>
+      </div>
+      <div class="bg-slide-item" data-index="4">
+        <img src="assets/step5.png" alt="Download Reports">
+        <div class="bg-slide-overlay"></div>
+      </div>
     </div>
 
-    <!-- Stage Container with Floating Nav Buttons -->
-    <div class="relative w-full">
-      <div class="coverflow-stage" id="coverflowStage">
+    <!-- 2. CARD-TO-BACKGROUND EXPANSION MORPH PORTAL -->
+    <div id="cardMorphPortal" class="card-morph-portal" style="display: none;">
+      <img id="cardMorphImg" src="" alt="Morphing Card">
+      <div class="card-morph-overlay"></div>
+    </div>
 
-        <!-- Card 01: Submission -->
-        <div class="coverflow-card active" data-step="0"
-          style="transform: translate(-50%, -50%) translate3d(0, 0, 60px) scale(1) rotateY(0deg); opacity: 1; z-index: 30;">
-          <div class="coverflow-poster-card"
-            style="background: linear-gradient(165deg, #18281d 0%, #172a1e 40%, #b86e3a 100%);">
-            <div class="flex items-center justify-between text-white/80 z-10 relative">
-              <div class="inline-flex items-center gap-1 font-mono text-[11px] font-bold tracking-widest uppercase">
-                <span class="text-[#ffb703] text-sm leading-none">✦</span>
-                <span class="text-white font-bold">Submission</span>
-              </div>
-              <span
-                class="text-[10px] font-mono text-white/70 bg-white/15 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20 font-bold">01
-                / 05</span>
-            </div>
+    <!-- 3. TOP BRAND HEADER -->
+    <header class="globe-top-bar">
+      <a href="index.html" class="flex items-center gap-2.5 text-white group">
+        <div
+          class="w-8 h-8 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center p-1.5 shadow-md group-hover:scale-105 transition-transform">
+          <img src="assets/app_logo.png" alt="Kanavu Illam Logo" class="w-full h-full object-contain">
+        </div>
+        <span class="font-serif-luxury text-lg sm:text-xl font-bold tracking-tight text-white">
+          Kanavu <span class="text-[#ffd043]">illam</span>
+        </span>
+      </a>
+    </header>
 
-            <div class="my-auto text-center px-1 z-10 relative flex flex-col items-center">
-              <div
-                class="w-32 h-32 sm:w-36 sm:h-36 mb-3 rounded-2xl sm:rounded-3xl overflow-hidden bg-white/10 backdrop-blur-xl border border-white/30 shadow-2xl shadow-black/35 group-hover:scale-105 transition-all duration-500 relative flex items-center justify-center">
-                <img src="assets/step1.png" alt="Upload 2D Plan" class="w-full h-full object-cover">
-              </div>
-              <h3 class="font-serif text-xl sm:text-2xl text-white font-bold leading-tight tracking-tight mb-1.5">
-                Upload 2D Plan<br>
-                <span class="italic font-serif font-normal text-[#ffb703]">In One Click</span>
-              </h3>
-            </div>
+    <!-- 4. MAIN SPLIT SCREEN: LEFT EDITORIAL INFO + RIGHT EDGE-BLEEDING CARD TRACK -->
+    <main class="globe-main-stage">
 
-            <div class="z-10 relative pt-2.5 border-t border-white/15 text-center">
-              <p class="text-xs sm:text-[12.5px] text-white/85 leading-relaxed font-normal mb-2">
-                Add your 2D sketch, blueprint, png, jpg, or technical PDF drawing.
-              </p>
-              <div
-                class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/25 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono text-white/90 font-bold">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#ffb703] animate-pulse"></span>
-                Instant Parser Engine • JPG &amp; PDF
-              </div>
-            </div>
-          </div>
+      <!-- LEFT COLUMN: Pure Editorial Typography with Mask Reveal -->
+      <div class="flex flex-col justify-center text-left max-w-lg z-20">
+
+        <!-- Masked Headline Title Line 1 -->
+        <div class="text-mask-wrapper mb-1">
+          <h1
+            id="activeTitleLine1"
+            class="masked-line font-serif-luxury text-2xl sm:text-3xl lg:text-[36px] font-bold text-white leading-tight tracking-tight">
+            Upload 2D Plan
+          </h1>
         </div>
 
-        <!-- Card 02: Verification -->
-        <div class="coverflow-card" data-step="1"
-          style="transform: translate(calc(-50% + 225px), -50%) translate3d(0, 0, -20px) scale(0.85) rotateY(-12deg); opacity: 0.65; z-index: 20;">
-          <div class="coverflow-poster-card"
-            style="background: linear-gradient(165deg, #241e17 0%, #2f2418 40%, #c97d39 100%);">
-            <div class="flex items-center justify-between text-white/80 z-10 relative">
-              <div class="inline-flex items-center gap-1 font-mono text-[11px] font-bold tracking-widest uppercase">
-                <span class="text-[#ffb703] text-sm leading-none">✦</span>
-                <span class="text-white font-bold">Verification</span>
-              </div>
-              <span
-                class="text-[10px] font-mono text-white/70 bg-white/15 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20 font-bold">02
-                / 05</span>
-            </div>
-
-            <div class="my-auto text-center px-1 z-10 relative flex flex-col items-center">
-              <div
-                class="w-32 h-32 sm:w-36 sm:h-36 mb-3 rounded-2xl sm:rounded-3xl overflow-hidden bg-white/10 backdrop-blur-xl border border-white/30 shadow-2xl shadow-black/35 group-hover:scale-105 transition-all duration-500 relative flex items-center justify-center">
-                <img src="assets/step2.png" alt="Secure Payment" class="w-full h-full object-cover">
-              </div>
-              <h3 class="font-serif text-xl sm:text-2xl text-white font-bold leading-tight tracking-tight mb-1.5">
-                Secure Payment<br>
-                <span class="italic font-serif font-normal text-[#ffb703]">Instant Receipt</span>
-              </h3>
-            </div>
-
-            <div class="z-10 relative pt-2.5 border-t border-white/15 text-center">
-              <p class="text-xs sm:text-[12.5px] text-white/85 leading-relaxed font-normal mb-2">
-                Transparent pricing with flexible packages to suit your home planning needs.
-              </p>
-              <div
-                class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/25 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono text-white/90 font-bold">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#ffb703] animate-pulse"></span>
-                UPI &amp; NetBanking • 100% SECURE
-              </div>
-            </div>
-          </div>
+        <!-- Masked Headline Subtitle Line 2 -->
+        <div class="text-mask-wrapper mb-3">
+          <span
+            id="activeTitleLine2"
+            class="masked-line italic font-serif-luxury font-normal text-[#ffd043] text-xl sm:text-2xl lg:text-[26px]">
+            In One Click
+          </span>
         </div>
 
-        <!-- Card 03: Analysis -->
-        <div class="coverflow-card" data-step="2"
-          style="transform: translate(calc(-50% + 400px), -50%) translate3d(0, 0, -60px) scale(0.70) rotateY(-20deg); opacity: 0.28; z-index: 10;">
-          <div class="coverflow-poster-card"
-            style="background: linear-gradient(165deg, #13221b 0%, #1a3426 40%, #3e7b5b 100%);">
-            <div class="flex items-center justify-between text-white/80 z-10 relative">
-              <div class="inline-flex items-center gap-1 font-mono text-[11px] font-bold tracking-widest uppercase">
-                <span class="text-[#ffb703] text-sm leading-none">✦</span>
-                <span class="text-white font-bold">Analysis Plan</span>
-              </div>
-              <span
-                class="text-[10px] font-mono text-white/70 bg-white/15 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20 font-bold">03
-                / 05</span>
-            </div>
-
-            <div class="my-auto text-center px-1 z-10 relative flex flex-col items-center">
-              <div
-                class="w-32 h-32 sm:w-36 sm:h-36 mb-3 rounded-2xl sm:rounded-3xl overflow-hidden bg-white/10 backdrop-blur-xl border border-white/30 shadow-2xl shadow-black/35 group-hover:scale-105 transition-all duration-500 relative flex items-center justify-center">
-                <img src="assets/step3.png" alt="Analyze 2D Plan" class="w-full h-full object-cover">
-              </div>
-              <h3 class="font-serif text-xl sm:text-2xl text-white font-bold leading-tight tracking-tight mb-1.5">
-                Analyze 2D Plan<br>
-                <span class="italic font-serif font-normal text-[#ffb703]">Vāstu Energy Grid</span>
-              </h3>
-            </div>
-
-            <div class="z-10 relative pt-2.5 border-t border-white/15 text-center">
-              <p class="text-xs sm:text-[12.5px] text-white/85 leading-relaxed font-normal mb-2">
-                Deterministic parsing of walls, room boundaries, structural loads, and azimuths.
-              </p>
-              <div
-                class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/25 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono text-white/90 font-bold">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#ffb703] animate-pulse"></span>
-                IS 456 Structural Checks • Validated
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 04: View Reports -->
-        <div class="coverflow-card" data-step="3"
-          style="transform: translate(calc(-50% - 400px), -50%) translate3d(0, 0, -60px) scale(0.70) rotateY(20deg); opacity: 0.28; z-index: 10;">
-          <div class="coverflow-poster-card"
-            style="background: linear-gradient(165deg, #15251b 0%, #1f3a2a 40%, #548762 100%);">
-            <div class="flex items-center justify-between text-white/80 z-10 relative">
-              <div class="inline-flex items-center gap-1 font-mono text-[11px] font-bold tracking-widest uppercase">
-                <span class="text-[#ffb703] text-sm leading-none">✦</span>
-                <span class="text-white font-bold">View Report</span>
-              </div>
-              <span
-                class="text-[10px] font-mono text-white/70 bg-white/15 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20 font-bold">04
-                / 05</span>
-            </div>
-
-            <div class="my-auto text-center px-1 z-10 relative flex flex-col items-center">
-              <div
-                class="w-32 h-32 sm:w-36 sm:h-36 mb-3 rounded-2xl sm:rounded-3xl overflow-hidden bg-white/10 backdrop-blur-xl border border-white/30 shadow-2xl shadow-black/35 group-hover:scale-105 transition-all duration-500 relative flex items-center justify-center">
-                <img src="assets/step4.png" alt="View Reports" class="w-full h-full object-cover">
-              </div>
-              <h3 class="font-serif text-xl sm:text-2xl text-white font-bold leading-tight tracking-tight mb-1.5">
-                View Reports<br>
-                <span class="italic font-serif font-normal text-[#ffb703]">Spatial Walkthrough</span>
-              </h3>
-            </div>
-
-            <div class="z-10 relative pt-2.5 border-t border-white/15 text-center">
-              <p class="text-xs sm:text-[12.5px] text-white/85 leading-relaxed font-normal mb-2">
-                Interactive 3D walkthrough, Vāstu energy matrix, material takeoff &amp; schedules.
-              </p>
-              <div
-                class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/25 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono text-white/90 font-bold">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#ffb703] animate-pulse"></span>
-                Full BIM Breakdown • LIVE PREVIEW
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 05: Download PDF -->
-        <div class="coverflow-card" data-step="4"
-          style="transform: translate(calc(-50% - 225px), -50%) translate3d(0, 0, -20px) scale(0.85) rotateY(12deg); opacity: 0.65; z-index: 20;">
-          <div class="coverflow-poster-card"
-            style="background: linear-gradient(165deg, #221a14 0%, #352619 40%, #b26c36 100%);">
-            <div class="flex items-center justify-between text-white/80 z-10 relative">
-              <div class="inline-flex items-center gap-1 font-mono text-[11px] font-bold tracking-widest uppercase">
-                <span class="text-[#ffb703] text-sm leading-none">✦</span>
-                <span class="text-white font-bold">Download PDF</span>
-              </div>
-              <span
-                class="text-[10px] font-mono text-white/70 bg-white/15 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20 font-bold">05
-                / 05</span>
-            </div>
-
-            <div class="my-auto text-center px-1 z-10 relative flex flex-col items-center">
-              <div
-                class="w-32 h-32 sm:w-36 sm:h-36 mb-3 rounded-2xl sm:rounded-3xl overflow-hidden bg-white/10 backdrop-blur-xl border border-white/30 shadow-2xl shadow-black/35 group-hover:scale-105 transition-all duration-500 relative flex items-center justify-center">
-                <img src="assets/step5.png" alt="Download Reports" class="w-full h-full object-cover">
-              </div>
-              <h3 class="font-serif text-xl sm:text-2xl text-white font-bold leading-tight tracking-tight mb-1.5">
-                Download Reports<br>
-                <span class="italic font-serif font-normal text-[#ffb703]">PDF &amp; Save to device</span>
-              </h3>
-            </div>
-
-            <div class="z-10 relative pt-2.5 border-t border-white/15 text-center">
-              <p class="text-xs sm:text-[12.5px] text-white/85 leading-relaxed font-normal mb-2">
-                Instant download all reports in one click to get PDF, save in device.
-              </p>
-              <div
-                class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/25 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono text-white/90 font-bold">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#ffb703] animate-pulse"></span>
-                Certified Dossier • ONE CLICK
-              </div>
-            </div>
-          </div>
+        <!-- Masked Concise Description -->
+        <div class="text-mask-wrapper">
+          <p
+            id="activeDescription"
+            class="masked-line text-xs sm:text-[13px] text-white/85 leading-relaxed font-normal max-w-md drop-shadow-sm">
+            Add your 2D sketch, blueprint, png, jpg, or technical PDF drawing. Our deterministic AI parser extracts walls, room boundaries, and loads in seconds.
+          </p>
         </div>
 
       </div>
 
-      <!-- Left & Right Arrow Buttons -->
-      <button type="button" id="coverflowPrevBtn"
-        class="absolute left-1 sm:left-3 top-1/2 -translate-y-1/2 z-40 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/45 hover:bg-black/75 backdrop-blur-xl border border-white/25 text-white flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
-        aria-label="Previous step">
-        <svg class="w-6 h-6 -translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-      <button type="button" id="coverflowNextBtn"
-        class="absolute right-1 sm:right-3 top-1/2 -translate-y-1/2 z-40 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/45 hover:bg-black/75 backdrop-blur-xl border border-white/25 text-white flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
-        aria-label="Next step">
-        <svg class="w-6 h-6 translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-    </div>
-
-    <!-- Capsule Pill Indicator (Exact Video Style) -->
-    <div class="flex items-center justify-center mt-4 z-20">
-      <div
-        class="px-4 py-2 rounded-full bg-black/45 backdrop-blur-xl border border-white/25 shadow-xl flex items-center gap-2">
-        <button type="button"
-          class="coverflow-dot w-6 h-2 rounded-full bg-[#ffb703] shadow-sm transition-all duration-300 cursor-pointer"
-          aria-label="Step 1"></button>
-        <button type="button"
-          class="coverflow-dot w-2 h-2 rounded-full bg-white/45 hover:bg-white/80 transition-all duration-300 cursor-pointer"
-          aria-label="Step 2"></button>
-        <button type="button"
-          class="coverflow-dot w-2 h-2 rounded-full bg-white/45 hover:bg-white/80 transition-all duration-300 cursor-pointer"
-          aria-label="Step 3"></button>
-        <button type="button"
-          class="coverflow-dot w-2 h-2 rounded-full bg-white/45 hover:bg-white/80 transition-all duration-300 cursor-pointer"
-          aria-label="Step 4"></button>
-        <button type="button"
-          class="coverflow-dot w-2 h-2 rounded-full bg-white/45 hover:bg-white/80 transition-all duration-300 cursor-pointer"
-          aria-label="Step 5"></button>
+      <!-- RIGHT COLUMN: Continuous Horizontal Card Track (Moved to Bottom Right) -->
+      <div class="card-deck-viewport">
+        <!-- Horizontal Continuous Track: Slides smoothly in synchronization with morph -->
+        <div class="card-deck-track" id="cardDeckTrack">
+          <!-- Populated dynamically with cards -->
+        </div>
       </div>
-    </div>
+
+    </main>
+
+    <!-- 5. BOTTOM CONTROLS BAR: GIANT LUXURY STEP COUNTER -->
+    <footer class="globe-controls-bar flex items-center justify-end">
+
+      <!-- Right: Giant Luxury Step Counter (01 / 05) -->
+      <div class="flex items-baseline gap-1 text-right select-none ml-auto">
+        <span id="giantCounterNum" class="counter-display text-3xl sm:text-4xl lg:text-5xl text-white drop-shadow-md">
+          01
+        </span>
+        <span class="font-mono text-xs sm:text-sm font-bold text-white/40">
+          / 05
+        </span>
+      </div>
+
+    </footer>
 
   </div>
 
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT: CARD EXPANSION MORPH ENGINE                                   -->
+  <!-- ========================================================================= -->
   <script>
-    (function initCoverFlow() {
-      const stage = document.getElementById('coverflowStage');
-      if (!stage) return;
-      const cards = Array.from(stage.querySelectorAll('.coverflow-card'));
-      const dots = Array.from(document.querySelectorAll('.coverflow-dot'));
-      const prevBtn = document.getElementById('coverflowPrevBtn');
-      const nextBtn = document.getElementById('coverflowNextBtn');
-      const total = cards.length;
-      if (total === 0) return;
+    (function initGlobeExpressLuxurySlider() {
+      const workflowData = [
+        {
+          id: 0,
+          stepNum: '01',
+          titleLine1: 'Upload 2D Plan',
+          titleLine2: 'In One Click',
+          desc: 'Add your 2D sketch, blueprint, png, jpg, or technical PDF drawing. Our deterministic AI parser extracts walls, room boundaries, and loads in seconds.',
+          image: 'assets/step1.png',
+          cardCategory: 'SUBMISSION',
+          cardTitle: 'Upload 2D Plan',
+          cardSubtitle: 'Blueprint & Sketches'
+        },
+        {
+          id: 1,
+          stepNum: '02',
+          titleLine1: 'Secure Payment',
+          titleLine2: 'Instant Receipt & Access',
+          desc: 'Transparent pricing with flexible packages to suit your exact needs. 100% encrypted checkout with instant invoice generation and guaranteed privacy.',
+          image: 'assets/step2.png',
+          cardCategory: 'VERIFICATION',
+          cardTitle: 'Secure Payment',
+          cardSubtitle: 'Instant Receipt'
+        },
+        {
+          id: 2,
+          stepNum: '03',
+          titleLine1: 'Analyze 2D Plan',
+          titleLine2: 'Vāstu Energy Grid',
+          desc: 'Deterministic parsing of load-bearing walls, structural columns, and 16-zone Vedic energy grid. Validated against Indian Standard IS 456 safety codes.',
+          image: 'assets/step3.png',
+          cardCategory: 'AI ANALYSIS',
+          cardTitle: 'Analyze 2D Plan',
+          cardSubtitle: 'Vāstu & Structural'
+        },
+        {
+          id: 3,
+          stepNum: '04',
+          titleLine1: 'View Reports',
+          titleLine2: 'Spatial Walkthrough',
+          desc: 'Immerse yourself in interactive 3D spatial models, elevation cross-sections, daylight simulations, and material quantity takeoff schedules.',
+          image: 'assets/step4.png',
+          cardCategory: '3D WALKTHROUGH',
+          cardTitle: 'View Reports',
+          cardSubtitle: 'Spatial Walkthrough'
+        },
+        {
+          id: 4,
+          stepNum: '05',
+          titleLine1: 'Download Reports',
+          titleLine2: 'Certified PDF Dossier',
+          desc: 'Download all certified engineering reports in one single click. Municipality-ready structural drawings and permanent digital archive for your device.',
+          image: 'assets/step5.png',
+          cardCategory: 'FINAL DOSSIER',
+          cardTitle: 'Download Reports',
+          cardSubtitle: 'Certified PDF'
+        }
+      ];
 
+      const total = workflowData.length;
       let currentIndex = 0;
-      let autoPlayTimer = null;
+      let virtualTrackIndex = 0;
+      let isTransitioning = false;
+      let isAutoplayRunning = true;
+      let progressInterval = null;
+      let progressPercent = 0;
+      const AUTOPLAY_DURATION = 6000;
 
-      function updateCards() {
-        const stageWidth = stage.clientWidth || window.innerWidth;
-        const isMobile = stageWidth < 640;
-        const isTablet = stageWidth < 1024;
-        const step1 = isMobile ? 105 : (isTablet ? 160 : 225);
-        const step2 = isMobile ? 185 : (isTablet ? 290 : 400);
+      // DOM Elements
+      const bgSlides = document.querySelectorAll('.bg-slide-item');
+      const cardMorphPortal = document.getElementById('cardMorphPortal');
+      const cardMorphImg = document.getElementById('cardMorphImg');
+      const activeTitleLine1 = document.getElementById('activeTitleLine1');
+      const activeTitleLine2 = document.getElementById('activeTitleLine2');
+      const activeDescription = document.getElementById('activeDescription');
+      const cardDeckTrack = document.getElementById('cardDeckTrack');
+      const giantCounterNum = document.getElementById('giantCounterNum');
+      const progressPillsContainer = document.getElementById('progressPillsContainer');
+      const autoplayProgressBar = document.getElementById('autoplayProgress');
+      const prevSlideBtn = document.getElementById('prevSlideBtn');
+      const nextSlideBtn = document.getElementById('nextSlideBtn');
 
-        cards.forEach((card, i) => {
-          let offset = i - currentIndex;
-          while (offset > total / 2) offset -= total;
-          while (offset < -total / 2) offset += total;
+      // 1. Build Continuous Track (Triple duplicated array: 15 cards for infinite smooth conveyor glide)
+      const REPEATS = 3;
+      function buildContinuousTrack() {
+        cardDeckTrack.innerHTML = '';
+        for (let r = 0; r < REPEATS; r++) {
+          workflowData.forEach((data, stepIdx) => {
+            const card = document.createElement('div');
+            card.className = 'deck-poster-card';
+            card.setAttribute('data-step-index', stepIdx);
+            card.setAttribute('data-card-id', `${r}-${stepIdx}`);
 
-          let transform = '';
-          let opacity = 0;
-          let zIndex = 0;
-          let filter = 'blur(0px)';
-          let pointerEvents = 'none';
+            card.innerHTML = `
+              <div class="deck-glass-sheen"></div>
+              <img src="${data.image}" alt="${data.cardTitle}" class="deck-card-img">
+              <div class="deck-card-overlay">
+                <div class="mt-auto">
+                  <span class="text-[9.5px] font-mono font-bold tracking-widest text-[#ffd043] uppercase block mb-1 drop-shadow">
+                    ✦ ${data.cardCategory}
+                  </span>
+                  <h4 class="font-serif-luxury text-sm sm:text-base font-bold text-white leading-snug drop-shadow-md">
+                    ${data.cardTitle}
+                  </h4>
+                  <p class="text-[10px] font-medium text-white/75 line-clamp-1 mt-0.5">
+                    ${data.cardSubtitle}
+                  </p>
+                </div>
+              </div>
+            `;
 
-          if (offset === 0) {
-            transform = 'translate(-50%, -50%) translate3d(0, 0, 60px) scale(1) rotateY(0deg)';
-            opacity = 1;
-            zIndex = 30;
-            filter = 'blur(0px)';
-            pointerEvents = 'auto';
-            card.classList.add('active');
-          } else if (offset === -1) {
-            transform = `translate(calc(-50% - ${step1}px), -50%) translate3d(0, 0, -20px) scale(0.85) rotateY(12deg)`;
-            opacity = 0.65;
-            zIndex = 20;
-            filter = 'blur(0.3px)';
-            pointerEvents = 'auto';
-            card.classList.remove('active');
-          } else if (offset === 1) {
-            transform = `translate(calc(-50% + ${step1}px), -50%) translate3d(0, 0, -20px) scale(0.85) rotateY(-12deg)`;
-            opacity = 0.65;
-            zIndex = 20;
-            filter = 'blur(0.3px)';
-            pointerEvents = 'auto';
-            card.classList.remove('active');
-          } else if (offset === -2) {
-            transform = `translate(calc(-50% - ${step2}px), -50%) translate3d(0, 0, -60px) scale(0.70) rotateY(20deg)`;
-            opacity = isMobile ? 0 : 0.28;
-            zIndex = 10;
-            filter = 'blur(1.2px)';
-            pointerEvents = isMobile ? 'none' : 'auto';
-            card.classList.remove('active');
-          } else if (offset === 2) {
-            transform = `translate(calc(-50% + ${step2}px), -50%) translate3d(0, 0, -60px) scale(0.70) rotateY(-20deg)`;
-            opacity = isMobile ? 0 : 0.28;
-            zIndex = 10;
-            filter = 'blur(1.2px)';
-            pointerEvents = isMobile ? 'none' : 'auto';
-            card.classList.remove('active');
-          } else {
-            const dir = offset > 0 ? 1 : -1;
-            transform = `translate(calc(-50% + ${dir * (step2 + 80)}px), -50%) translate3d(0, 0, -100px) scale(0.5) rotateY(${dir * -25}deg)`;
-            opacity = 0;
-            zIndex = 0;
-            filter = 'blur(3px)';
-            pointerEvents = 'none';
-            card.classList.remove('active');
-          }
+            // Clicking ANY card triggers physical expansion from that card into full screen!
+            card.addEventListener('click', (e) => {
+              if (isTransitioning) return;
+              e.stopPropagation();
+              triggerCardExpansionMorph(stepIdx, card);
+              resetAutoplayTimer();
+            });
 
-          card.style.transform = transform;
-          card.style.opacity = opacity;
-          card.style.zIndex = zIndex;
-          card.style.filter = filter;
-          card.style.pointerEvents = pointerEvents;
-        });
-
-        dots.forEach((dot, idx) => {
-          if (idx === currentIndex) {
-            dot.className = 'coverflow-dot w-6 h-2 rounded-full bg-[#ffb703] shadow-sm transition-all duration-300 cursor-pointer';
-          } else {
-            dot.className = 'coverflow-dot w-2 h-2 rounded-full bg-white/45 hover:bg-white/80 transition-all duration-300 cursor-pointer';
-          }
-        });
-      }
-
-      function goTo(idx) {
-        currentIndex = (idx + total) % total;
-        updateCards();
-      }
-
-      function next() {
-        goTo(currentIndex + 1);
-      }
-
-      function prev() {
-        goTo(currentIndex - 1);
-      }
-
-      // Card click
-      cards.forEach((card, idx) => {
-        card.addEventListener('click', (e) => {
-          e.stopPropagation();
-          if (idx === currentIndex) {
-            next();
-          } else {
-            goTo(idx);
-          }
-          restartAutoplay();
-        });
-      });
-
-      // Arrow buttons
-      if (prevBtn) {
-        prevBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          prev();
-          restartAutoplay();
-        });
-      }
-      if (nextBtn) {
-        nextBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          next();
-          restartAutoplay();
-        });
-      }
-
-      // Dots
-      dots.forEach((dot, idx) => {
-        dot.addEventListener('click', (e) => {
-          e.stopPropagation();
-          goTo(idx);
-          restartAutoplay();
-        });
-      });
-
-      // Mouse drag & touch swipe
-      let touchStartX = 0;
-      let touchStartY = 0;
-      let isDragging = false;
-
-      stage.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        touchStartX = e.clientX;
-      });
-
-      window.addEventListener('mouseup', (e) => {
-        if (!isDragging) return;
-        isDragging = false;
-        const diff = e.clientX - touchStartX;
-        if (Math.abs(diff) > 35) {
-          if (diff < 0) next();
-          else prev();
-          restartAutoplay();
+            cardDeckTrack.appendChild(card);
+          });
         }
+      }
+
+      function getCardStepWidth() {
+        const firstCard = cardDeckTrack.querySelector('.deck-poster-card');
+        if (!firstCard) return 264;
+        const style = window.getComputedStyle(cardDeckTrack);
+        const gap = parseFloat(style.gap) || 24;
+        return firstCard.offsetWidth + gap;
+      }
+
+      // Update Track Position with Slow, Buttery Smooth 1.05s Glide
+      function updateTrackPosition(animate = true) {
+        const stepWidth = getCardStepWidth();
+        const offset = virtualTrackIndex + 1;
+        const targetX = -(offset * stepWidth);
+
+        if (animate) {
+          cardDeckTrack.style.transition = 'transform 1.05s cubic-bezier(0.2, 1, 0.28, 1)';
+        } else {
+          cardDeckTrack.style.transition = 'none';
+        }
+        cardDeckTrack.style.transform = `translateX(${targetX}px)`;
+      }
+
+      function checkTrackInfiniteLoop() {
+        if (virtualTrackIndex >= total) {
+          virtualTrackIndex = virtualTrackIndex % total;
+          updateTrackPosition(false);
+          void cardDeckTrack.offsetWidth;
+        }
+      }
+
+      // 2. Initialize Progress Pills (If container present)
+      function renderProgressPills() {
+        if (!progressPillsContainer) return;
+        progressPillsContainer.innerHTML = '';
+        workflowData.forEach((_, idx) => {
+          const pill = document.createElement('button');
+          pill.type = 'button';
+          pill.className = `progress-pill-dot ${idx === currentIndex ? 'active' : ''}`;
+          pill.setAttribute('aria-label', `Go to Step ${idx + 1}`);
+          pill.addEventListener('click', () => {
+            if (isTransitioning) return;
+            triggerCardExpansionMorph(idx);
+            resetAutoplayTimer();
+          });
+          progressPillsContainer.appendChild(pill);
+        });
+      }
+
+      // 3. Masked Editorial Text Reveal Animation (Exact Video Style)
+      function updateLeftEditorialContent(data) {
+        const lines = [activeTitleLine1, activeTitleLine2, activeDescription];
+
+        // Mask Slide Up Out
+        lines.forEach((line) => {
+          if (!line) return;
+          line.style.transition = 'transform 0.35s cubic-bezier(0.4, 0, 1, 1), opacity 0.3s ease';
+          line.style.transform = 'translateY(-120%)';
+          line.style.opacity = '0';
+        });
+
+        setTimeout(() => {
+          activeTitleLine1.textContent = data.titleLine1;
+          activeTitleLine2.textContent = data.titleLine2;
+          activeDescription.textContent = data.desc;
+
+          // Prime from below
+          lines.forEach((line) => {
+            if (!line) return;
+            line.style.transition = 'none';
+            line.style.transform = 'translateY(120%)';
+            line.style.opacity = '0';
+          });
+
+          void activeTitleLine1.offsetWidth; // Force reflow
+
+          // Mask Slide Up In (Staggered & Smooth)
+          if (activeTitleLine1) {
+            activeTitleLine1.style.transition = 'transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.85s ease';
+            activeTitleLine1.style.transform = 'translateY(0)';
+            activeTitleLine1.style.opacity = '1';
+          }
+
+          if (activeTitleLine2) {
+            activeTitleLine2.style.transition = 'transform 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.08s, opacity 0.85s ease 0.08s';
+            activeTitleLine2.style.transform = 'translateY(0)';
+            activeTitleLine2.style.opacity = '1';
+          }
+
+          if (activeDescription) {
+            activeDescription.style.transition = 'transform 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.16s, opacity 0.85s ease 0.16s';
+            activeDescription.style.transform = 'translateY(0)';
+            activeDescription.style.opacity = '1';
+          }
+        }, 320);
+      }
+
+      // 4. Smooth Counter Flip Animation
+      function updateControls(index) {
+        const stepNum = workflowData[index].stepNum;
+
+        giantCounterNum.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+        giantCounterNum.style.opacity = '0';
+        giantCounterNum.style.transform = 'translateY(-12px)';
+
+        setTimeout(() => {
+          giantCounterNum.textContent = stepNum;
+          giantCounterNum.style.transition = 'none';
+          giantCounterNum.style.transform = 'translateY(14px)';
+          void giantCounterNum.offsetWidth;
+          giantCounterNum.style.transition = 'opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1)';
+          giantCounterNum.style.opacity = '1';
+          giantCounterNum.style.transform = 'translateY(0)';
+        }, 250);
+
+        if (progressPillsContainer) {
+          const pills = progressPillsContainer.querySelectorAll('.progress-pill-dot');
+          pills.forEach((pill, idx) => {
+            if (idx === index) pill.classList.add('active');
+            else pill.classList.remove('active');
+          });
+        }
+      }
+
+      // =======================================================================
+      // 5. MASTER CARD-TO-BACKGROUND PHYSICAL EXPANSION MORPH
+      // =======================================================================
+      function triggerCardExpansionMorph(targetIndex, clickedCardEl = null) {
+        if (targetIndex === currentIndex || isTransitioning) return;
+        isTransitioning = true;
+
+        const targetData = workflowData[targetIndex];
+        const prevIndex = currentIndex;
+
+        // 1. Locate the exact source card in the track
+        let sourceCard = clickedCardEl;
+        if (!sourceCard) {
+          const cards = cardDeckTrack.querySelectorAll(`.deck-poster-card[data-step-index="${targetIndex}"]`);
+          const vpLeft = cardDeckTrack.getBoundingClientRect().left;
+          let best = cards[0];
+          let minDiff = 999999;
+          cards.forEach((c) => {
+            const r = c.getBoundingClientRect();
+            if (r.right > vpLeft && Math.abs(r.left - vpLeft) < minDiff) {
+              minDiff = Math.abs(r.left - vpLeft);
+              best = c;
+            }
+          });
+          sourceCard = best || cards[0];
+        }
+
+        // 2. Measure Card's exact starting rectangle on screen
+        const rect = sourceCard.getBoundingClientRect();
+
+        // 3. Position the Morph Portal element at the exact card coordinates
+        cardMorphImg.src = targetData.image;
+        cardMorphPortal.style.transition = 'none';
+        cardMorphPortal.style.display = 'block';
+        cardMorphPortal.style.top = rect.top + 'px';
+        cardMorphPortal.style.left = rect.left + 'px';
+        cardMorphPortal.style.width = rect.width + 'px';
+        cardMorphPortal.style.height = rect.height + 'px';
+        cardMorphPortal.style.borderRadius = window.getComputedStyle(sourceCard).borderRadius || '24px';
+        cardMorphPortal.style.boxShadow = '0 25px 60px -10px rgba(0, 0, 0, 0.85)';
+        cardMorphPortal.style.opacity = '1';
+        cardMorphPortal.classList.remove('expanded');
+
+        // Lift card visually with glow
+        sourceCard.classList.add('card-active-expanding');
+
+        // 4. Update track position & advance conveyor
+        let diff = targetIndex - currentIndex;
+        if (diff <= 0) diff += total;
+        virtualTrackIndex += diff;
+        currentIndex = targetIndex;
+
+        // Force browser layout reflow
+        void cardMorphPortal.offsetWidth;
+
+        // 5. PHYSICAL EXPANSION: Card expands from its exact rect into full screen!
+        cardMorphPortal.style.transition = 
+          'top 1.05s cubic-bezier(0.16, 1, 0.3, 1), ' +
+          'left 1.05s cubic-bezier(0.16, 1, 0.3, 1), ' +
+          'width 1.05s cubic-bezier(0.16, 1, 0.3, 1), ' +
+          'height 1.05s cubic-bezier(0.16, 1, 0.3, 1), ' +
+          'border-radius 1.05s cubic-bezier(0.16, 1, 0.3, 1), ' +
+          'box-shadow 0.7s ease';
+
+        cardMorphPortal.style.top = '0px';
+        cardMorphPortal.style.left = '0px';
+        cardMorphPortal.style.width = '100vw';
+        cardMorphPortal.style.height = '100vh';
+        cardMorphPortal.style.borderRadius = '0px';
+        cardMorphPortal.style.boxShadow = 'none';
+        cardMorphPortal.classList.add('expanded');
+
+        // Simultaneously slide remaining cards in conveyor & update text & controls
+        updateTrackPosition(true);
+        updateLeftEditorialContent(targetData);
+        updateControls(currentIndex);
+
+        // Previous background slide dissolves smoothly underneath
+        bgSlides.forEach((slide, sIdx) => {
+          if (sIdx === prevIndex) {
+            slide.classList.remove('active');
+            slide.classList.add('prev-active');
+          }
+        });
+
+        // 6. Seamless Handoff at end of 1.05s expansion (ZERO FLICKER)
+        setTimeout(() => {
+          // Pre-set target background slide to ACTIVE and full opacity BEFORE hiding morph portal!
+          bgSlides.forEach((slide, sIdx) => {
+            if (sIdx === targetIndex) {
+              slide.style.transition = 'none';
+              slide.classList.add('active');
+              slide.classList.remove('prev-active');
+              slide.style.opacity = '1';
+              slide.style.transform = 'scale(1)';
+              void slide.offsetWidth; // Force reflow
+              slide.style.transition = '';
+            } else {
+              slide.classList.remove('active', 'prev-active');
+              slide.style.opacity = '';
+            }
+          });
+
+          // Reset morph portal & card glow cleanly
+          sourceCard.classList.remove('card-active-expanding');
+          cardMorphPortal.style.display = 'none';
+          cardMorphPortal.classList.remove('expanded');
+
+          checkTrackInfiniteLoop();
+          isTransitioning = false;
+        }, 1050);
+      }
+
+      function nextSlide() {
+        triggerCardExpansionMorph((currentIndex + 1) % total);
+      }
+
+      function prevSlide() {
+        triggerCardExpansionMorph((currentIndex - 1 + total) % total);
+      }
+
+      // Button Listeners
+      if (prevSlideBtn) {
+        prevSlideBtn.addEventListener('click', () => { prevSlide(); resetAutoplayTimer(); });
+      }
+      if (nextSlideBtn) {
+        nextSlideBtn.addEventListener('click', () => { nextSlide(); resetAutoplayTimer(); });
+      }
+
+      // Keyboard Controls
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') { prevSlide(); resetAutoplayTimer(); }
+        else if (e.key === 'ArrowRight') { nextSlide(); resetAutoplayTimer(); }
       });
 
-      stage.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
-      }, { passive: true });
-
-      stage.addEventListener('touchend', (e) => {
-        const diffX = e.changedTouches[0].clientX - touchStartX;
-        const diffY = e.changedTouches[0].clientY - touchStartY;
-        if (Math.abs(diffX) > 30 && Math.abs(diffX) > Math.abs(diffY)) {
-          if (diffX < 0) next();
-          else prev();
-          restartAutoplay();
-        }
-      }, { passive: true });
-
+      // 7. Autoplay Loop with Progress Bar
       function startAutoplay() {
         stopAutoplay();
-        autoPlayTimer = setInterval(() => {
-          next();
-        }, 3200);
+        isAutoplayRunning = true;
+        progressPercent = 0;
+
+        const stepTime = 50;
+        const stepInc = (stepTime / AUTOPLAY_DURATION) * 100;
+
+        progressInterval = setInterval(() => {
+          progressPercent += stepInc;
+          if (autoplayProgressBar) {
+            autoplayProgressBar.style.width = `${Math.min(progressPercent, 100)}%`;
+          }
+          if (progressPercent >= 100) {
+            progressPercent = 0;
+            nextSlide();
+          }
+        }, stepTime);
       }
 
       function stopAutoplay() {
-        if (autoPlayTimer) {
-          clearInterval(autoPlayTimer);
-          autoPlayTimer = null;
+        if (progressInterval) {
+          clearInterval(progressInterval);
+          progressInterval = null;
+        }
+        if (autoplayProgressBar) {
+          autoplayProgressBar.style.width = '0%';
         }
       }
 
-      let userPauseTimer = null;
-      function pauseAutoplayTemporarily(ms = 4000) {
-        stopAutoplay();
-        if (userPauseTimer) clearTimeout(userPauseTimer);
-        userPauseTimer = setTimeout(() => {
-          startAutoplay();
-        }, ms);
+      function resetAutoplayTimer() {
+        if (!isAutoplayRunning) return;
+        startAutoplay();
       }
 
-      function restartAutoplay() {
-        pauseAutoplayTemporarily(4500);
+      // Pause on Hover
+      const mainStage = document.querySelector('.globe-main-stage');
+      if (mainStage) {
+        mainStage.addEventListener('mouseenter', () => { if (isAutoplayRunning) stopAutoplay(); });
+        mainStage.addEventListener('mouseleave', () => { if (isAutoplayRunning) startAutoplay(); });
       }
 
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') { prev(); restartAutoplay(); }
-        else if (e.key === 'ArrowRight') { next(); restartAutoplay(); }
+      // Handle Window Resize
+      window.addEventListener('resize', () => {
+        updateTrackPosition(false);
       });
 
-      stage.addEventListener('mouseenter', () => { pauseAutoplayTemporarily(4000); });
-      stage.addEventListener('mouseleave', () => { startAutoplay(); });
+      // Touch Swipe on Card Deck
+      let touchStartX = 0;
+      cardDeckTrack.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+      }, { passive: true });
 
-      window.addEventListener('resize', updateCards);
+      cardDeckTrack.addEventListener('touchend', (e) => {
+        const diffX = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(diffX) > 45) {
+          if (diffX < 0) nextSlide();
+          else prevSlide();
+          resetAutoplayTimer();
+        }
+      }, { passive: true });
 
-      updateCards();
+      // Initial Mount
+      buildContinuousTrack();
+      renderProgressPills();
+      updateTrackPosition(false);
+      updateControls(0);
       startAutoplay();
     })();
   </script>

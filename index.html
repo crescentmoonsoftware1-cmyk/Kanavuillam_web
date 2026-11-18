@@ -300,13 +300,13 @@
 
 
 
-    /* ==================== 3D COVER FLOW WORKFLOW CAROUSEL (EXACT VIDEO MATCH) ==================== */
+    /* ==================== 3D COVER FLOW WORKFLOW CAROUSEL (WIDE SLEEK LIQUID GLASS) ==================== */
     .coverflow-stage {
       perspective: 1200px;
       perspective-origin: 50% 50%;
       position: relative;
       width: 100%;
-      height: 440px;
+      height: 360px;
       overflow: hidden;
       touch-action: pan-y;
       user-select: none;
@@ -315,7 +315,13 @@
 
     @media (min-width: 640px) {
       .coverflow-stage {
-        height: 480px;
+        height: 380px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .coverflow-stage {
+        height: 395px;
       }
     }
 
@@ -323,9 +329,9 @@
       position: absolute;
       left: 50%;
       top: 50%;
-      width: 260px;
-      max-width: 85vw;
-      height: 380px;
+      width: 310px;
+      max-width: 88vw;
+      height: 300px;
       transform-origin: center center;
       transform-style: preserve-3d;
       will-change: transform, opacity, filter, box-shadow;
@@ -337,39 +343,92 @@
 
     @media (min-width: 640px) {
       .coverflow-card {
-        width: 290px;
-        height: 420px;
+        width: 350px;
+        height: 315px;
       }
     }
 
     @media (min-width: 1024px) {
       .coverflow-card {
-        width: 315px;
-        height: 445px;
+        width: 385px;
+        height: 330px;
       }
     }
 
-    /* Video-matched Squircle Poster Card (Slightly Reduced Size) */
+    /* True Liquid Glass Squircle Poster Card */
     .coverflow-poster-card {
       width: 100%;
       height: 100%;
-      border-radius: 36px;
-      border: 1.5px solid rgba(255, 255, 255, 0.35);
-      backdrop-filter: blur(28px);
-      -webkit-backdrop-filter: blur(28px);
-      box-shadow: 0 16px 38px -8px rgba(0, 0, 0, 0.3), inset 0 1.5px 2px rgba(255, 255, 255, 0.45);
+      border-radius: 28px;
+      border: 1.5px solid rgba(255, 255, 255, 0.42);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 40%, rgba(0, 0, 0, 0.28) 100%);
+      backdrop-filter: blur(28px) saturate(190%) contrast(105%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%) contrast(105%);
+      box-shadow: 
+        0 20px 45px -10px rgba(0, 0, 0, 0.5),
+        inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.8),
+        inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.35);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 1.35rem 1.25rem;
+      padding: 1.15rem 1.25rem;
       position: relative;
       overflow: hidden;
-      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
     }
 
     .coverflow-card.active .coverflow-poster-card {
-      border-color: rgba(255, 255, 255, 0.85);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 183, 3, 0.5), inset 0 1.5px 2px rgba(255, 255, 255, 0.8);
+      border: 2px solid rgba(255, 255, 255, 0.98);
+      box-shadow: 
+        0 28px 65px -12px rgba(0, 0, 0, 0.6),
+        0 0 28px rgba(255, 208, 67, 0.3),
+        inset 0 2px 3px 0 rgba(255, 255, 255, 0.95),
+        inset 0 -2px 3px 0 rgba(0, 0, 0, 0.45);
+    }
+
+    /* Liquid Glass Fluid Reflection Sheen */
+    .liquid-glass-sheen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 55%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.06) 30%, transparent 60%);
+      pointer-events: none;
+      z-index: 10;
+      border-radius: 28px 28px 80px 0;
+    }
+
+    /* Integrated Card Background Image (Exact Width Fit, Zero Cropping, Zero Blur) */
+    .card-bg-media {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    .card-bg-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: contrast(1.05) saturate(1.08);
+      image-rendering: auto;
+      transform: none;
+    }
+
+    /* Gradient Overlay: 100% CLEAR in the center, smooth transition to solid dark at the bottom */
+    .card-bg-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
     }
 
     /* Sweep Light Reflection */
@@ -694,6 +753,304 @@
     }
 
 
+    /* ==================== LUGGAGE TAG HANGING 3D FLIP REPORT CARDS ==================== */
+    .hanging-rig-container {
+      position: relative;
+      width: 100%;
+      margin-top: 1rem;
+      padding-top: 15px;
+    }
+
+    .overhead-cable-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 12;
+      overflow: visible;
+    }
+
+    .cards-hanging-deck {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1.5rem;
+      width: 100%;
+      position: relative;
+      z-index: 15;
+    }
+
+    @media (max-width: 1023px) {
+      .cards-hanging-deck {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 3.5rem 1.5rem;
+      }
+      .overhead-cable-svg {
+        display: none;
+      }
+    }
+
+    .hanging-assembly-unit {
+      flex: 1;
+      max-width: 255px;
+      min-width: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      perspective: 1200px;
+      transition: margin-top 0.3s ease;
+    }
+
+    .assembly-1 { margin-top: 10px; }
+    .assembly-2 { margin-top: 24px; }
+    .assembly-3 { margin-top: 24px; }
+    .assembly-4 { margin-top: 10px; }
+
+    .cable-runner-ball {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #ffffff 0%, #cbd5e1 45%, #475569 85%, #1e293b 100%);
+      border: 1px solid #334155;
+      box-shadow: 0 3px 6px rgba(15, 23, 42, 0.35);
+      position: relative;
+      z-index: 14;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .hanging-assembly-unit:hover .cable-runner-ball {
+      transform: scale(1.15);
+      box-shadow: 0 4px 10px rgba(255, 183, 3, 0.45);
+    }
+
+    .card-sway-rig {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform-origin: 50% 0px;
+      will-change: transform;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+    }
+
+    .assembly-1 .card-sway-rig { animation: gentleSway1 6.8s ease-in-out infinite alternate; }
+    .assembly-2 .card-sway-rig { animation: gentleSway2 7.2s ease-in-out infinite alternate 0.9s; }
+    .assembly-3 .card-sway-rig { animation: gentleSway3 6.4s ease-in-out infinite alternate 1.6s; }
+    .assembly-4 .card-sway-rig { animation: gentleSway4 7.6s ease-in-out infinite alternate 0.4s; }
+
+    @keyframes gentleSway1 {
+      0% { transform: rotate(-1.2deg) translateY(0); }
+      100% { transform: rotate(1.4deg) translateY(1.2px); }
+    }
+    @keyframes gentleSway2 {
+      0% { transform: rotate(1.4deg) translateY(1px); }
+      100% { transform: rotate(-1.1deg) translateY(-0.6px); }
+    }
+    @keyframes gentleSway3 {
+      0% { transform: rotate(-1.5deg) translateY(-0.4px); }
+      100% { transform: rotate(1.2deg) translateY(1.4px); }
+    }
+    @keyframes gentleSway4 {
+      0% { transform: rotate(1.3deg) translateY(0.8px); }
+      100% { transform: rotate(-1.3deg) translateY(-0.8px); }
+    }
+
+    .hanging-assembly-unit:hover .card-sway-rig {
+      animation-play-state: paused;
+    }
+
+    .tag-badge-card {
+      position: relative;
+      width: 240px;
+      height: 380px;
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.34, 1.25, 0.64, 1);
+      cursor: pointer;
+    }
+
+    .hanging-assembly-unit.is-flipped .tag-badge-card,
+    .hanging-assembly-unit:hover .tag-badge-card {
+      transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
+    }
+
+    .tag-face {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 0;
+      transform-style: flat;
+      -webkit-transform-style: flat;
+    }
+
+    .tag-front {
+      z-index: 2;
+      transform: rotateY(0deg);
+      -webkit-transform: rotateY(0deg);
+    }
+
+    .tag-back {
+      z-index: 1;
+      transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
+    }
+
+    .tag-silhouette-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    .tag-content-wrap {
+      position: relative;
+      z-index: 3;
+      padding: 48px 14px 14px 14px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .tag-image-window {
+      position: relative;
+      width: 100%;
+      height: 160px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #0b1120;
+      border: 1.5px solid rgba(255, 255, 255, 0.65);
+      box-shadow: 
+        0 10px 25px -4px rgba(15, 23, 42, 0.28),
+        inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.7);
+      margin-top: 8px;
+    }
+
+    /* Subtle Glass Glare Sheen across image window */
+    .tag-image-window::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.08) 50%, transparent 100%);
+      pointer-events: none;
+      border-radius: 14px 14px 0 0;
+    }
+
+    .tag-image-window img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hanging-assembly-unit:hover .tag-image-window img {
+      transform: scale(1.05);
+    }
+
+    .image-glass-pill {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      padding: 3.5px 9px;
+      border-radius: 9999px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+      color: #ffffff;
+      font-size: 8.5px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      z-index: 2;
+    }
+
+    .tag-arrow-pill {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0f172a;
+      font-size: 10px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 3px 8px rgba(15, 23, 42, 0.1);
+    }
+
+    .hanging-assembly-unit:hover .tag-arrow-pill {
+      background: #ffd043;
+      border-color: #ffb703;
+      transform: rotate(45deg);
+      box-shadow: 0 4px 12px rgba(255, 183, 3, 0.4);
+    }
+
+    .hologram-shimmer-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.45;
+      background: radial-gradient(circle 220px at var(--shimmer-x, 50%) var(--shimmer-y, 50%), rgba(255, 255, 255, 0.90) 0%, rgba(255, 215, 0, 0.20) 35%, rgba(147, 197, 253, 0.12) 65%, transparent 85%);
+      mix-blend-mode: overlay;
+      transition: opacity 0.3s ease;
+    }
+
+    .spec-item-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      font-size: 8.5px;
+      color: #0f172a;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.05), inset 0 1px 1.5px rgba(255, 255, 255, 0.95);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .spec-item-pill:hover {
+      background: #ffffff;
+      border-color: #ffd043;
+      transform: translateX(3px);
+      box-shadow: 0 4px 10px rgba(255, 183, 3, 0.2);
+    }
+
+    .qr-badge-frame {
+      width: 38px;
+      height: 38px;
+      padding: 3px;
+      background: rgba(255, 255, 255, 0.78);
+      border-radius: 7px;
+      border: 1px solid rgba(255, 255, 255, 0.90);
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+    }
+
     /* ==================== MODERN ARCHITECTURAL GLASS REPORT CARDS ==================== */
     .report-glass-card {
       background: linear-gradient(145deg, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.05) 100%);
@@ -788,34 +1145,29 @@
         </div>
       </a>
 
-      <!-- Desktop Nav (Exact Reference Image Style) -->
-      <nav class="hidden md:flex items-center text-sm font-serif text-white/95">
-        <a class="text-white font-medium border-b-2 border-[#ffd043] pb-0.5 tracking-wide hover:text-[#ffd043] transition-colors"
-          href="#hero" data-i18n="nav_home">Home</a>
+      <!-- Desktop Nav (Dynamic Active Scrollspy & Click Underline) -->
+      <nav id="desktopNav" class="hidden md:flex items-center text-sm font-serif text-white/95">
+        <a class="nav-item text-white font-medium border-b-2 border-[#ffd043] pb-0.5 tracking-wide hover:text-[#ffd043] transition-all cursor-pointer"
+          href="#hero" data-nav-target="hero" data-i18n="nav_home">Home</a>
         <span class="text-[#ffd043] text-xs mx-3.5">&bull;</span>
-        <a class="text-white/90 hover:text-[#ffd043] transition-colors tracking-wide" href="#how-it-works"
-          data-i18n="nav_how_it_works">How it Works</a>
+        <a class="nav-item text-white/80 hover:text-[#ffd043] border-b-2 border-transparent pb-0.5 tracking-wide transition-all cursor-pointer"
+          href="#how-it-works" data-nav-target="how-it-works" data-i18n="nav_how_it_works">How it Works</a>
         <span class="text-[#ffd043] text-xs mx-3.5">&bull;</span>
-        <a class="text-white/90 hover:text-[#ffd043] transition-colors tracking-wide" href="#pillars"
-          data-i18n="nav_reports">Reports</a>
+        <a class="nav-item text-white/80 hover:text-[#ffd043] border-b-2 border-transparent pb-0.5 tracking-wide transition-all cursor-pointer"
+          href="#pillars" data-nav-target="pillars" data-i18n="nav_reports">Reports</a>
         <span class="text-[#ffd043] text-xs mx-3.5">&bull;</span>
-        <a class="text-white/90 hover:text-[#ffd043] transition-colors tracking-wide" href="#contact"
-          data-i18n="nav_consultation">Consultation</a>
+        <a class="nav-item text-white/80 hover:text-[#ffd043] border-b-2 border-transparent pb-0.5 tracking-wide transition-all cursor-pointer"
+          href="#contact" data-nav-target="contact" data-i18n="nav_consultation">Consultation</a>
       </nav>
 
-      <!-- Action & Language Switcher (Exact Pill Shape with Translate & Chevron) -->
+      <!-- Action & Language Switcher (Text & Chevron Only) -->
       <div class="flex items-center gap-3 shrink-0">
         <!-- Interactive Language Toggle -->
         <button id="langToggleBtn" type="button"
-          class="inline-flex items-center gap-2 rounded-full px-4.5 py-2 bg-black/40 hover:bg-black/60 backdrop-blur-md text-white font-sans text-xs uppercase tracking-wider font-bold border border-white/20 shadow-sm transition-all duration-300 hover:scale-[1.02]"
+          class="inline-flex items-center gap-1.5 rounded-full px-4 py-2 bg-black/40 hover:bg-black/60 backdrop-blur-md text-white font-sans text-xs uppercase tracking-wider font-bold border border-white/20 shadow-sm transition-all duration-300 hover:scale-[1.02] cursor-pointer"
           title="Switch English / தமிழ்">
-          <!-- Translate Icon (文A) -->
-          <svg class="w-4 h-4 text-white/90 fill-current" viewBox="0 0 24 24">
-            <path
-              d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z" />
-          </svg>
-          <span id="langLabel" class="font-bold">ENG / TAM</span>
-          <svg class="w-3.5 h-3.5 text-white/70 ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <span id="langLabel" class="font-bold tracking-wide">ENG / TAM</span>
+          <svg class="w-3.5 h-3.5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
           </svg>
         </button>
@@ -831,15 +1183,16 @@
 
     <!-- Mobile Drawer Menu -->
     <div id="mobileMenu"
-      class="hidden md:hidden bg-[#2b4131]/95 backdrop-blur-xl border-b border-white/10 px-6 py-4 shadow-xl transition-all">
+      class="hidden md:hidden bg-[#1a251d]/95 backdrop-blur-2xl border-b border-white/10 px-6 py-4 shadow-xl transition-all">
       <div class="flex flex-col gap-3 text-sm font-medium text-white/90">
-        <a class="py-2 text-[#ffb703] font-semibold border-b border-white/10" href="#hero"
-          onclick="toggleMobileMenu()">Home</a>
-        <a class="py-2 hover:text-[#ffb703] border-b border-white/10" href="#how-it-works"
-          onclick="toggleMobileMenu()">How it Works</a>
-        <a class="py-2 hover:text-[#ffb703] border-b border-white/10" href="#pillars"
-          onclick="toggleMobileMenu()">Reports</a>
-        <a class="py-2 hover:text-[#ffb703]" href="#contact" onclick="toggleMobileMenu()">Consultation</a>
+        <a class="mobile-nav-item py-2 text-[#ffd043] font-semibold border-b border-white/10" href="#hero"
+          data-nav-target="hero" onclick="toggleMobileMenu()">Home</a>
+        <a class="mobile-nav-item py-2 hover:text-[#ffd043] border-b border-white/10" href="#how-it-works"
+          data-nav-target="how-it-works" onclick="toggleMobileMenu()">How it Works</a>
+        <a class="mobile-nav-item py-2 hover:text-[#ffd043] border-b border-white/10" href="#pillars"
+          data-nav-target="pillars" onclick="toggleMobileMenu()">Reports</a>
+        <a class="mobile-nav-item py-2 hover:text-[#ffd043]" href="#contact"
+          data-nav-target="contact" onclick="toggleMobileMenu()">Consultation</a>
       </div>
     </div>
   </header>
@@ -948,42 +1301,51 @@
               <div class="coverflow-card active" data-step="0"
                 style="transform: translate(-50%, -50%) translate3d(0, 0, 60px) scale(1) rotateY(0deg); opacity: 1; z-index: 30;">
                 <div class="coverflow-poster-card sweep-card"
-                  style="background: linear-gradient(165deg, #18281d 0%, #172a1e 40%, #b86e3a 100%);">
+                  style="background: linear-gradient(165deg, rgba(19, 34, 25, 0.85) 0%, rgba(23, 42, 30, 0.7) 40%, rgba(130, 80, 38, 0.85) 100%);">
+                  
+                  <!-- Liquid Glass Specular Sheen Reflection -->
+                  <div class="liquid-glass-sheen"></div>
+
+                  <!-- Integrated Card Background Image (Zero Cut, Crystal Clear) -->
+                  <div class="card-bg-media">
+                    <img src="assets/step1.png" alt="Upload 2D Plan">
+                    <div class="card-bg-overlay"
+                      style="background: linear-gradient(180deg, rgba(14, 24, 18, 0.35) 0%, rgba(14, 24, 18, 0) 18%, rgba(14, 24, 18, 0) 45%, rgba(14, 24, 18, 0.88) 72%, rgba(8, 16, 11, 0.98) 100%);">
+                    </div>
+                  </div>
+
                   <!-- Top Glyph & Step Meta -->
-                  <div class="flex items-center justify-between text-white/80 z-10 relative">
+                  <div class="flex items-center justify-between text-white/90 z-10 relative">
                     <div
                       class="inline-flex items-center gap-1 font-mono text-[11px] font-bold tracking-widest uppercase">
-                      <span class="text-[#ffb703] text-sm leading-none">✦</span>
+                      <span class="text-[#ffd043] text-sm leading-none">✦</span>
                       <span class="text-white font-bold" data-i18n="step1_tag">Submission</span>
                     </div>
                     <span
-                      class="text-[10px] font-mono text-white/70 bg-white/15 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20 font-bold">01
+                      class="text-[10px] font-mono text-white/90 bg-white/15 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20 font-bold">01
                       / 05</span>
                   </div>
 
-                  <!-- Center Graphic Visual & Big Title (Exact Video Style) -->
-                  <div class="my-auto text-center px-1 z-10 relative flex flex-col items-center">
-                    <div
-                      class="w-32 h-32 sm:w-36 sm:h-36 mb-3 rounded-2xl sm:rounded-3xl overflow-hidden bg-white/10 backdrop-blur-xl border border-white/30 shadow-2xl shadow-black/35 group-hover:scale-105 transition-all duration-500 relative flex items-center justify-center">
-                      <img src="assets/step1.png" alt="Upload 2D Plan" class="w-full h-full object-cover">
-                    </div>
-                    <h3 class="font-serif text-xl sm:text-2xl text-white font-bold leading-tight tracking-tight mb-1.5"
+                  <!-- Open Visual Window (Background Scene Shines Through with 100% Crystal Clarity) -->
+                  <div class="h-20 sm:h-24 w-full z-10 relative pointer-events-none"></div>
+
+                  <!-- Bottom Content: Luxury Typography & Feature Pill -->
+                  <div class="z-10 relative text-center">
+                    <h3 class="font-serif text-xl sm:text-[22px] text-white font-bold leading-tight tracking-tight mb-1"
                       data-i18n="step1_title">
                       Upload 2D Plan<br>
-                      <span class="italic font-serif font-normal text-[#ffb703]">In One Click</span>
+                      <span class="italic font-serif font-normal text-[#ffd043]">In One Click</span>
                     </h3>
-                  </div>
-
-                  <!-- Bottom Description & Feature Pill -->
-                  <div class="z-10 relative pt-2.5 border-t border-white/15 text-center">
-                    <p class="font-body text-xs sm:text-[12.5px] text-white/85 leading-relaxed font-normal mb-2"
-                      data-i18n="step1_desc">
-                      Add your 2D sketch, blueprint, png, jpg, or technical PDF drawing.
-                    </p>
-                    <div
-                      class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/25 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono text-white/90 font-bold">
-                      <span class="w-1.5 h-1.5 rounded-full bg-[#ffb703] animate-pulse"></span>
-                      Instant Parser Engine • JPG &amp; PDF
+                    <div class="pt-1.5 border-t border-white/15">
+                      <p class="font-body text-xs sm:text-[12px] text-white/85 leading-relaxed font-normal mb-1.5"
+                        data-i18n="step1_desc">
+                        Add your 2D sketch, blueprint, png, jpg, or technical PDF drawing.
+                      </p>
+                      <div
+                        class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/35 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono text-white/90 font-bold">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#ffd043] animate-pulse"></span>
+                        Instant Parser Engine • JPG &amp; PNG
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -991,41 +1353,48 @@
 
               <!-- Card 02: Verification & Secure Payment -->
               <div class="coverflow-card" data-step="1"
-                style="transform: translate(calc(-50% + 225px), -50%) translate3d(0, 0, -20px) scale(0.85) rotateY(-12deg); opacity: 0.65; z-index: 20;">
+                style="transform: translate(calc(-50% + 255px), -50%) translate3d(0, 0, -20px) scale(0.85) rotateY(-12deg); opacity: 0.65; z-index: 20;">
                 <div class="coverflow-poster-card sweep-card"
-                  style="background: linear-gradient(165deg, #241e17 0%, #2f2418 40%, #c97d39 100%);">
-                  <div class="flex items-center justify-between text-white/80 z-10 relative">
+                  style="background: linear-gradient(165deg, rgba(36, 30, 23, 0.85) 0%, rgba(47, 36, 24, 0.7) 40%, rgba(201, 125, 57, 0.85) 100%);">
+                  
+                  <div class="liquid-glass-sheen"></div>
+
+                  <div class="card-bg-media">
+                    <img src="assets/step2.png" alt="Secure Payment">
+                    <div class="card-bg-overlay"
+                      style="background: linear-gradient(180deg, rgba(28, 20, 14, 0.35) 0%, rgba(28, 20, 14, 0) 18%, rgba(28, 20, 14, 0) 45%, rgba(28, 20, 14, 0.88) 72%, rgba(16, 10, 7, 0.98) 100%);">
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between text-white/90 z-10 relative">
                     <div
                       class="inline-flex items-center gap-1 font-mono text-[11px] font-bold tracking-widest uppercase">
-                      <span class="text-[#ffb703] text-sm leading-none">✦</span>
+                      <span class="text-[#ffd043] text-sm leading-none">✦</span>
                       <span class="text-white font-bold" data-i18n="step2_tag">Verification</span>
                     </div>
                     <span
-                      class="text-[10px] font-mono text-white/70 bg-white/15 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20 font-bold">02
+                      class="text-[10px] font-mono text-white/90 bg-white/15 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20 font-bold">02
                       / 05</span>
                   </div>
 
-                  <div class="my-auto text-center px-1 z-10 relative flex flex-col items-center">
-                    <div
-                      class="w-32 h-32 sm:w-36 sm:h-36 mb-3 rounded-2xl sm:rounded-3xl overflow-hidden bg-white/10 backdrop-blur-xl border border-white/30 shadow-2xl shadow-black/35 group-hover:scale-105 transition-all duration-500 relative flex items-center justify-center">
-                      <img src="assets/step2.png" alt="Secure Payment" class="w-full h-full object-cover">
-                    </div>
-                    <h3 class="font-serif text-xl sm:text-2xl text-white font-bold leading-tight tracking-tight mb-1.5"
+                  <div class="h-20 sm:h-24 w-full z-10 relative pointer-events-none"></div>
+
+                  <div class="z-10 relative text-center">
+                    <h3 class="font-serif text-xl sm:text-[22px] text-white font-bold leading-tight tracking-tight mb-1"
                       data-i18n="step2_title">
                       Secure Payment<br>
-                      <span class="italic font-serif font-normal text-[#ffb703]">Instant Receipt</span>
+                      <span class="italic font-serif font-normal text-[#ffd043]">Instant Receipt</span>
                     </h3>
-                  </div>
-
-                  <div class="z-10 relative pt-2.5 border-t border-white/15 text-center">
-                    <p class="font-body text-xs sm:text-[12.5px] text-white/85 leading-relaxed font-normal mb-2"
-                      data-i18n="step2_desc">
-                      Transparent pricing with flexible packages to suit your home planning needs.
-                    </p>
-                    <div
-                      class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/25 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono text-white/90 font-bold">
-                      <span class="w-1.5 h-1.5 rounded-full bg-[#ffb703] animate-pulse"></span>
-                      UPI &amp; NetBanking • 100% SECURE
+                    <div class="pt-1.5 border-t border-white/15">
+                      <p class="font-body text-xs sm:text-[12px] text-white/85 leading-relaxed font-normal mb-1.5"
+                        data-i18n="step2_desc">
+                        Transparent pricing with flexible packages to suit your home planning needs.
+                      </p>
+                      <div
+                        class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/35 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono text-white/90 font-bold">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#ffd043] animate-pulse"></span>
+                        UPI &amp; NetBanking • 100% SECURE
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1033,41 +1402,48 @@
 
               <!-- Card 03: Analysis Plan -->
               <div class="coverflow-card" data-step="2"
-                style="transform: translate(calc(-50% + 400px), -50%) translate3d(0, 0, -60px) scale(0.70) rotateY(-20deg); opacity: 0.28; z-index: 10;">
+                style="transform: translate(calc(-50% + 445px), -50%) translate3d(0, 0, -60px) scale(0.70) rotateY(-20deg); opacity: 0.28; z-index: 10;">
                 <div class="coverflow-poster-card sweep-card"
-                  style="background: linear-gradient(165deg, #13221b 0%, #1a3426 40%, #3e7b5b 100%);">
-                  <div class="flex items-center justify-between text-white/80 z-10 relative">
+                  style="background: linear-gradient(165deg, rgba(19, 34, 27, 0.85) 0%, rgba(26, 52, 38, 0.7) 40%, rgba(62, 123, 91, 0.85) 100%);">
+                  
+                  <div class="liquid-glass-sheen"></div>
+
+                  <div class="card-bg-media">
+                    <img src="assets/step3.png" alt="Analyze 2D Plan">
+                    <div class="card-bg-overlay"
+                      style="background: linear-gradient(180deg, rgba(14, 26, 19, 0.35) 0%, rgba(14, 26, 19, 0) 18%, rgba(14, 26, 19, 0) 45%, rgba(14, 26, 19, 0.88) 72%, rgba(8, 18, 12, 0.98) 100%);">
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between text-white/90 z-10 relative">
                     <div
                       class="inline-flex items-center gap-1 font-mono text-[11px] font-bold tracking-widest uppercase">
-                      <span class="text-[#ffb703] text-sm leading-none">✦</span>
+                      <span class="text-[#ffd043] text-sm leading-none">✦</span>
                       <span class="text-white font-bold" data-i18n="step3_tag">Analysis Plan</span>
                     </div>
                     <span
-                      class="text-[10px] font-mono text-white/70 bg-white/15 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20 font-bold">03
+                      class="text-[10px] font-mono text-white/90 bg-white/15 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20 font-bold">03
                       / 05</span>
                   </div>
 
-                  <div class="my-auto text-center px-1 z-10 relative flex flex-col items-center">
-                    <div
-                      class="w-32 h-32 sm:w-36 sm:h-36 mb-3 rounded-2xl sm:rounded-3xl overflow-hidden bg-white/10 backdrop-blur-xl border border-white/30 shadow-2xl shadow-black/35 group-hover:scale-105 transition-all duration-500 relative flex items-center justify-center">
-                      <img src="assets/step3.png" alt="Analyze 2D Plan" class="w-full h-full object-cover">
-                    </div>
-                    <h3 class="font-serif text-xl sm:text-2xl text-white font-bold leading-tight tracking-tight mb-1.5"
+                  <div class="h-20 sm:h-24 w-full z-10 relative pointer-events-none"></div>
+
+                  <div class="z-10 relative text-center">
+                    <h3 class="font-serif text-xl sm:text-[22px] text-white font-bold leading-tight tracking-tight mb-1"
                       data-i18n="step3_title">
                       Analyze 2D Plan<br>
-                      <span class="italic font-serif font-normal text-[#ffb703]">Vāstu Energy Grid</span>
+                      <span class="italic font-serif font-normal text-[#ffd043]">Vāstu Energy Grid</span>
                     </h3>
-                  </div>
-
-                  <div class="z-10 relative pt-2.5 border-t border-white/15 text-center">
-                    <p class="font-body text-xs sm:text-[12.5px] text-white/85 leading-relaxed font-normal mb-2"
-                      data-i18n="step3_desc">
-                      Deterministic parsing of walls, room boundaries, structural loads, and azimuths.
-                    </p>
-                    <div
-                      class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/25 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono text-white/90 font-bold">
-                      <span class="w-1.5 h-1.5 rounded-full bg-[#ffb703] animate-pulse"></span>
-                      IS 456 Structural Checks • Validated
+                    <div class="pt-1.5 border-t border-white/15">
+                      <p class="font-body text-xs sm:text-[12px] text-white/85 leading-relaxed font-normal mb-1.5"
+                        data-i18n="step3_desc">
+                        Deterministic parsing of walls, room boundaries, structural loads, and azimuths.
+                      </p>
+                      <div
+                        class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/35 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono text-white/90 font-bold">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#ffd043] animate-pulse"></span>
+                        IS 456 Structural Checks • Validated
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1075,41 +1451,48 @@
 
               <!-- Card 04: View Reports -->
               <div class="coverflow-card" data-step="3"
-                style="transform: translate(calc(-50% - 400px), -50%) translate3d(0, 0, -60px) scale(0.70) rotateY(20deg); opacity: 0.28; z-index: 10;">
+                style="transform: translate(calc(-50% - 445px), -50%) translate3d(0, 0, -60px) scale(0.70) rotateY(20deg); opacity: 0.28; z-index: 10;">
                 <div class="coverflow-poster-card sweep-card"
-                  style="background: linear-gradient(165deg, #15251b 0%, #1f3a2a 40%, #548762 100%);">
-                  <div class="flex items-center justify-between text-white/80 z-10 relative">
+                  style="background: linear-gradient(165deg, rgba(21, 37, 27, 0.85) 0%, rgba(31, 58, 42, 0.7) 40%, rgba(84, 135, 98, 0.85) 100%);">
+                  
+                  <div class="liquid-glass-sheen"></div>
+
+                  <div class="card-bg-media">
+                    <img src="assets/step4.png" alt="View Reports">
+                    <div class="card-bg-overlay"
+                      style="background: linear-gradient(180deg, rgba(16, 28, 20, 0.35) 0%, rgba(16, 28, 20, 0) 18%, rgba(16, 28, 20, 0) 45%, rgba(16, 28, 20, 0.88) 72%, rgba(9, 19, 13, 0.98) 100%);">
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between text-white/90 z-10 relative">
                     <div
                       class="inline-flex items-center gap-1 font-mono text-[11px] font-bold tracking-widest uppercase">
-                      <span class="text-[#ffb703] text-sm leading-none">✦</span>
+                      <span class="text-[#ffd043] text-sm leading-none">✦</span>
                       <span class="text-white font-bold" data-i18n="step4_tag">View Report</span>
                     </div>
                     <span
-                      class="text-[10px] font-mono text-white/70 bg-white/15 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20 font-bold">04
+                      class="text-[10px] font-mono text-white/90 bg-white/15 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20 font-bold">04
                       / 05</span>
                   </div>
 
-                  <div class="my-auto text-center px-1 z-10 relative flex flex-col items-center">
-                    <div
-                      class="w-32 h-32 sm:w-36 sm:h-36 mb-3 rounded-2xl sm:rounded-3xl overflow-hidden bg-white/10 backdrop-blur-xl border border-white/30 shadow-2xl shadow-black/35 group-hover:scale-105 transition-all duration-500 relative flex items-center justify-center">
-                      <img src="assets/step4.png" alt="View Reports" class="w-full h-full object-cover">
-                    </div>
-                    <h3 class="font-serif text-xl sm:text-2xl text-white font-bold leading-tight tracking-tight mb-1.5"
+                  <div class="h-20 sm:h-24 w-full z-10 relative pointer-events-none"></div>
+
+                  <div class="z-10 relative text-center">
+                    <h3 class="font-serif text-xl sm:text-[22px] text-white font-bold leading-tight tracking-tight mb-1"
                       data-i18n="step4_title">
                       View Reports<br>
-                      <span class="italic font-serif font-normal text-[#ffb703]">Spatial Walkthrough</span>
+                      <span class="italic font-serif font-normal text-[#ffd043]">Spatial Walkthrough</span>
                     </h3>
-                  </div>
-
-                  <div class="z-10 relative pt-2.5 border-t border-white/15 text-center">
-                    <p class="font-body text-xs sm:text-[12.5px] text-white/85 leading-relaxed font-normal mb-2"
-                      data-i18n="step4_desc">
-                      Interactive 3D walkthrough, Vāstu energy matrix, material takeoff &amp; schedules.
-                    </p>
-                    <div
-                      class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/25 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono text-white/90 font-bold">
-                      <span class="w-1.5 h-1.5 rounded-full bg-[#ffb703] animate-pulse"></span>
-                      Full BIM Breakdown • LIVE PREVIEW
+                    <div class="pt-1.5 border-t border-white/15">
+                      <p class="font-body text-xs sm:text-[12px] text-white/85 leading-relaxed font-normal mb-1.5"
+                        data-i18n="step4_desc">
+                        Interactive 3D walkthrough, Vāstu energy matrix, material takeoff &amp; schedules.
+                      </p>
+                      <div
+                        class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/35 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono text-white/90 font-bold">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#ffd043] animate-pulse"></span>
+                        Full BIM Breakdown • LIVE PREVIEW
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1117,41 +1500,48 @@
 
               <!-- Card 05: Download Dossier PDF -->
               <div class="coverflow-card" data-step="4"
-                style="transform: translate(calc(-50% - 225px), -50%) translate3d(0, 0, -20px) scale(0.85) rotateY(12deg); opacity: 0.65; z-index: 20;">
+                style="transform: translate(calc(-50% - 255px), -50%) translate3d(0, 0, -20px) scale(0.85) rotateY(12deg); opacity: 0.65; z-index: 20;">
                 <div class="coverflow-poster-card sweep-card"
-                  style="background: linear-gradient(165deg, #221a14 0%, #352619 40%, #b26c36 100%);">
-                  <div class="flex items-center justify-between text-white/80 z-10 relative">
+                  style="background: linear-gradient(165deg, rgba(34, 26, 20, 0.85) 0%, rgba(53, 38, 25, 0.7) 40%, rgba(178, 108, 54, 0.85) 100%);">
+                  
+                  <div class="liquid-glass-sheen"></div>
+
+                  <div class="card-bg-media">
+                    <img src="assets/step5.png" alt="Download Reports">
+                    <div class="card-bg-overlay"
+                      style="background: linear-gradient(180deg, rgba(26, 18, 14, 0.35) 0%, rgba(26, 18, 14, 0) 18%, rgba(26, 18, 14, 0) 45%, rgba(26, 18, 14, 0.88) 72%, rgba(15, 9, 6, 0.98) 100%);">
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between text-white/90 z-10 relative">
                     <div
                       class="inline-flex items-center gap-1 font-mono text-[11px] font-bold tracking-widest uppercase">
-                      <span class="text-[#ffb703] text-sm leading-none">✦</span>
+                      <span class="text-[#ffd043] text-sm leading-none">✦</span>
                       <span class="text-white font-bold" data-i18n="step5_tag">Download PDF</span>
                     </div>
                     <span
-                      class="text-[10px] font-mono text-white/70 bg-white/15 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20 font-bold">05
+                      class="text-[10px] font-mono text-white/90 bg-white/15 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20 font-bold">05
                       / 05</span>
                   </div>
 
-                  <div class="my-auto text-center px-1 z-10 relative flex flex-col items-center">
-                    <div
-                      class="w-32 h-32 sm:w-36 sm:h-36 mb-3 rounded-2xl sm:rounded-3xl overflow-hidden bg-white/10 backdrop-blur-xl border border-white/30 shadow-2xl shadow-black/35 group-hover:scale-105 transition-all duration-500 relative flex items-center justify-center">
-                      <img src="assets/step5.png" alt="Download Reports" class="w-full h-full object-cover">
-                    </div>
-                    <h3 class="font-serif text-xl sm:text-2xl text-white font-bold leading-tight tracking-tight mb-1.5"
+                  <div class="h-20 sm:h-24 w-full z-10 relative pointer-events-none"></div>
+
+                  <div class="z-10 relative text-center">
+                    <h3 class="font-serif text-xl sm:text-[22px] text-white font-bold leading-tight tracking-tight mb-1"
                       data-i18n="step5_title">
                       Download Reports<br>
-                      <span class="italic font-serif font-normal text-[#ffb703]">PDF &amp; Save to device</span>
+                      <span class="italic font-serif font-normal text-[#ffd043]">PDF &amp; Save to device</span>
                     </h3>
-                  </div>
-
-                  <div class="z-10 relative pt-2.5 border-t border-white/15 text-center">
-                    <p class="font-body text-xs sm:text-[12.5px] text-white/85 leading-relaxed font-normal mb-2"
-                      data-i18n="step5_desc">
-                      Instant download all reports in one click to get PDF, save in device.
-                    </p>
-                    <div
-                      class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/25 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono text-white/90 font-bold">
-                      <span class="w-1.5 h-1.5 rounded-full bg-[#ffb703] animate-pulse"></span>
-                      Certified Dossier • ONE CLICK
+                    <div class="pt-1.5 border-t border-white/15">
+                      <p class="font-body text-xs sm:text-[12px] text-white/85 leading-relaxed font-normal mb-1.5"
+                        data-i18n="step5_desc">
+                        Instant download all reports in one click to get PDF, save in device.
+                      </p>
+                      <div
+                        class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/35 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono text-white/90 font-bold">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#ffd043] animate-pulse"></span>
+                        Certified Dossier • ONE CLICK
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1379,232 +1769,854 @@
           </div>
         </div>
 
-        <!-- 4 Modern Architectural Glass Bento Deliverable Cards -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-7 lg:gap-8 items-stretch">
+        <!-- HANGING RIG CONTAINER: UNIFIED SVG CABLE & SUSPENDED CARDS -->
+        <div class="hanging-rig-container" id="hangingRigContainer">
 
-          <!-- CARD 1: 3D Floor Plan (Top Left) -->
-          <div class="report-glass-card p-6 sm:p-7 flex flex-col justify-between group cursor-pointer"
-            onclick="openReportModal('3d')">
-            <div>
-              <div class="flex items-center justify-between mb-4 text-xs">
-                <span
-                  class="text-[11px] font-mono font-extrabold text-[#1a1f26] tracking-wider uppercase flex items-center gap-1.5">
-                  <span class="text-sm leading-none text-[#ffb703]">✦</span>
-                  The Pavilion Residence &bull; Project ID: AR2307
-                </span>
-                <span
-                  class="px-2.5 py-0.5 rounded-full bg-[#1a1f26] text-white font-mono text-[10px] font-bold uppercase shadow-sm">
-                  Report #01
-                </span>
-              </div>
+          <!-- FULL-BLEED OVERLAY SVG CANVAS FOR CONTINUOUS STEEL CABLE -->
+          <svg class="overhead-cable-svg" id="overheadCableSvg">
+            <defs>
+              <!-- Metallic Steel Cable Gradient -->
+              <linearGradient id="cableSteelGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#475569" />
+                <stop offset="20%" stop-color="#94a3b8" />
+                <stop offset="50%" stop-color="#cbd5e1" />
+                <stop offset="80%" stop-color="#94a3b8" />
+                <stop offset="100%" stop-color="#475569" />
+              </linearGradient>
 
-              <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
-                <!-- 3D Plan Isometric Visual -->
-                <div
-                  class="sm:col-span-5 rounded-2xl overflow-hidden shadow-lg border border-white/25 bg-black/40 h-36 sm:h-40 relative group/img">
-                  <img src="assets/report_3d.png" alt="3D Floor Plan"
-                    class="w-full h-full object-cover group-hover/img:scale-108 transition-transform duration-700"
-                    onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/report_3d.png';">
-                  <span
-                    class="absolute bottom-2 left-2 px-2.5 py-0.5 rounded-full bg-black/70 backdrop-blur-md text-white text-[9px] font-mono font-bold border border-white/20">
-                    Scale: 1:50
-                  </span>
-                </div>
+              <!-- Spherical Chrome Anchor Pin Gradient -->
+              <radialGradient id="anchorPinGrad" cx="35%" cy="35%" r="65%">
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="45%" stop-color="#cbd5e1" />
+                <stop offset="85%" stop-color="#475569" />
+                <stop offset="100%" stop-color="#1e293b" />
+              </radialGradient>
 
-                <!-- Text & Buttons -->
-                <div class="sm:col-span-7 space-y-2.5">
-                  <h3 class="font-serif text-2xl font-bold text-[#1a1f26] leading-tight" data-i18n="card1_title">
-                    3D Floor Plan
-                  </h3>
-                  <p class="font-sans text-xs text-[#2d3748] font-medium line-clamp-2 leading-relaxed">
-                    Complete room-by-room isometric walkthrough with verified dimensions &amp; wall layouts.
-                  </p>
+              <!-- Silver Wire Drop Strands Gradient -->
+              <linearGradient id="wireGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#64748b" />
+                <stop offset="50%" stop-color="#ffffff" />
+                <stop offset="100%" stop-color="#475569" />
+              </linearGradient>
 
-                  <div class="flex items-center gap-2.5 pt-1.5 flex-wrap">
-                    <span
-                      class="px-4 py-1.5 rounded-full bg-gradient-to-r from-[#ffd043] via-[#ffaa00] to-[#e68200] hover:from-[#ffe066] hover:to-[#ffaa00] text-[#1a1f26] text-xs font-bold shadow-md hover:scale-[1.03] active:scale-95 transition-all">
-                      Explore Layout
-                    </span>
-                    <button type="button"
-                      class="text-xs font-extrabold text-[#1a1f26] hover:text-[#ffb703] transition flex items-center gap-1 group-hover:translate-x-1 duration-300">
-                      View Details <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                    </button>
+              <!-- Steel Crimp & Oval Ring Link Gradient -->
+              <linearGradient id="linkGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="40%" stop-color="#cbd5e1" />
+                <stop offset="80%" stop-color="#64748b" />
+                <stop offset="100%" stop-color="#334155" />
+              </linearGradient>
+
+              <!-- Realistic Burnished Bronze Eyelet / Grommet Gradient -->
+              <linearGradient id="grommetGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#f59e0b" />
+                <stop offset="30%" stop-color="#d97706" />
+                <stop offset="70%" stop-color="#92400e" />
+                <stop offset="100%" stop-color="#78350f" />
+              </linearGradient>
+
+              <!-- Clean Architectural Dossier Foil for Back Face -->
+              <linearGradient id="holoFoil1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="40%" stop-color="#fefdfa" />
+                <stop offset="75%" stop-color="#f8fafc" />
+                <stop offset="100%" stop-color="#f1f5f9" />
+              </linearGradient>
+
+              <!-- Ultra-Luxury Translucent Frosted Glass Silhouette Gradients -->
+              <linearGradient id="glassTagFrontGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.75" />
+                <stop offset="25%" stop-color="#f8fafc" stop-opacity="0.48" />
+                <stop offset="70%" stop-color="#e2e8f0" stop-opacity="0.42" />
+                <stop offset="100%" stop-color="#ffffff" stop-opacity="0.68" />
+              </linearGradient>
+
+              <linearGradient id="glassTagBackGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.78" />
+                <stop offset="30%" stop-color="#f8fafc" stop-opacity="0.52" />
+                <stop offset="70%" stop-color="#edf2f7" stop-opacity="0.48" />
+                <stop offset="100%" stop-color="#ffffff" stop-opacity="0.72" />
+              </linearGradient>
+
+              <!-- Crystal Glass Rim Highlight Border Gradient -->
+              <linearGradient id="glassRimGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+                <stop offset="25%" stop-color="#ffd043" stop-opacity="0.65" />
+                <stop offset="60%" stop-color="#ffffff" stop-opacity="0.40" />
+                <stop offset="85%" stop-color="#cbd5e1" stop-opacity="0.65" />
+                <stop offset="100%" stop-color="#ffffff" stop-opacity="0.90" />
+              </linearGradient>
+
+              <!-- Specular Glass Light Sheen Diagonal Gradient -->
+              <linearGradient id="glassSheenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.52" />
+                <stop offset="30%" stop-color="#ffffff" stop-opacity="0.18" />
+                <stop offset="70%" stop-color="#ffffff" stop-opacity="0.04" />
+                <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+              </linearGradient>
+
+              <!-- Photorealistic Luggage Tag Silhouette Drop Shadow -->
+              <filter id="tagBadgeShadow" x="-20%" y="-15%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="14" stdDeviation="12" flood-color="#142117" flood-opacity="0.22" />
+                <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#142117" flood-opacity="0.10" />
+              </filter>
+            </defs>
+
+            <!-- Overhead Cable Path (Dynamically passes THROUGH every ball center) -->
+            <path id="overheadCablePath" 
+                  d="M 20 6 L 140 17 Q 300 25 460 31 Q 610 33 760 31 Q 920 25 1070 17 L 1180 6" 
+                  fill="none" stroke="url(#cableSteelGrad)" stroke-width="2.2" stroke-linecap="round" />
+
+            <!-- Left Anchor Pin on wall -->
+            <circle id="anchorPinLeft" cx="20" cy="6" r="6" fill="url(#anchorPinGrad)" stroke="#1e293b" stroke-width="1.5" />
+            <circle id="anchorPinLeftCore" cx="20" cy="6" r="2" fill="#0f172a" />
+
+            <!-- Right Anchor Pin on wall -->
+            <circle id="anchorPinRight" cx="1180" cy="6" r="6" fill="url(#anchorPinGrad)" stroke="#1e293b" stroke-width="1.5" />
+            <circle id="anchorPinRightCore" cx="1180" cy="6" r="2" fill="#0f172a" />
+          </svg>
+
+          <!-- 4 SUSPENDED HANGING BADGE CARDS -->
+          <div class="cards-hanging-deck" id="hangingCardsDeck">
+
+            <!-- ===================================================================== -->
+            <!-- CARD 1: 3D Floor Plan (Assembly 1)                                    -->
+            <!-- ===================================================================== -->
+            <div class="hanging-assembly-unit assembly-1" data-report="3d">
+              <div class="cable-runner-ball" title="Chrome Cable Runner #01"></div>
+
+              <div class="card-sway-rig">
+                <!-- Double Wire Loop with Crimp & Oval Ring hooked into Grommet -->
+                <svg width="24" height="44" viewBox="0 0 24 44" fill="none" class="overflow-visible" style="margin-top: -1px; margin-bottom: -16px; z-index: 10;">
+                  <line x1="10" y1="0" x2="10" y2="22" stroke="url(#wireGrad1)" stroke-width="1.3" />
+                  <line x1="14" y1="0" x2="14" y2="22" stroke="url(#wireGrad1)" stroke-width="1.3" />
+                  <rect x="8.5" y="20" width="7" height="6" rx="1.5" fill="#94a3b8" stroke="#334155" stroke-width="0.8" />
+                  <line x1="9" y1="23" x2="15" y2="23" stroke="#ffffff" stroke-width="0.7" />
+                  <rect x="10" y="24" width="4" height="18" rx="2" fill="none" stroke="url(#linkGrad1)" stroke-width="1.8" />
+                </svg>
+
+                <!-- 3D Flip Luggage Tag Card -->
+                <div class="tag-badge-card" onclick="openReportModal('3d')">
+
+                  <!-- FRONT FACE: Pristine Image Showcase -->
+                  <div class="tag-face tag-front">
+                    <svg class="tag-silhouette-svg" viewBox="0 0 240 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M 0 55 Q 0 42 16 33 L 105 5 Q 120 0 135 5 L 224 33 Q 240 42 240 55 L 240 356 Q 240 380 216 380 L 24 380 Q 0 380 0 356 Z" 
+                            fill="url(#glassTagFrontGrad)" stroke="url(#glassRimGrad)" stroke-width="1.8" filter="url(#tagBadgeShadow)" />
+                      <!-- Specular Liquid Glass Diagonal Light Glare -->
+                      <path d="M 0 55 Q 0 42 16 33 L 105 5 Q 120 0 135 5 L 224 33 L 140 185 L 0 135 Z" fill="url(#glassSheenGrad)" />
+                      <circle cx="120" cy="28" r="9" fill="url(#grommetGrad1)" stroke="#78350f" stroke-width="1" />
+                      <circle cx="120" cy="28" r="5" fill="#8ca38f" stroke="#78350f" stroke-width="0.9" />
+                    </svg>
+
+                    <svg width="24" height="18" viewBox="0 0 24 18" fill="none" style="position: absolute; top: 19px; left: 108px; z-index: 5;">
+                      <path d="M 10 0 L 10 9 Q 10 13 12 13 Q 14 13 14 9 L 14 0" fill="none" stroke="#64748b" stroke-width="1.8" />
+                    </svg>
+
+                    <div class="tag-content-wrap">
+                      <div>
+                        <div class="flex items-center justify-between text-[9px] font-mono text-slate-400 font-bold uppercase tracking-wider">
+                          <span class="flex items-center gap-1 text-[#ffb703]">
+                            <span>✦</span> <span class="text-slate-600 font-extrabold">KANAVU ILLAM</span>
+                          </span>
+                          <span class="px-2 py-0.5 rounded-full bg-slate-900 text-white font-extrabold text-[8.5px]">
+                            + REPORT #01
+                          </span>
+                        </div>
+
+                        <div class="tag-image-window">
+                          <img src="assets/report_3d.png" alt="3D Floor Plan Walkthrough"
+                            onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/report_3d.png';">
+                          <div class="image-glass-pill">
+                            <i class="fa-solid fa-cube text-[#ffd043]"></i>
+                            <span>3D Floor Plan</span>
+                          </div>
+                        </div>
+
+                        <div class="mt-3">
+                          <div class="flex items-center justify-between text-[8.5px] font-mono font-bold text-amber-600 uppercase mb-0.5">
+                            <span>SPATIAL ARCHITECTURE</span>
+                            <span class="text-slate-400">Scale: 1:50</span>
+                          </div>
+                          <h3 class="text-[16px] font-extrabold text-slate-900 tracking-tight leading-snug font-serif">
+                            3D Floor Plan
+                          </h3>
+                          <p class="text-[10px] text-slate-500 font-medium mt-0.5 line-clamp-1">
+                            Complete isometric walkthrough with true scale.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="pt-2 flex items-center justify-between border-t border-slate-100">
+                        <span class="text-[9px] font-mono font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
+                          <span>HOVER TO INSPECT</span>
+                          <i class="fa-solid fa-rotate text-[8px] animate-spin" style="animation-duration: 8s;"></i>
+                        </span>
+                        <div class="tag-arrow-pill">
+                          <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                      </div>
+                    </div>
                   </div>
+
+                  <!-- BACK FACE: Educational Report Content (3D Model Na Ena?) -->
+                  <div class="tag-face tag-back">
+                    <svg class="tag-silhouette-svg" viewBox="0 0 240 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M 0 55 Q 0 42 16 33 L 105 5 Q 120 0 135 5 L 224 33 Q 240 42 240 55 L 240 356 Q 240 380 216 380 L 24 380 Q 0 380 0 356 Z" 
+                            fill="url(#glassTagBackGrad)" stroke="url(#glassRimGrad)" stroke-width="1.8" filter="url(#tagBadgeShadow)" />
+                      <!-- Specular Liquid Glass Diagonal Light Glare -->
+                      <path d="M 0 55 Q 0 42 16 33 L 105 5 Q 120 0 135 5 L 224 33 L 140 185 L 0 135 Z" fill="url(#glassSheenGrad)" />
+                      <circle cx="120" cy="28" r="9" fill="url(#grommetGrad1)" stroke="#78350f" stroke-width="1" />
+                      <circle cx="120" cy="28" r="5" fill="#8ca38f" stroke="#78350f" stroke-width="0.9" />
+                    </svg>
+
+                    <div class="hologram-shimmer-layer"></div>
+
+                    <div class="tag-content-wrap">
+                      <div>
+                        <!-- Header with Icon & Category -->
+                        <div class="flex items-center justify-between text-[8px] font-mono font-bold uppercase tracking-wider text-slate-400 mb-1.5 pb-1 border-b border-slate-200/80">
+                          <span class="flex items-center gap-1 text-amber-700">
+                            <i class="fa-solid fa-cube text-[9px]"></i>
+                            <span>SPATIAL ARCHITECTURE</span>
+                          </span>
+                          <span class="text-slate-800 font-extrabold">DOSSIER #01</span>
+                        </div>
+
+                        <!-- What is 3D Model? / 3D Model Na Ena? -->
+                        <div class="mt-1">
+                          <h4 class="text-[13.5px] font-extrabold text-slate-900 tracking-tight leading-snug">
+                            3D Floor Plan Na Ena?
+                          </h4>
+                          <span class="text-[8.5px] font-mono text-amber-600 font-semibold block mt-0.5">
+                            Isometric Spatial Walkthrough &amp; Scale
+                          </span>
+                        </div>
+
+                        <!-- Concise Description of Why it Matters -->
+                        <p class="text-[9.5px] text-slate-600 leading-relaxed font-normal mt-1.5 mb-2.5">
+                          2D blueprint-ah paatha puriyathavangalukku, veetin actual room size, ceiling height, door clearance, matrum furniture fit-ah katti mudikum munne 3D-la live-ah paaka mudiyum.
+                        </p>
+
+                        <!-- Selected Deliverables Checklist -->
+                        <div class="space-y-1 pt-1.5 border-t border-slate-200/70">
+                          <span class="text-[7.5px] font-mono uppercase font-bold text-slate-500 tracking-widest block mb-1">
+                            DELIVERABLES INCLUDED
+                          </span>
+                          <div class="space-y-1">
+                            <div class="spec-item-pill">
+                              <i class="fa-solid fa-check text-emerald-600 text-[8px] shrink-0"></i>
+                              <span class="truncate">Room-by-Room 1:50 Spatial Walkthrough</span>
+                            </div>
+                            <div class="spec-item-pill">
+                              <i class="fa-solid fa-check text-emerald-600 text-[8px] shrink-0"></i>
+                              <span class="truncate">Sunlight &amp; Cross-Ventilation Simulation</span>
+                            </div>
+                            <div class="spec-item-pill">
+                              <i class="fa-solid fa-check text-emerald-600 text-[8px] shrink-0"></i>
+                              <span class="truncate">Furniture Fit &amp; True Opening Clearance</span>
+                            </div>
+                            <div class="spec-item-pill">
+                              <i class="fa-solid fa-check text-emerald-600 text-[8px] shrink-0"></i>
+                              <span class="truncate">360 Degree Rotate in 3D Model</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Footer: Action Button & QR Code -->
+                      <div class="pt-2 border-t border-slate-200/80 flex items-end justify-between">
+                        <div>
+                          <span class="text-[7.5px] font-mono uppercase font-bold text-slate-500 tracking-widest block mb-1">
+                            LET'S EXPLORE
+                          </span>
+                          <button type="button" class="px-2.5 py-1 rounded-full bg-slate-900 text-white text-[9px] font-bold shadow-md hover:bg-[#ffb703] hover:text-slate-900 transition flex items-center gap-1.5 cursor-pointer"
+                            onclick="event.stopPropagation(); openReportModal('3d');">
+                            <span>Explore 3D Plan</span>
+                            <i class="fa-solid fa-arrow-right text-[7.5px]"></i>
+                          </button>
+                        </div>
+
+                        <div class="flex flex-col items-center">
+                          <div class="qr-badge-frame">
+                            <svg viewBox="0 0 21 21" class="w-full h-full" fill="#0f172a" xmlns="http://www.w3.org/2000/svg">
+                              <rect x="0" y="0" width="7" height="7" fill="none" stroke="#0f172a" stroke-width="1"/>
+                              <rect x="2" y="2" width="3" height="3"/>
+                              <rect x="14" y="0" width="7" height="7" fill="none" stroke="#0f172a" stroke-width="1"/>
+                              <rect x="16" y="2" width="3" height="3"/>
+                              <rect x="0" y="14" width="7" height="7" fill="none" stroke="#0f172a" stroke-width="1"/>
+                              <rect x="2" y="16" width="3" height="3"/>
+                              <rect x="9" y="3" width="3" height="3"/>
+                              <rect x="14" y="9" width="4" height="2"/>
+                              <rect x="8" y="14" width="3" height="4"/>
+                              <rect x="14" y="14" width="4" height="4"/>
+                            </svg>
+                          </div>
+                          <span class="text-[6.5px] font-mono font-extrabold text-slate-500 uppercase mt-0.5">
+                            SCAN DOSSIER
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
-          </div>
 
-          <!-- CARD 3: Cost & Budget (Top Right) -->
-          <div class="report-glass-card p-6 sm:p-7 flex flex-col justify-between group cursor-pointer"
-            onclick="openReportModal('cost')">
-            <div>
-              <div class="flex items-center justify-between mb-4 text-xs">
-                <span
-                  class="text-[11px] font-mono font-extrabold text-[#1a1f26] tracking-wider uppercase flex items-center gap-1.5">
-                  <span class="text-sm leading-none text-[#ffb703]">✦</span>
-                  The Pavilion Residence &bull; Project ID: AR2307
-                </span>
-                <span
-                  class="px-2.5 py-0.5 rounded-full bg-[#1a1f26] text-white font-mono text-[10px] font-bold uppercase shadow-sm">
-                  Report #03
-                </span>
-              </div>
+            <!-- ===================================================================== -->
+            <!-- CARD 2: Cost & Budget (Assembly 2)                                    -->
+            <!-- ===================================================================== -->
+            <div class="hanging-assembly-unit assembly-2" data-report="cost">
+              <div class="cable-runner-ball" title="Chrome Cable Runner #02"></div>
 
-              <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
-                <!-- Circular Cost Graphic with Gunmetal/Gold Ring -->
-                <div
-                  class="sm:col-span-5 rounded-2xl overflow-hidden shadow-lg border border-white/25 bg-black/45 backdrop-blur-md p-3 h-36 sm:h-40 flex flex-col items-center justify-center text-center relative">
-                  <div
-                    class="w-14 h-14 rounded-full border-4 border-white/15 border-t-[#ffb703] border-r-[#ffb703] flex items-center justify-center shadow-inner">
-                    <i class="fa-solid fa-coins text-[#ffb703] text-base"></i>
-                  </div>
-                  <span class="text-[10px] uppercase font-mono font-bold text-white/80 mt-1.5">Projected Cost</span>
-                  <span class="text-sm font-bold text-white tracking-tight">&#8377;34.8 Lakhs</span>
-                </div>
+              <div class="card-sway-rig">
+                <svg width="24" height="44" viewBox="0 0 24 44" fill="none" class="overflow-visible" style="margin-top: -1px; margin-bottom: -16px; z-index: 10;">
+                  <line x1="10" y1="0" x2="10" y2="22" stroke="url(#wireGrad1)" stroke-width="1.3" />
+                  <line x1="14" y1="0" x2="14" y2="22" stroke="url(#wireGrad1)" stroke-width="1.3" />
+                  <rect x="8.5" y="20" width="7" height="6" rx="1.5" fill="#94a3b8" stroke="#334155" stroke-width="0.8" />
+                  <line x1="9" y1="23" x2="15" y2="23" stroke="#ffffff" stroke-width="0.7" />
+                  <rect x="10" y="24" width="4" height="18" rx="2" fill="none" stroke="url(#linkGrad1)" stroke-width="1.8" />
+                </svg>
 
-                <!-- Text & Budget Stats -->
-                <div class="sm:col-span-7 space-y-2.5">
-                  <h3 class="font-serif text-2xl font-bold text-[#1a1f26] leading-tight" data-i18n="card3_title">
-                    Cost &amp; Budget
-                  </h3>
-                  <div class="flex items-baseline gap-2">
-                    <span class="text-xs text-[#4a5568] font-medium">Current Spend:</span>
-                    <span class="text-sm font-extrabold text-[#1a1f26]">&#8377;34,80,000</span>
-                    <span class="text-xs text-[#718096] font-semibold">/ &#8377;35L</span>
+                <div class="tag-badge-card" onclick="openReportModal('cost')">
+                  <!-- FRONT FACE -->
+                  <div class="tag-face tag-front">
+                    <svg class="tag-silhouette-svg" viewBox="0 0 240 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M 0 55 Q 0 42 16 33 L 105 5 Q 120 0 135 5 L 224 33 Q 240 42 240 55 L 240 356 Q 240 380 216 380 L 24 380 Q 0 380 0 356 Z" 
+                            fill="url(#glassTagFrontGrad)" stroke="url(#glassRimGrad)" stroke-width="1.8" filter="url(#tagBadgeShadow)" />
+                      <!-- Specular Liquid Glass Diagonal Light Glare -->
+                      <path d="M 0 55 Q 0 42 16 33 L 105 5 Q 120 0 135 5 L 224 33 L 140 185 L 0 135 Z" fill="url(#glassSheenGrad)" />
+                      <circle cx="120" cy="28" r="9" fill="url(#grommetGrad1)" stroke="#78350f" stroke-width="1" />
+                      <circle cx="120" cy="28" r="5" fill="#8ca38f" stroke="#78350f" stroke-width="0.9" />
+                    </svg>
+
+                    <svg width="24" height="18" viewBox="0 0 24 18" fill="none" style="position: absolute; top: 19px; left: 108px; z-index: 5;">
+                      <path d="M 10 0 L 10 9 Q 10 13 12 13 Q 14 13 14 9 L 14 0" fill="none" stroke="#64748b" stroke-width="1.8" />
+                    </svg>
+
+                    <div class="tag-content-wrap">
+                      <div>
+                        <div class="flex items-center justify-between text-[9px] font-mono text-slate-400 font-bold uppercase tracking-wider">
+                          <span class="flex items-center gap-1 text-[#ffb703]">
+                            <span>✦</span> <span class="text-slate-600 font-extrabold">KANAVU ILLAM</span>
+                          </span>
+                          <span class="px-2 py-0.5 rounded-full bg-slate-900 text-white font-extrabold text-[8.5px]">
+                            + REPORT #02
+                          </span>
+                        </div>
+
+                        <div class="tag-image-window">
+                          <img src="assets/report_cost.png" alt="Cost & Budgeting BOQ"
+                            onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/report_cost.png';">
+                          <div class="image-glass-pill">
+                            <i class="fa-solid fa-coins text-[#ffd043]"></i>
+                            <span>Cost &amp; Budget</span>
+                          </div>
+                        </div>
+
+                        <div class="mt-3">
+                          <div class="flex items-center justify-between text-[8.5px] font-mono font-bold text-amber-600 uppercase mb-0.5">
+                            <span>FINANCIAL ARCHITECTURE</span>
+                            <span class="text-slate-400">&#8377;34.8L BOQ</span>
+                          </div>
+                          <h3 class="text-[16px] font-extrabold text-slate-900 tracking-tight leading-snug font-serif">
+                            Cost &amp; Budget
+                          </h3>
+                          <p class="text-[10px] text-slate-500 font-medium mt-0.5 line-clamp-1">
+                            Detailed material estimation with BOQ takeoffs.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="pt-2 flex items-center justify-between border-t border-slate-100">
+                        <span class="text-[9px] font-mono font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
+                          <span>HOVER TO INSPECT</span>
+                          <i class="fa-solid fa-rotate text-[8px] animate-spin" style="animation-duration: 8s;"></i>
+                        </span>
+                        <div class="tag-arrow-pill">
+                          <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="flex items-center gap-2.5 pt-1.5 flex-wrap">
-                    <span
-                      class="px-4 py-1.5 rounded-full bg-gradient-to-r from-[#ffd043] via-[#ffaa00] to-[#e68200] hover:from-[#ffe066] hover:to-[#ffaa00] text-[#1a1f26] text-xs font-bold shadow-md hover:scale-[1.03] active:scale-95 transition-all">
-                      Review Budget
-                    </span>
-                    <span
-                      class="px-3 py-1 rounded-full bg-[#1a1f26] text-[#4ade80] text-xs font-bold border border-emerald-500/30 flex items-center gap-1.5 shadow-sm">
-                      <i class="fa-solid fa-check-circle text-emerald-400"></i> 96% Progress
-                    </span>
+
+                  <!-- BACK FACE: Educational Report Content (Cost & Budget Na Ena?) -->
+                  <div class="tag-face tag-back">
+                    <svg class="tag-silhouette-svg" viewBox="0 0 240 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M 0 55 Q 0 42 16 33 L 105 5 Q 120 0 135 5 L 224 33 Q 240 42 240 55 L 240 356 Q 240 380 216 380 L 24 380 Q 0 380 0 356 Z" 
+                            fill="url(#glassTagBackGrad)" stroke="url(#glassRimGrad)" stroke-width="1.8" filter="url(#tagBadgeShadow)" />
+                      <!-- Specular Liquid Glass Diagonal Light Glare -->
+                      <path d="M 0 55 Q 0 42 16 33 L 105 5 Q 120 0 135 5 L 224 33 L 140 185 L 0 135 Z" fill="url(#glassSheenGrad)" />
+                      <circle cx="120" cy="28" r="9" fill="url(#grommetGrad1)" stroke="#78350f" stroke-width="1" />
+                      <circle cx="120" cy="28" r="5" fill="#8ca38f" stroke="#78350f" stroke-width="0.9" />
+                    </svg>
+
+                    <div class="hologram-shimmer-layer"></div>
+
+                    <div class="tag-content-wrap">
+                      <div>
+                        <!-- Header with Icon & Category -->
+                        <div class="flex items-center justify-between text-[8px] font-mono font-bold uppercase tracking-wider text-slate-400 mb-1.5 pb-1 border-b border-slate-200/80">
+                          <span class="flex items-center gap-1 text-amber-700">
+                            <i class="fa-solid fa-calculator text-[9px]"></i>
+                            <span>FINANCIAL ARCHITECTURE</span>
+                          </span>
+                          <span class="text-slate-800 font-extrabold">DOSSIER #02</span>
+                        </div>
+
+                        <!-- What is Cost & Budget? -->
+                        <div class="mt-1">
+                          <h4 class="text-[13.5px] font-extrabold text-slate-900 tracking-tight leading-snug">
+                            Cost &amp; Budget Na Ena?
+                          </h4>
+                          <span class="text-[8.5px] font-mono text-amber-600 font-semibold block mt-0.5">
+                            Bill of Quantities (BOQ) &amp; Milestone Spend
+                          </span>
+                        </div>
+
+                        <!-- Concise Description -->
+                        <p class="text-[9.5px] text-slate-600 leading-relaxed font-normal mt-1.5 mb-2.5">
+                          Cement, TMT Steel, Bricks, Tiles, matrum Labour kaga thevaiyana exact material alavu &amp; cost breakdown. Contractor kitta extra charge thaduthu 0% budget overrun urudhi seiyum.
+                        </p>
+
+                        <!-- Deliverables Checklist -->
+                        <div class="space-y-1 pt-1.5 border-t border-slate-200/70">
+                          <span class="text-[7.5px] font-mono uppercase font-bold text-slate-500 tracking-widest block mb-1">
+                            DELIVERABLES INCLUDED
+                          </span>
+                          <div class="space-y-1">
+                            <div class="spec-item-pill">
+                              <i class="fa-solid fa-check text-emerald-600 text-[8px] shrink-0"></i>
+                              <span class="truncate">Itemized Cement, Steel &amp; Brick BOQ</span>
+                            </div>
+                            <div class="spec-item-pill">
+                              <i class="fa-solid fa-check text-emerald-600 text-[8px] shrink-0"></i>
+                              <span class="truncate">Stage-by-Stage Milestone Payments</span>
+                            </div>
+                            <div class="spec-item-pill">
+                              <i class="fa-solid fa-check text-emerald-600 text-[8px] shrink-0"></i>
+                              <span class="truncate">Local Market Price Benchmarking</span>
+                            </div>
+                            <div class="spec-item-pill">
+                              <i class="fa-solid fa-check text-emerald-600 text-[8px] shrink-0"></i>
+                              <span class="truncate">Stage-by-Stage Detailed Report</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Footer -->
+                      <div class="pt-2 border-t border-slate-200/80 flex items-end justify-between">
+                        <div>
+                          <span class="text-[7.5px] font-mono uppercase font-bold text-slate-500 tracking-widest block mb-1">
+                            LET'S EXPLORE
+                          </span>
+                          <button type="button" class="px-2.5 py-1 rounded-full bg-slate-900 text-white text-[9px] font-bold shadow-md hover:bg-[#ffb703] hover:text-slate-900 transition flex items-center gap-1.5 cursor-pointer"
+                            onclick="event.stopPropagation(); openReportModal('cost');">
+                            <span>Review Budget</span>
+                            <i class="fa-solid fa-arrow-right text-[7.5px]"></i>
+                          </button>
+                        </div>
+
+                        <div class="flex flex-col items-center">
+                          <div class="qr-badge-frame">
+                            <svg viewBox="0 0 21 21" class="w-full h-full" fill="#0f172a" xmlns="http://www.w3.org/2000/svg">
+                              <rect x="0" y="0" width="7" height="7" fill="none" stroke="#0f172a" stroke-width="1"/>
+                              <rect x="2" y="2" width="3" height="3"/>
+                              <rect x="14" y="0" width="7" height="7" fill="none" stroke="#0f172a" stroke-width="1"/>
+                              <rect x="16" y="2" width="3" height="3"/>
+                              <rect x="0" y="14" width="7" height="7" fill="none" stroke="#0f172a" stroke-width="1"/>
+                              <rect x="2" y="16" width="3" height="3"/>
+                              <rect x="9" y="1" width="3" height="2"/>
+                              <rect x="9" y="8" width="3" height="4"/>
+                              <rect x="14" y="8" width="5" height="4"/>
+                              <rect x="8" y="14" width="4" height="3"/>
+                              <rect x="14" y="15" width="4" height="4"/>
+                            </svg>
+                          </div>
+                          <span class="text-[6.5px] font-mono font-extrabold text-slate-500 uppercase mt-0.5">
+                            SCAN DOSSIER
+                          </span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
+
                 </div>
               </div>
             </div>
-          </div>
 
-          <!-- CARD 2: Vastu Analysis (Bottom Left) -->
-          <div class="report-glass-card p-6 sm:p-7 flex flex-col justify-between group cursor-pointer"
-            onclick="openReportModal('vastu')">
-            <div>
-              <div class="flex items-center justify-between mb-4 text-xs">
-                <span
-                  class="text-[11px] font-mono font-extrabold text-[#1a1f26] tracking-wider uppercase flex items-center gap-1.5">
-                  <span class="text-sm leading-none text-[#ffb703]">✦</span>
-                  The Pavilion Residence &bull; Project ID: AR2307
-                </span>
-                <span
-                  class="px-2.5 py-0.5 rounded-full bg-[#1a1f26] text-white font-mono text-[10px] font-bold uppercase shadow-sm">
-                  Report #02
-                </span>
-              </div>
+            <!-- ===================================================================== -->
+            <!-- CARD 3: Vāstu Analysis (Assembly 3)                                   -->
+            <!-- ===================================================================== -->
+            <div class="hanging-assembly-unit assembly-3" data-report="vastu">
+              <div class="cable-runner-ball" title="Chrome Cable Runner #03"></div>
 
-              <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
-                <!-- Text & Score Info -->
-                <div class="sm:col-span-7 space-y-2.5 order-2 sm:order-1">
-                  <h3 class="font-serif text-2xl font-bold text-[#1a1f26] leading-tight" data-i18n="card2_title">
-                    Vastu Analysis
-                  </h3>
-                  <div class="flex items-center gap-2">
-                    <span class="text-xs text-[#4a5568] font-medium">Orientation Score:</span>
-                    <span
-                      class="px-3 py-1 rounded-full bg-[#1a1f26] text-[#4ade80] text-xs font-bold border border-emerald-500/30 flex items-center gap-1.5 shadow-sm">
-                      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                      92% Compliant
-                    </span>
-                  </div>
-                  <div class="flex items-center gap-2.5 pt-1.5 flex-wrap">
-                    <span
-                      class="px-4 py-1.5 rounded-full bg-gradient-to-r from-[#ffd043] via-[#ffaa00] to-[#e68200] hover:from-[#ffe066] hover:to-[#ffaa00] text-[#1a1f26] text-xs font-bold shadow-md hover:scale-[1.03] active:scale-95 transition-all">
-                      Compliance Check
-                    </span>
-                    <button type="button"
-                      class="text-xs font-extrabold text-[#1a1f26] hover:text-[#ffb703] transition flex items-center gap-1 group-hover:translate-x-1 duration-300">
-                      Download Report <i class="fa-solid fa-arrow-down text-[10px]"></i>
-                    </button>
-                  </div>
-                </div>
+              <div class="card-sway-rig">
+                <svg width="24" height="44" viewBox="0 0 24 44" fill="none" class="overflow-visible" style="margin-top: -1px; margin-bottom: -16px; z-index: 10;">
+                  <line x1="10" y1="0" x2="10" y2="22" stroke="url(#wireGrad1)" stroke-width="1.3" />
+                  <line x1="14" y1="0" x2="14" y2="22" stroke="url(#wireGrad1)" stroke-width="1.3" />
+                  <rect x="8.5" y="20" width="7" height="6" rx="1.5" fill="#94a3b8" stroke="#334155" stroke-width="0.8" />
+                  <line x1="9" y1="23" x2="15" y2="23" stroke="#ffffff" stroke-width="0.7" />
+                  <rect x="10" y="24" width="4" height="18" rx="2" fill="none" stroke="url(#linkGrad1)" stroke-width="1.8" />
+                </svg>
 
-                <!-- Glowing Vastu Compass Visual -->
-                <div
-                  class="sm:col-span-5 rounded-2xl overflow-hidden shadow-lg border border-white/25 bg-black/40 h-36 sm:h-40 flex items-center justify-center relative order-1 sm:order-2 group/img">
-                  <img src="assets/report_vastu.png" alt="Vastu Compass"
-                    class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-500"
-                    onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/report_vastu.png';">
-                  <div class="absolute inset-0 flex items-center justify-center pointer-events-none bg-black/20">
-                    <i
-                      class="fa-solid fa-compass text-[#ffb703] text-3xl drop-shadow-[0_0_12px_rgba(255,183,3,0.8)] opacity-95"></i>
+                <div class="tag-badge-card" onclick="openReportModal('vastu')">
+                  <!-- FRONT FACE -->
+                  <div class="tag-face tag-front">
+                    <svg class="tag-silhouette-svg" viewBox="0 0 240 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M 0 55 Q 0 42 16 33 L 105 5 Q 120 0 135 5 L 224 33 Q 240 42 240 55 L 240 356 Q 240 380 216 380 L 24 380 Q 0 380 0 356 Z" 
+                            fill="url(#glassTagFrontGrad)" stroke="url(#glassRimGrad)" stroke-width="1.8" filter="url(#tagBadgeShadow)" />
+                      <!-- Specular Liquid Glass Diagonal Light Glare -->
+                      <path d="M 0 55 Q 0 42 16 33 L 105 5 Q 120 0 135 5 L 224 33 L 140 185 L 0 135 Z" fill="url(#glassSheenGrad)" />
+                      <circle cx="120" cy="28" r="9" fill="url(#grommetGrad1)" stroke="#78350f" stroke-width="1" />
+                      <circle cx="120" cy="28" r="5" fill="#8ca38f" stroke="#78350f" stroke-width="0.9" />
+                    </svg>
+
+                    <svg width="24" height="18" viewBox="0 0 24 18" fill="none" style="position: absolute; top: 19px; left: 108px; z-index: 5;">
+                      <path d="M 10 0 L 10 9 Q 10 13 12 13 Q 14 13 14 9 L 14 0" fill="none" stroke="#64748b" stroke-width="1.8" />
+                    </svg>
+
+                    <div class="tag-content-wrap">
+                      <div>
+                        <div class="flex items-center justify-between text-[9px] font-mono text-slate-400 font-bold uppercase tracking-wider">
+                          <span class="flex items-center gap-1 text-[#ffb703]">
+                            <span>✦</span> <span class="text-slate-600 font-extrabold">KANAVU ILLAM</span>
+                          </span>
+                          <span class="px-2 py-0.5 rounded-full bg-slate-900 text-white font-extrabold text-[8.5px]">
+                            + REPORT #03
+                          </span>
+                        </div>
+
+                        <div class="tag-image-window">
+                          <img src="assets/report_vastu.png" alt="Vastu Energy Compass"
+                            onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/report_vastu.png';">
+                          <div class="image-glass-pill">
+                            <i class="fa-solid fa-compass text-[#ffd043]"></i>
+                            <span>Vāstu Energy</span>
+                          </div>
+                        </div>
+
+                        <div class="mt-3">
+                          <div class="flex items-center justify-between text-[8.5px] font-mono font-bold text-amber-600 uppercase mb-0.5">
+                            <span>VEDIC ARCHITECTURE</span>
+                            <span class="text-slate-400">92% Compliant</span>
+                          </div>
+                          <h3 class="text-[16px] font-extrabold text-slate-900 tracking-tight leading-snug font-serif">
+                            Vāstu Analysis
+                          </h3>
+                          <p class="text-[10px] text-slate-500 font-medium mt-0.5 line-clamp-1">
+                            16-Zone energy grid &amp; directional alignment.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="pt-2 flex items-center justify-between border-t border-slate-100">
+                        <span class="text-[9px] font-mono font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
+                          <span>HOVER TO INSPECT</span>
+                          <i class="fa-solid fa-rotate text-[8px] animate-spin" style="animation-duration: 8s;"></i>
+                        </span>
+                        <div class="tag-arrow-pill">
+                          <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                      </div>
+                    </div>
                   </div>
+
+                  <!-- BACK FACE: Educational Report Content (Vāstu Na Ena?) -->
+                  <div class="tag-face tag-back">
+                    <svg class="tag-silhouette-svg" viewBox="0 0 240 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M 0 55 Q 0 42 16 33 L 105 5 Q 120 0 135 5 L 224 33 Q 240 42 240 55 L 240 356 Q 240 380 216 380 L 24 380 Q 0 380 0 356 Z" 
+                            fill="url(#glassTagBackGrad)" stroke="url(#glassRimGrad)" stroke-width="1.8" filter="url(#tagBadgeShadow)" />
+                      <!-- Specular Liquid Glass Diagonal Light Glare -->
+                      <path d="M 0 55 Q 0 42 16 33 L 105 5 Q 120 0 135 5 L 224 33 L 140 185 L 0 135 Z" fill="url(#glassSheenGrad)" />
+                      <circle cx="120" cy="28" r="9" fill="url(#grommetGrad1)" stroke="#78350f" stroke-width="1" />
+                      <circle cx="120" cy="28" r="5" fill="#8ca38f" stroke="#78350f" stroke-width="0.9" />
+                    </svg>
+
+                    <div class="hologram-shimmer-layer"></div>
+
+                    <div class="tag-content-wrap">
+                      <div>
+                        <!-- Header with Icon & Category -->
+                        <div class="flex items-center justify-between text-[8px] font-mono font-bold uppercase tracking-wider text-slate-400 mb-1.5 pb-1 border-b border-slate-200/80">
+                          <span class="flex items-center gap-1 text-amber-700">
+                            <i class="fa-solid fa-compass text-[9px]"></i>
+                            <span>VEDIC ARCHITECTURE</span>
+                          </span>
+                          <span class="text-slate-800 font-extrabold">DOSSIER #03</span>
+                        </div>
+
+                        <!-- What is Vāstu? -->
+                        <div class="mt-1">
+                          <h4 class="text-[13.5px] font-extrabold text-slate-900 tracking-tight leading-snug">
+                            Vāstu Analysis Na Ena?
+                          </h4>
+                          <span class="text-[8.5px] font-mono text-amber-600 font-semibold block mt-0.5">
+                            16-Zone Energy Grid &amp; Brahmasthan Harmony
+                          </span>
+                        </div>
+
+                        <!-- Concise Description -->
+                        <p class="text-[9.5px] text-slate-600 leading-relaxed font-normal mt-1.5 mb-2.5">
+                          Plot-in magnetic North-ku erpa Eashanya (NE) Pooja room, Agni (SE) Kitchen, matrum Nairuthi (SW) Master Bed amaithu veetirku positive energy &amp; santhosham serum vidhamaga design seidhal.
+                        </p>
+
+                        <!-- Deliverables Checklist -->
+                        <div class="space-y-1 pt-1.5 border-t border-slate-200/70">
+                          <span class="text-[7.5px] font-mono uppercase font-bold text-slate-500 tracking-widest block mb-1">
+                            DELIVERABLES INCLUDED
+                          </span>
+                          <div class="space-y-1">
+                            <div class="spec-item-pill">
+                              <i class="fa-solid fa-check text-emerald-600 text-[8px] shrink-0"></i>
+                              <span class="truncate">16-Zone Energy Direction Chart</span>
+                            </div>
+                            <div class="spec-item-pill">
+                              <i class="fa-solid fa-check text-emerald-600 text-[8px] shrink-0"></i>
+                              <span class="truncate">92%+ Certified Vedic Orientation Score</span>
+                            </div>
+                            <div class="spec-item-pill">
+                              <i class="fa-solid fa-check text-emerald-600 text-[8px] shrink-0"></i>
+                              <span class="truncate">Zero-Demolition Remedy Guidelines</span>
+                            </div>
+                            <div class="spec-item-pill">
+                              <i class="fa-solid fa-check text-emerald-600 text-[8px] shrink-0"></i>
+                              <span class="truncate">Room-by-Room Audit Function</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Footer -->
+                      <div class="pt-2 border-t border-slate-200/80 flex items-end justify-between">
+                        <div>
+                          <span class="text-[7.5px] font-mono uppercase font-bold text-slate-500 tracking-widest block mb-1">
+                            LET'S EXPLORE
+                          </span>
+                          <button type="button" class="px-2.5 py-1 rounded-full bg-slate-900 text-white text-[9px] font-bold shadow-md hover:bg-[#ffb703] hover:text-slate-900 transition flex items-center gap-1.5 cursor-pointer"
+                            onclick="event.stopPropagation(); openReportModal('vastu');">
+                            <span>Check Vāstu</span>
+                            <i class="fa-solid fa-arrow-right text-[7.5px]"></i>
+                          </button>
+                        </div>
+
+                        <div class="flex flex-col items-center">
+                          <div class="qr-badge-frame">
+                            <svg viewBox="0 0 21 21" class="w-full h-full" fill="#0f172a" xmlns="http://www.w3.org/2000/svg">
+                              <rect x="0" y="0" width="7" height="7" fill="none" stroke="#0f172a" stroke-width="1"/>
+                              <rect x="2" y="2" width="3" height="3"/>
+                              <rect x="14" y="0" width="7" height="7" fill="none" stroke="#0f172a" stroke-width="1"/>
+                              <rect x="16" y="2" width="3" height="3"/>
+                              <rect x="0" y="14" width="7" height="7" fill="none" stroke="#0f172a" stroke-width="1"/>
+                              <rect x="2" y="16" width="3" height="3"/>
+                              <rect x="8" y="2" width="3" height="3"/>
+                              <rect x="8" y="9" width="4" height="2"/>
+                              <rect x="14" y="8" width="5" height="3"/>
+                              <rect x="9" y="14" width="3" height="3"/>
+                              <rect x="15" y="14" width="3" height="5"/>
+                            </svg>
+                          </div>
+                          <span class="text-[6.5px] font-mono font-extrabold text-slate-500 uppercase mt-0.5">
+                            SCAN DOSSIER
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
-          </div>
 
-          <!-- CARD 4: Structural Report (Bottom Right) -->
-          <div class="report-glass-card p-6 sm:p-7 flex flex-col justify-between group cursor-pointer"
-            onclick="openReportModal('structural')">
-            <div>
-              <div class="flex items-center justify-between mb-4 text-xs">
-                <span
-                  class="text-[11px] font-mono font-extrabold text-[#1a1f26] tracking-wider uppercase flex items-center gap-1.5">
-                  <span class="text-sm leading-none text-[#ffb703]">✦</span>
-                  The Pavilion Residence &bull; Project ID: AR2307
-                </span>
-                <span
-                  class="px-2.5 py-0.5 rounded-full bg-[#1a1f26] text-white font-mono text-[10px] font-bold uppercase shadow-sm">
-                  Report #04
-                </span>
-              </div>
+            <!-- ===================================================================== -->
+            <!-- CARD 4: Structural Safety (Assembly 4)                                -->
+            <!-- ===================================================================== -->
+            <div class="hanging-assembly-unit assembly-4" data-report="structural">
+              <div class="cable-runner-ball" title="Chrome Cable Runner #04"></div>
 
-              <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
-                <!-- Text & Structural Integrity -->
-                <div class="sm:col-span-7 space-y-2.5">
-                  <h3 class="font-serif text-2xl font-bold text-[#1a1f26] leading-tight" data-i18n="card4_title">
-                    Structural Report
-                  </h3>
-                  <p class="font-sans text-xs text-[#2d3748] font-medium line-clamp-1 leading-relaxed">Beam Load
-                    Analysis &amp; Civil
-                    Safety</p>
-                  <div class="flex items-center gap-2">
-                    <span class="text-xs text-[#4a5568] font-medium">Integrity Score:</span>
-                    <span
-                      class="px-3 py-1 rounded-full bg-[#1a1f26] text-[#38bdf8] text-xs font-bold border border-sky-400/30 flex items-center gap-1.5 shadow-sm">
-                      94% Safe
-                    </span>
+              <div class="card-sway-rig">
+                <svg width="24" height="44" viewBox="0 0 24 44" fill="none" class="overflow-visible" style="margin-top: -1px; margin-bottom: -16px; z-index: 10;">
+                  <line x1="10" y1="0" x2="10" y2="22" stroke="url(#wireGrad1)" stroke-width="1.3" />
+                  <line x1="14" y1="0" x2="14" y2="22" stroke="url(#wireGrad1)" stroke-width="1.3" />
+                  <rect x="8.5" y="20" width="7" height="6" rx="1.5" fill="#94a3b8" stroke="#334155" stroke-width="0.8" />
+                  <line x1="9" y1="23" x2="15" y2="23" stroke="#ffffff" stroke-width="0.7" />
+                  <rect x="10" y="24" width="4" height="18" rx="2" fill="none" stroke="url(#linkGrad1)" stroke-width="1.8" />
+                </svg>
+
+                <div class="tag-badge-card" onclick="openReportModal('structural')">
+                  <!-- FRONT FACE -->
+                  <div class="tag-face tag-front">
+                    <svg class="tag-silhouette-svg" viewBox="0 0 240 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M 0 55 Q 0 42 16 33 L 105 5 Q 120 0 135 5 L 224 33 Q 240 42 240 55 L 240 356 Q 240 380 216 380 L 24 380 Q 0 380 0 356 Z" 
+                            fill="url(#glassTagFrontGrad)" stroke="url(#glassRimGrad)" stroke-width="1.8" filter="url(#tagBadgeShadow)" />
+                      <!-- Specular Liquid Glass Diagonal Light Glare -->
+                      <path d="M 0 55 Q 0 42 16 33 L 105 5 Q 120 0 135 5 L 224 33 L 140 185 L 0 135 Z" fill="url(#glassSheenGrad)" />
+                      <circle cx="120" cy="28" r="9" fill="url(#grommetGrad1)" stroke="#78350f" stroke-width="1" />
+                      <circle cx="120" cy="28" r="5" fill="#8ca38f" stroke="#78350f" stroke-width="0.9" />
+                    </svg>
+
+                    <svg width="24" height="18" viewBox="0 0 24 18" fill="none" style="position: absolute; top: 19px; left: 108px; z-index: 5;">
+                      <path d="M 10 0 L 10 9 Q 10 13 12 13 Q 14 13 14 9 L 14 0" fill="none" stroke="#64748b" stroke-width="1.8" />
+                    </svg>
+
+                    <div class="tag-content-wrap">
+                      <div>
+                        <div class="flex items-center justify-between text-[9px] font-mono text-slate-400 font-bold uppercase tracking-wider">
+                          <span class="flex items-center gap-1 text-[#ffb703]">
+                            <span>✦</span> <span class="text-slate-600 font-extrabold">KANAVU ILLAM</span>
+                          </span>
+                          <span class="px-2 py-0.5 rounded-full bg-slate-900 text-white font-extrabold text-[8.5px]">
+                            + REPORT #04
+                          </span>
+                        </div>
+
+                        <div class="tag-image-window">
+                          <img src="assets/report_structural.png" alt="Structural Engineering Dossier"
+                            onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/report_structural.png';">
+                          <div class="image-glass-pill">
+                            <i class="fa-solid fa-shield-halved text-[#ffd043]"></i>
+                            <span>Structural Safety</span>
+                          </div>
+                        </div>
+
+                        <div class="mt-3">
+                          <div class="flex items-center justify-between text-[8.5px] font-mono font-bold text-amber-600 uppercase mb-0.5">
+                            <span>CIVIL ARCHITECTURE</span>
+                            <span class="text-slate-400">IS 456 Code</span>
+                          </div>
+                          <h3 class="text-[16px] font-extrabold text-slate-900 tracking-tight leading-snug font-serif">
+                            Structural Safety
+                          </h3>
+                          <p class="text-[10px] text-slate-500 font-medium mt-0.5 line-clamp-1">
+                            Soil bearing capacity &amp; beam load calculations.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="pt-2 flex items-center justify-between border-t border-slate-100">
+                        <span class="text-[9px] font-mono font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
+                          <span>HOVER TO INSPECT</span>
+                          <i class="fa-solid fa-rotate text-[8px] animate-spin" style="animation-duration: 8s;"></i>
+                        </span>
+                        <div class="tag-arrow-pill">
+                          <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="flex items-center gap-2.5 pt-1.5 flex-wrap">
-                    <span
-                      class="px-4 py-1.5 rounded-full bg-gradient-to-r from-[#ffd043] via-[#ffaa00] to-[#e68200] hover:from-[#ffe066] hover:to-[#ffaa00] text-[#1a1f26] text-xs font-bold shadow-md hover:scale-[1.03] active:scale-95 transition-all">
-                      Check Safety
-                    </span>
-                    <button type="button"
-                      class="text-xs font-extrabold text-[#1a1f26] hover:text-[#ffb703] transition flex items-center gap-1 group-hover:translate-x-1 duration-300">
-                      View Summary <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                    </button>
-                  </div>
-                </div>
 
-                <!-- 3D Structural Wireframe Visual -->
-                <div
-                  class="sm:col-span-5 rounded-2xl overflow-hidden shadow-lg border border-white/25 bg-black/40 h-36 sm:h-40 relative group/img">
-                  <img src="assets/report_structural.png" alt="Structural Frame"
-                    class="w-full h-full object-cover group-hover/img:scale-108 transition-transform duration-700"
-                    onerror="this.onerror=null; this.src='stitch_kanavu_illam_architectural_showcase/assets/report_structural.png';">
-                  <span
-                    class="absolute bottom-2 left-2 px-2.5 py-0.5 rounded-full bg-black/70 backdrop-blur-md text-white text-[9px] font-mono font-bold border border-white/20">
-                    IS 456 Compliant
-                  </span>
+                  <!-- BACK FACE: Educational Report Content (Structural Safety Na Ena?) -->
+                  <div class="tag-face tag-back">
+                    <svg class="tag-silhouette-svg" viewBox="0 0 240 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M 0 55 Q 0 42 16 33 L 105 5 Q 120 0 135 5 L 224 33 Q 240 42 240 55 L 240 356 Q 240 380 216 380 L 24 380 Q 0 380 0 356 Z" 
+                            fill="url(#glassTagBackGrad)" stroke="url(#glassRimGrad)" stroke-width="1.8" filter="url(#tagBadgeShadow)" />
+                      <!-- Specular Liquid Glass Diagonal Light Glare -->
+                      <path d="M 0 55 Q 0 42 16 33 L 105 5 Q 120 0 135 5 L 224 33 L 140 185 L 0 135 Z" fill="url(#glassSheenGrad)" />
+                      <circle cx="120" cy="28" r="9" fill="url(#grommetGrad1)" stroke="#78350f" stroke-width="1" />
+                      <circle cx="120" cy="28" r="5" fill="#8ca38f" stroke="#78350f" stroke-width="0.9" />
+                    </svg>
+
+                    <div class="hologram-shimmer-layer"></div>
+
+                    <div class="tag-content-wrap">
+                      <div>
+                        <!-- Header with Icon & Category -->
+                        <div class="flex items-center justify-between text-[8px] font-mono font-bold uppercase tracking-wider text-slate-400 mb-1.5 pb-1 border-b border-slate-200/80">
+                          <span class="flex items-center gap-1 text-amber-700">
+                            <i class="fa-solid fa-shield-halved text-[9px]"></i>
+                            <span>CIVIL ARCHITECTURE</span>
+                          </span>
+                          <span class="text-slate-800 font-extrabold">DOSSIER #04</span>
+                        </div>
+
+                        <!-- What is Structural Safety? -->
+                        <div class="mt-1">
+                          <h4 class="text-[13.5px] font-extrabold text-slate-900 tracking-tight leading-snug">
+                            Structural Safety Na Ena?
+                          </h4>
+                          <span class="text-[8.5px] font-mono text-amber-600 font-semibold block mt-0.5">
+                            IS 456 Seismic Load &amp; Foundation Strength
+                          </span>
+                        </div>
+
+                        <!-- Concise Description -->
+                        <p class="text-[9.5px] text-slate-600 leading-relaxed font-normal mt-1.5 mb-2.5">
+                          Soil test adippadaiyil basement aazham, pillars matrum beams-in kambi alavu (reinforcement) Indian Standards (IS 456) padi kanakidapadum. 50+ varudangal veedu crack illamal uruthiyaaga irukum.
+                        </p>
+
+                        <!-- Deliverables Checklist -->
+                        <div class="space-y-1 pt-1.5 border-t border-slate-200/70">
+                          <span class="text-[7.5px] font-mono uppercase font-bold text-slate-500 tracking-widest block mb-1">
+                            DELIVERABLES INCLUDED
+                          </span>
+                          <div class="space-y-1">
+                            <div class="spec-item-pill">
+                              <i class="fa-solid fa-check text-emerald-600 text-[8px] shrink-0"></i>
+                              <span class="truncate">Soil Bearing Capacity (SBC) Audit</span>
+                            </div>
+                            <div class="spec-item-pill">
+                              <i class="fa-solid fa-check text-emerald-600 text-[8px] shrink-0"></i>
+                              <span class="truncate">Column &amp; Beam Rebar Grid (IS 456)</span>
+                            </div>
+                            <div class="spec-item-pill">
+                              <i class="fa-solid fa-check text-emerald-600 text-[8px] shrink-0"></i>
+                              <span class="truncate">3D Pillar Structural Detailing</span>
+                            </div>
+                            <div class="spec-item-pill">
+                              <i class="fa-solid fa-check text-emerald-600 text-[8px] shrink-0"></i>
+                              <span class="truncate">Safety Score &amp; Material Quantity</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Footer -->
+                      <div class="pt-2 border-t border-slate-200/80 flex items-end justify-between">
+                        <div>
+                          <span class="text-[7.5px] font-mono uppercase font-bold text-slate-500 tracking-widest block mb-1">
+                            LET'S EXPLORE
+                          </span>
+                          <button type="button" class="px-2.5 py-1 rounded-full bg-slate-900 text-white text-[9px] font-bold shadow-md hover:bg-[#ffb703] hover:text-slate-900 transition flex items-center gap-1.5 cursor-pointer"
+                            onclick="event.stopPropagation(); openReportModal('structural');">
+                            <span>View Dossier</span>
+                            <i class="fa-solid fa-arrow-right text-[7.5px]"></i>
+                          </button>
+                        </div>
+
+                        <div class="flex flex-col items-center">
+                          <div class="qr-badge-frame">
+                            <svg viewBox="0 0 21 21" class="w-full h-full" fill="#0f172a" xmlns="http://www.w3.org/2000/svg">
+                              <rect x="0" y="0" width="7" height="7" fill="none" stroke="#0f172a" stroke-width="1"/>
+                              <rect x="2" y="2" width="3" height="3"/>
+                              <rect x="14" y="0" width="7" height="7" fill="none" stroke="#0f172a" stroke-width="1"/>
+                              <rect x="16" y="2" width="3" height="3"/>
+                              <rect x="0" y="14" width="7" height="7" fill="none" stroke="#0f172a" stroke-width="1"/>
+                              <rect x="2" y="16" width="3" height="3"/>
+                              <rect x="8" y="1" width="4" height="2"/>
+                              <rect x="9" y="8" width="4" height="4"/>
+                              <rect x="15" y="8" width="3" height="3"/>
+                              <rect x="8" y="15" width="4" height="2"/>
+                              <rect x="15" y="14" width="4" height="5"/>
+                            </svg>
+                          </div>
+                          <span class="text-[6.5px] font-mono font-extrabold text-slate-500 uppercase mt-0.5">
+                            SCAN DOSSIER
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
-          </div>
 
+          </div>
         </div>
+
+
 
       </div>
     </section>
@@ -2288,6 +3300,92 @@
     }
     document.getElementById('mobileMenuBtn').addEventListener('click', toggleMobileMenu);
 
+    // ==================== DYNAMIC NAVBAR ACTIVE UNDERLINE (SCROLLSPY) ====================
+    const navItems = document.querySelectorAll('.nav-item');
+    const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+    const trackedSections = [
+      { id: 'hero', element: document.getElementById('hero') },
+      { id: 'how-it-works', element: document.getElementById('how-it-works') },
+      { id: 'pillars', element: document.getElementById('pillars') },
+      { id: 'contact', element: document.getElementById('contact') }
+    ];
+
+    function updateActiveNav(activeId) {
+      navItems.forEach(link => {
+        const target = link.getAttribute('data-nav-target');
+        if (target === activeId) {
+          link.classList.remove('border-transparent', 'text-white/80');
+          link.classList.add('border-[#ffd043]', 'text-white', 'font-medium');
+        } else {
+          link.classList.remove('border-[#ffd043]', 'text-white', 'font-medium');
+          link.classList.add('border-transparent', 'text-white/80');
+        }
+      });
+
+      mobileNavItems.forEach(mLink => {
+        const target = mLink.getAttribute('data-nav-target');
+        if (target === activeId) {
+          mLink.classList.add('text-[#ffd043]', 'font-semibold');
+          mLink.classList.remove('text-white/90');
+        } else {
+          mLink.classList.remove('text-[#ffd043]', 'font-semibold');
+          mLink.classList.add('text-white/90');
+        }
+      });
+    }
+
+    function onScrollSpy() {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      // If scrolled to bottom of the page, activate contact
+      if (scrollY + windowHeight >= documentHeight - 60) {
+        updateActiveNav('contact');
+        return;
+      }
+
+      // If near top of page, activate hero
+      if (scrollY < 180) {
+        updateActiveNav('hero');
+        return;
+      }
+
+      const headerOffset = 200;
+      let currentSectionId = 'hero';
+
+      trackedSections.forEach(sec => {
+        if (!sec.element) return;
+        const top = sec.element.offsetTop - headerOffset;
+        if (scrollY >= top) {
+          currentSectionId = sec.id;
+        }
+      });
+
+      updateActiveNav(currentSectionId);
+    }
+
+    window.addEventListener('scroll', onScrollSpy, { passive: true });
+    window.addEventListener('DOMContentLoaded', onScrollSpy);
+
+    navItems.forEach(link => {
+      link.addEventListener('click', () => {
+        const target = link.getAttribute('data-nav-target');
+        if (target) {
+          updateActiveNav(target);
+        }
+      });
+    });
+
+    mobileNavItems.forEach(link => {
+      link.addEventListener('click', () => {
+        const target = link.getAttribute('data-nav-target');
+        if (target) {
+          updateActiveNav(target);
+        }
+      });
+    });
+
     // ==================== BILINGUAL TRANSLATION DICTIONARY ====================
     let currentLang = 'en';
     const translations = {
@@ -2307,19 +3405,19 @@
         workflow_title: "How It Works",
         workflow_desc: "From initial 2D blueprint upload to municipal-stamped and bank-ready construction dossier in five seamless stages.",
         step1_tag: "Submission",
-        step1_title: "Upload 2D Plan",
-        step1_desc: "Add your 2D sketch, blueprint, AutoCAD DWG, DXF, or technical PDF drawing.",
+        step1_title: 'Upload 2D Plan<br><span class="italic font-serif font-normal text-[#ffd043]">In One Click</span>',
+        step1_desc: "Add your 2D sketch, blueprint, png, jpg, or technical PDF drawing.",
         step2_tag: "Verification",
-        step2_title: "Secure Payment",
-        step2_desc: "Transparent upfront pricing with milestone-based fee tiers and GST invoicing.",
+        step2_title: 'Secure Payment<br><span class="italic font-serif font-normal text-[#ffd043]">Instant Receipt</span>',
+        step2_desc: "Transparent upfront pricing with flexible packages to suit your home planning needs.",
         step3_tag: "Analysis Plan",
-        step3_title: "Analyze 2D Plan",
+        step3_title: 'Analyze 2D Plan<br><span class="italic font-serif font-normal text-[#ffd043]">Vāstu Energy Grid</span>',
         step3_desc: "Deterministic parsing of walls, room boundaries, structural loads, and cardinal azimuths.",
         step4_tag: "View Report",
-        step4_title: "View Reports",
-        step4_desc: "Interactive 3D walkthrough, Vāstu energy matrix, material takeoff, and structural schedules.",
+        step4_title: 'View Reports<br><span class="italic font-serif font-normal text-[#ffd043]">Spatial Walkthrough</span>',
+        step4_desc: "Interactive 3D walkthrough, Vāstu energy matrix, material takeoff & schedules.",
         step5_tag: "Download PDF",
-        step5_title: "Download Reports",
+        step5_title: 'Download Reports<br><span class="italic font-serif font-normal text-[#ffd043]">PDF & Save to device</span>',
         step5_desc: "Instant download all reports in one click to get PDF, save in device.",
         dropzone_kicker: "Interactive Blueprint Ingestion",
         dropzone_title: "Upload 2D Plan",
@@ -2379,19 +3477,19 @@
         workflow_title: "எப்படி செயல்படுகிறது?",
         workflow_desc: "2D வரைபடம் பதிவேற்றம் முதல் நகராட்சி மற்றும் வங்கி ஒப்புதல் பெற்ற பொறியியல் ஆவணம் வரை 5 எளிய நிலைகள்.",
         step1_tag: "பதிவேற்றம்",
-        step1_title: "2D வரைபடம் சமர்ப்பிப்பு",
+        step1_title: '2D திட்ட பதிவேற்றம்<br><span class="italic font-serif font-normal text-[#ffd043]">ஒரே கிளிக்கில்</span>',
         step1_desc: "உங்கள் 2D வரைபடம், புளூபிரிண்ட், AutoCAD DWG, DXF அல்லது PDF பதிவேற்றவும்.",
         step2_tag: "சரிபார்ப்பு",
-        step2_title: "பாதுகாப்பான கட்டணம்",
+        step2_title: 'பாதுகாப்பான கட்டணம்<br><span class="italic font-serif font-normal text-[#ffd043]">உடனடி ரசீது</span>',
         step2_desc: "வெளிப்படையான நிலையான கட்டணம், UPI மற்றும் உடனடி ஜிஎஸ்டி ரசீது வசதி.",
         step3_tag: "பகுப்பாய்வு",
-        step3_title: "2D திட்ட பகுப்பாய்வு",
+        step3_title: '2D திட்ட பகுப்பாய்வு<br><span class="italic font-serif font-normal text-[#ffd043]">வாஸ்து சக்தி கட்டமைப்பு</span>',
         step3_desc: "சுவர்கள், அறைகள், கட்டமைப்பு சுமைகள் மற்றும் வாஸ்து திசைகளின் துல்லிய பகுப்பாய்வு.",
         step4_tag: "அறிக்கை",
-        step4_title: "அறிக்கைகளை காண்க",
+        step4_title: 'அறிக்கைகளை காண்க<br><span class="italic font-serif font-normal text-[#ffd043]">3D நவீன நடைப்பயிற்சி</span>',
         step4_desc: "3D மாதிரி, வாஸ்து ஆற்றல் வரைபடம், மூலப்பொருள் மதிப்பீடு மற்றும் கட்டமைப்பு விவரங்கள்.",
         step5_tag: "பதிவிறக்கம்",
-        step5_title: "ஆவண பதிவிறக்கம்",
+        step5_title: 'அறிக்கை பதிவிறக்கம்<br><span class="italic font-serif font-normal text-[#ffd043]">PDF & உங்கள் சாதனத்தில்</span>',
         step5_desc: "அனைத்து விரிவான அறிக்கைகளையும் ஒரே கிளிக்கில் PDF கோப்பாக சேமிக்கவும்.",
         dropzone_kicker: "ஊடாடும் வரைபட பதிவேற்றம்",
         dropzone_title: "2D திட்டத்தை பதிவேற்றவும்",
@@ -2790,9 +3888,9 @@
         const isMobile = stageWidth < 640;
         const isTablet = stageWidth < 1024;
 
-        // Dynamic 3D depth and horizontal spacing based on viewport width (Compact proportions)
-        const step1 = isMobile ? 105 : (isTablet ? 160 : 225);
-        const step2 = isMobile ? 185 : (isTablet ? 290 : 400);
+        // Dynamic 3D depth and horizontal spacing based on viewport width (Wide sleek proportions)
+        const step1 = isMobile ? 125 : (isTablet ? 185 : 255);
+        const step2 = isMobile ? 220 : (isTablet ? 320 : 445);
 
         cards.forEach((card, i) => {
           let offset = i - currentIndex;
@@ -3019,6 +4117,127 @@
       }
       window.addEventListener('load', updateCards);
       requestAnimationFrame(updateCards);
+    })();
+  </script>
+
+  <!-- ==================== LUGGAGE TAG HANGING BADGE CARDS SCRIPT ==================== -->
+  <script>
+    // 1. UPDATE OVERHEAD CABLE GEOMETRY: PASSES DIRECTLY THROUGH EVERY BALL
+    function updateOverheadCableGeometry() {
+      const container = document.getElementById('hangingRigContainer');
+      const cablePath = document.getElementById('overheadCablePath');
+      const pinL = document.getElementById('anchorPinLeft');
+      const pinLC = document.getElementById('anchorPinLeftCore');
+      const pinR = document.getElementById('anchorPinRight');
+      const pinRC = document.getElementById('anchorPinRightCore');
+      const balls = document.querySelectorAll('.cable-runner-ball');
+
+      if (!container || !cablePath || balls.length < 4) return;
+
+      const cRect = container.getBoundingClientRect();
+      const pts = Array.from(balls).map(b => {
+        const r = b.getBoundingClientRect();
+        return {
+          x: r.left + r.width / 2 - cRect.left,
+          y: r.top + r.height / 2 - cRect.top
+        };
+      });
+
+      // Wall Anchor Pins (smoothly anchored to the wall sides)
+      const aL = { x: Math.max(10, pts[0].x - 105), y: pts[0].y - 14 };
+      const aR = { x: Math.min(cRect.width - 10, pts[3].x + 105), y: pts[3].y - 14 };
+
+      if (pinL) { pinL.setAttribute('cx', aL.x); pinL.setAttribute('cy', aL.y); }
+      if (pinLC) { pinLC.setAttribute('cx', aL.x); pinLC.setAttribute('cy', aL.y); }
+      if (pinR) { pinR.setAttribute('cx', aR.x); pinR.setAttribute('cy', aR.y); }
+      if (pinRC) { pinRC.setAttribute('cx', aR.x); pinRC.setAttribute('cy', aR.y); }
+
+      // Build continuous realistic catenary cable path passing EXACTLY through every ball:
+      let d = `M ${aL.x.toFixed(1)} ${aL.y.toFixed(1)} `;
+      d += `L ${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)} `;
+
+      // Sag between Ball 1 and 2
+      const mid01_x = (pts[0].x + pts[1].x) / 2;
+      const mid01_y = (pts[0].y + pts[1].y) / 2 + 1.6;
+      d += `Q ${mid01_x.toFixed(1)} ${mid01_y.toFixed(1)} ${pts[1].x.toFixed(1)} ${pts[1].y.toFixed(1)} `;
+
+      // Gentle Sag between Ball 2 and 3
+      const mid12_x = (pts[1].x + pts[2].x) / 2;
+      const mid12_y = (pts[1].y + pts[2].y) / 2 + 1.8;
+      d += `Q ${mid12_x.toFixed(1)} ${mid12_y.toFixed(1)} ${pts[2].x.toFixed(1)} ${pts[2].y.toFixed(1)} `;
+
+      // Rise between Ball 3 and 4
+      const mid23_x = (pts[2].x + pts[3].x) / 2;
+      const mid23_y = (pts[2].y + pts[3].y) / 2 + 1.6;
+      d += `Q ${mid23_x.toFixed(1)} ${mid23_y.toFixed(1)} ${pts[3].x.toFixed(1)} ${pts[3].y.toFixed(1)} `;
+
+      d += `L ${aR.x.toFixed(1)} ${aR.y.toFixed(1)}`;
+
+      cablePath.setAttribute('d', d);
+    }
+
+    // Call cable alignment on all events
+    window.addEventListener('DOMContentLoaded', updateOverheadCableGeometry);
+    window.addEventListener('load', updateOverheadCableGeometry);
+    window.addEventListener('resize', updateOverheadCableGeometry);
+    requestAnimationFrame(updateOverheadCableGeometry);
+    setTimeout(updateOverheadCableGeometry, 60);
+    setTimeout(updateOverheadCableGeometry, 250);
+    setTimeout(updateOverheadCableGeometry, 600);
+
+    if (window.ResizeObserver) {
+      const ro = new ResizeObserver(() => updateOverheadCableGeometry());
+      const container = document.getElementById('hangingRigContainer');
+      if (container) ro.observe(container);
+    }
+
+    // 2. AUTOMATIC HOVER ROTATE & SPECULAR HOLOGRAPHIC TILT
+    (function initLuggageTagBadgeSystem() {
+      const assemblies = document.querySelectorAll('.hanging-assembly-unit');
+
+      assemblies.forEach((assembly) => {
+        const card = assembly.querySelector('.tag-badge-card');
+        const swayRig = assembly.querySelector('.card-sway-rig');
+        const shimmerLayer = assembly.querySelector('.hologram-shimmer-layer');
+
+        // Automatic rotate to back side on mouseenter
+        assembly.addEventListener('mouseenter', () => {
+          assembly.classList.add('is-flipped');
+        });
+
+        // Rotate smoothly back to front on mouseleave
+        assembly.addEventListener('mouseleave', () => {
+          assembly.classList.remove('is-flipped');
+          if (swayRig) swayRig.style.transform = '';
+          if (shimmerLayer) {
+            shimmerLayer.style.setProperty('--shimmer-x', '50%');
+            shimmerLayer.style.setProperty('--shimmer-y', '50%');
+          }
+        });
+
+        // Specular holographic shimmer highlight on mousemove (uses assembly rect, never shrinks or tilts)
+        assembly.addEventListener('mousemove', (e) => {
+          if (!shimmerLayer) return;
+          const rect = assembly.getBoundingClientRect();
+          if (!rect.width || !rect.height) return;
+          const relX = e.clientX - rect.left;
+          const relY = e.clientY - rect.top;
+
+          const shimmerX = Math.round(Math.max(0, Math.min(100, (relX / rect.width) * 100)));
+          const shimmerY = Math.round(Math.max(0, Math.min(100, (relY / rect.height) * 100)));
+
+          shimmerLayer.style.setProperty('--shimmer-x', `${shimmerX}%`);
+          shimmerLayer.style.setProperty('--shimmer-y', `${shimmerY}%`);
+        });
+
+        // Mobile touch click toggle
+        if (card) {
+          card.addEventListener('click', (e) => {
+            if (e.target.closest('button')) return;
+            assembly.classList.toggle('is-flipped');
+          });
+        }
+      });
     })();
   </script>
 </body>
