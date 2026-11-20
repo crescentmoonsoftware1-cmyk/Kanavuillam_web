@@ -14,12 +14,22 @@
       "permanent": true
     },
     {
+      "source": "/home/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/home/:path*",
       "destination": "/",
       "permanent": true
     },
     {
       "source": "/property",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/property/",
       "destination": "/",
       "permanent": true
     },
