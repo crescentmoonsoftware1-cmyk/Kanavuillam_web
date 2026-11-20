@@ -19,7 +19,22 @@
       "permanent": true
     },
     {
+      "source": "/property",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/property/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/properties",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/properties/:path*",
       "destination": "/",
       "permanent": true
     },
@@ -39,6 +54,11 @@
       "permanent": true
     },
     {
+      "source": "/privacy-and-policy",
+      "destination": "/privacy-policy",
+      "permanent": true
+    },
+    {
       "source": "/terms-conditions",
       "destination": "/terms",
       "permanent": true
@@ -49,13 +69,63 @@
       "permanent": true
     },
     {
+      "source": "/terms-and-conditions",
+      "destination": "/terms",
+      "permanent": true
+    },
+    {
+      "source": "/terms-and-conditions.html",
+      "destination": "/terms",
+      "permanent": true
+    },
+    {
       "source": "/terms.html",
       "destination": "/terms",
       "permanent": true
     },
     {
+      "source": "/delete",
+      "destination": "/delete-account",
+      "permanent": true
+    },
+    {
       "source": "/delete-account.html",
       "destination": "/delete-account",
+      "permanent": true
+    },
+    {
+      "source": "/sample_cards_preview.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/sample_contact_cards.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/sample_reports_cards.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/sample_upload_card.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/sample_hanging_badge_cards.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/sample_certified_reports_video_style.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/sample_card_animation.html",
+      "destination": "/",
       "permanent": true
     }
   ],
